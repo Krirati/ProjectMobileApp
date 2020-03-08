@@ -62,30 +62,14 @@ class RegisterActivity : AppCompatActivity() {
                     val intent = Intent(this, Bottomnavigation::class.java)
                     finishAffinity();
                     startActivity(intent)
+                }.addOnFailureListener{
+                    var somwrong: String? = it.message
+                    showrong.text = somwrong
+                    showrong.visibility = View.VISIBLE
                 }
 
         }
-        else{
 
-            var somwrong: String= ""
-            if (pass.length != 6){
-                somwrong += "Your password need least than 6 character\n"
-            }
-            if (confirmpass != pass){
-                somwrong += "Your password and confirmation password do not match.\n"
-            }
-            if (!checkmail){
-                somwrong += "Bad format E-mail\n"
-            }
-            if (email.isEmpty()){
-                somwrong += "Enter Your E-mail\n"
-            }
-            if (pass.isEmpty()){
-                somwrong += "Enter Your Password\n"
-            }
-            showrong.text = somwrong
-            showrong.visibility = View.VISIBLE
-        }
 
     }
 

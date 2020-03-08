@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
@@ -38,27 +39,13 @@ class LoginActivity : AppCompatActivity() {
                 finishAffinity();
                 startActivity(intent)
 
-            }
+            }.addOnFailureListener{
+                var somwrong: String? = it.message
+                showwronglogin.text = somwrong
+                showwronglogin.visibility = View.VISIBLE}
     }
     private fun checkUser () {
         val user = FirebaseAuth.getInstance().currentUser
-        user?.let {
-            for (profile in it.providerData) {
-                // Id of the provider (ex: google.com)
-                val providerId = profile.providerId
-
-                // UID specific to the provider
-                val uid = profile.uid
-
-                // Name, email address, and profile photo Url
-                val name = profile.displayName
-                val email = profile.email
-                val photoUrl = profile.photoUrl
-//                val userProfile = User(providerId,uid,name,email)
-            }
-
-        }
-
         if (user != null) {
             val intent = Intent(this, Bottomnavigation::class.java)
             finishAffinity();

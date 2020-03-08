@@ -9,24 +9,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MoredetailsActivity"
-            android:parentActivityName=".Bottomnavigation"/>
+        <activity android:name=".ui.chatlog.Chatlog">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MoredetailsActivity"
+            android:parentActivityName=".Bottomnavigation" />
         <activity
             android:name=".ui.setting.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".Bottomnavigation" />
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/AppTheme.splash">
-        </activity>
+            android:theme="@style/AppTheme.splash"></activity>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:theme="@style/NoActionBar">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".AddActivity"
@@ -37,9 +40,7 @@
             android:label="@string/title_activity_bottomnavigation" />
         <activity
             android:name=".Bottomnavigation"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

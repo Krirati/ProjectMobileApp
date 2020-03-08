@@ -71,4 +71,6 @@
     <string name="lost_animals">Lost animals</string>
     <string name="find_friends">Find friends</string>
     <string name="images">Images</string>
+    <string name="sendmessage">Send</string>
+    <string name="hintmessage">Enter Message</string>
 </resources>
