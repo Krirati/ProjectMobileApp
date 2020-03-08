@@ -1,137 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/activity_horizontal_margin"
-    tools:context=".ui.description.Description">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="myPet"
+            type="com.example.petlover.MyPet" />
+    </data>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.088"
-        android:clickable="false">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_horizontal_margin"
+        tools:context=".ui.description.Description">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputPedigree"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="@string/pedigree"
-        app:layout_constraintStart_toStartOf="@+id/inputName"
-        app:layout_constraintTop_toBottomOf="@+id/inputName">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pedigree"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="@string/age"
-        app:layout_constraintStart_toStartOf="@+id/inputPedigree"
-        app:layout_constraintTop_toBottomOf="@+id/inputPedigree">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/birthday"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_date_range_black_24dp" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:clickable="false"
+            android:hint="@string/name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.029">
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/category"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/input"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroupGender" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={myPet.name}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/buttonAdd"
-        android:layout_width="195dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_curve"
-        android:elevation="10dp"
-        android:text="@string/addH"
-        android:textColor="@color/whiht"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:layout_constraintVertical_bias="0.839" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputPedigree"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/pedigree"
+            app:layout_constraintStart_toStartOf="@+id/inputName"
+            app:layout_constraintTop_toBottomOf="@+id/inputName">
 
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
-        android:text="@string/gender"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/input"
-        app:layout_constraintTop_toBottomOf="@+id/input" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pedigree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={myPet.pedigree}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <RadioGroup
-        android:id="@+id/radioGroupGender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:checkedButton="@+id/first"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@+id/gender"
-        app:layout_constraintTop_toBottomOf="@+id/gender">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/age"
+            app:layout_constraintStart_toStartOf="@+id/inputPedigree"
+            app:layout_constraintTop_toBottomOf="@+id/inputPedigree">
 
-        <RadioButton
-            android:id="@+id/Male"
-            style="@style/MyMainRoundedActionButton"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_date_range_black_24dp"
+                android:text="@={myPet.birthday}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="195dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_curve"
+            android:elevation="10dp"
+            android:text="@string/addH"
+            android:textColor="@color/whiht"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_margin_top"
-            android:text="Male"
-            android:button="@null"
-            android:textColor="@android:color/black" />
+            android:layout_marginTop="23dp"
+            android:text="@string/gender"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/input"
+            app:layout_constraintTop_toBottomOf="@+id/input" />
 
-        <RadioButton
-            android:id="@+id/Female"
-            style="@style/MyMainRoundedActionButton"
+        <RadioGroup
+            android:id="@+id/radioGroupGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_margin_top"
-            android:buttonTint="#FFFFFF"
-            android:checked="false"
-            android:text="Female"
-            android:button="@null"
-            android:textColor="@android:color/black" />
-    </RadioGroup>
+            android:layout_marginTop="8dp"
+            android:checkedButton="@+id/Male"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/gender"
+            app:layout_constraintTop_toBottomOf="@+id/gender">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <RadioButton
+                android:id="@+id/Male"
+                style="@style/MyMainRoundedActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_margin_top"
+                android:button="@null"
+                android:text="@string/male"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/Female"
+                style="@style/MyMainRoundedActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_margin_top"
+                android:button="@null"
+                android:buttonTint="#FFFFFF"
+                android:checked="false"
+                android:text="@string/female"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/category"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/input"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupGender" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.375"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
+            app:singleSelection="false"
+            app:chipSpacingHorizontal="2dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipCouple"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="@string/find_a_couple"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipLost"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checkable="true"
+                android:text="@string/lost_animals"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFriends"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/find_friends"
+                android:textAppearance="@style/TextAppearance.AppCompat" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_select_img"
+            style="@style/Widget.Design.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:fabSize="mini"
+            app:layout_constraintStart_toStartOf="@+id/imgText"
+            app:layout_constraintTop_toBottomOf="@+id/imgText"
+            app:srcCompat="@drawable/ic_add_black_24dp" />
+
+        <TextView
+            android:id="@+id/imgText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/images"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonAdd"
+            app:layout_constraintEnd_toEndOf="@+id/buttonAdd"
+            app:layout_constraintStart_toStartOf="@+id/buttonAdd"
+            app:layout_constraintTop_toTopOf="@+id/buttonAdd" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxHeight="40dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toBottomOf="@+id/floating_select_img"
+            app:layout_constraintStart_toEndOf="@+id/floating_select_img"
+            app:layout_constraintTop_toTopOf="@+id/floating_select_img"
+            tools:srcCompat ="@drawable/ic_person_black_24dp"
+            android:contentDescription="@string/images"
+            android:adjustViewBounds="true"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

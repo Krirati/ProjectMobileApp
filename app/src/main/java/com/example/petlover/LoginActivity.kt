@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
                 val name = profile.displayName
                 val email = profile.email
                 val photoUrl = profile.photoUrl
-                val userProfile = User(providerId,uid,name,email)
+//                val userProfile = User(providerId,uid,name,email)
             }
 
         }

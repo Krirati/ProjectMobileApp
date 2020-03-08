@@ -64,4 +64,11 @@
     <string name="map">map</string>
     <string name="wrongconfirm">Your password and confirmation password do not match.</string>
     <string name="cancelbtn">Cancel</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="select_image">Select image</string>
+    <string name="find_a_couple">Find a couple</string>
+    <string name="lost_animals">Lost animals</string>
+    <string name="find_friends">Find friends</string>
+    <string name="images">Images</string>
 </resources>
