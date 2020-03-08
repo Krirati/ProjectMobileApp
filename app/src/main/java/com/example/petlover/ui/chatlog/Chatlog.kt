@@ -1,20 +1,30 @@
-package com.example.petlover
+package com.example.petlover.ui.chatlog
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.petlover.R
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_chatlog.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class Chatlog : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlog)
-        var roomuid: String= "22Mk5iKKLdB4VmT8db2k"
-        var uiduser: String = "svx67MwBcfO4rQ5dESBDSvXnrCH3"
-        getchat(roomuid)
-        sendmessage(uiduser,"Hello Dad",roomuid)
+
+
+
+        //val recyclechat = findViewById<re>()
+        var adapter = ArrayList<ChatlogModel>()
+
+
+        //var roomuid: String= "22Mk5iKKLdB4VmT8db2k"
+        //var uiduser: String = "svx67MwBcfO4rQ5dESBDSvXnrCH3"
+        //getchat(roomuid)
+        //sendmessage(uiduser,"Hello Dad",roomuid)
     }
 
     fun getchat(uid: String){
@@ -40,7 +50,8 @@ class Chatlog : AppCompatActivity() {
     fun sendmessage(uiduser: String,msg: String,roomuid: String){
         var database = FirebaseDatabase.getInstance().reference
         val timeStamp: String? = Calendar.getInstance().time.toString()
-        val setmssage = ChatlogModel(uiduser, msg, timeStamp)
+        val setmssage =
+            ChatlogModel(uiduser, msg, timeStamp)
         database.child("chat").child(roomuid).child("b").setValue(setmssage)
     }
 

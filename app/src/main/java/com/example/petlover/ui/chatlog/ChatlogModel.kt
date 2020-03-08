@@ -1,4 +1,4 @@
-package com.example.petlover
+package com.example.petlover.ui.chatlog
 
 data class ChatlogModel (
     var fromuid: String,

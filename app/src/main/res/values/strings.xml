@@ -64,4 +64,6 @@
     <string name="map">map</string>
     <string name="wrongconfirm">Your password and confirmation password do not match.</string>
     <string name="cancelbtn">Cancel</string>
+    <string name="sendmessage">Send</string>
+    <string name="hintmessage">Enter Message</string>
 </resources>
