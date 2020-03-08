@@ -6,7 +6,7 @@
     <color name="colorBtn">#f8bb68</color>
     <color name="text">#000000</color>
     <color name="whiht">#FFFF</color>
-    <color name="greyBackground">#E1E1E1</color>
+    <color name="greyBackground">#FDFCFC</color>
     <color name="detail">#DDDDDD</color>
     <color name="btnAccept">#E96606</color>
 </resources>
