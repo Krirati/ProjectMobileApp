@@ -66,4 +66,13 @@
     <string name="map">map</string>
     <string name="wrongconfirm">Your password and confirmation password do not match.</string>
     <string name="cancelbtn">Cancel</string>
+    <string name="female" translatable="false">Female</string>
+    <string name="male" translatable="false">Male</string>
+    <string name="select_image" translatable="false">Select image</string>
+    <string name="find_a_couple" translatable="false">Find a couple</string>
+    <string name="lost_animals" translatable="false">Lost animals</string>
+    <string name="find_friends" translatable="false">Find friends</string>
+    <string name="images" translatable="false">Images</string>
+    <string name="sendmessage">Send</string>
+    <string name="hintmessage" translatable="false">Enter Message</string>
 </resources>
