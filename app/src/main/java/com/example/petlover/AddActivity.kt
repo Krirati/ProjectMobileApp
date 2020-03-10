@@ -28,11 +28,15 @@ class AddActivity : AppCompatActivity() {
     private var selectedPhotoUri: Uri? = null
     private var filenameImg: String? = null
     private val list = mutableListOf<String>()
-
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
     private lateinit var binding: ActivityAddpetBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this,R.layout.activity_addpet)
         binding.buttonAdd.setOnClickListener {
             crateNewPet(it)
@@ -40,7 +44,7 @@ class AddActivity : AppCompatActivity() {
         binding.input.setOnClickListener {
             showDatePickerDialog()
         }
-        floating_select_img.setOnClickListener {
+        binding.floatingSelectImg.setOnClickListener {
             Log.d("AddActivity", "select img")
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -48,8 +52,8 @@ class AddActivity : AppCompatActivity() {
         }
 
         // Loop through the chips
-        for (index in 0 until chipGroup.childCount) {
-            val chip:Chip = chipGroup.getChildAt(index) as Chip
+        for (index in 0 until binding.chipGroup.childCount) {
+            val chip:Chip = binding.chipGroup.getChildAt(index) as Chip
 
             // Set the chip checked change listener
             chip.setOnCheckedChangeListener{view, isChecked ->
@@ -76,7 +80,7 @@ class AddActivity : AppCompatActivity() {
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
             val bitmapDrawable = BitmapDrawable(bitmap)
             binding.imageView.visibility = View.VISIBLE
-            imageView.setBackgroundDrawable(bitmapDrawable)
+            binding.imageView.setBackgroundDrawable(bitmapDrawable)
         }
     }
     private fun crateNewPet (view: View) {
@@ -87,7 +91,7 @@ class AddActivity : AppCompatActivity() {
         val name = findViewById<TextInputEditText>(R.id.name).text.toString()
         val pedigree = findViewById<TextInputEditText>(R.id.pedigree).text.toString()
         val birthday = findViewById<TextInputEditText>(R.id.birthday).text.toString()
-        val genderId = radioGroupGender.checkedRadioButtonId
+        val genderId = binding.radioGroupGender.checkedRadioButtonId
         val genderString = resources.getResourceEntryName(genderId)
         val generateId = db.collection("animals").document().id
         val user = FirebaseAuth.getInstance().currentUser?.uid
@@ -145,9 +149,9 @@ class AddActivity : AppCompatActivity() {
     }
 
     private fun showDatePickerDialog () {
-//        val datePickerDialog = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { datePicker, year, monthOfyear, dayOfMonth ->
-//            textView.setText("" + dayOfMonth + " " + monthOfyear + ", " + year)
-//        }, year, month, day)
-//        datePickerDialog.show()
+        val datePickerDialog = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
+            binding.birthday.setText("$mDay/$mMonth/$mYear")
+        }, year, month, day)
+        datePickerDialog.show()
     }
 }

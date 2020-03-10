@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.chatlog.Chatlog">
-
         </activity>
         <activity
             android:name=".MoredetailsActivity"
