@@ -4,7 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.example.petlover.LoginActivity
 import com.example.petlover.R
+import com.google.firebase.auth.FirebaseAuth
+import android.content.Intent as Intent1
+
 
 private const val TITLE_TAG = "settingsActivityTitle"
 
@@ -81,5 +85,16 @@ class SettingsActivity : AppCompatActivity(),
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.sync_preferences, rootKey)
         }
+    }
+    class LogoutFragment : PreferenceFragmentCompat() {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            var firebaseAuth = FirebaseAuth.getInstance()
+            firebaseAuth.signOut();
+            val intent = android.content.Intent(context, LoginActivity::class.java)
+            startActivity(intent)
+
+        }
+
+
     }
 }
