@@ -13,7 +13,7 @@
         app:title="@string/sync_header" />
     <Preference
         app:fragment="com.example.petlover.ui.setting.SettingsActivity$LogoutFragment"
-        app:icon="@drawable/logout"
+        app:icon="@drawable/ic_input_black_24dp"
         app:key="logout_header"
         app:title="@string/logout_header" />
 

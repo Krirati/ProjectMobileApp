@@ -46,4 +46,6 @@
     <string name="register">สมัคร</string>
     <string name="confirm_password">ยืนยันรหัสผ่าน</string>
     <string name="wrongconfirm">รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน</string>
+    <string name="sendmessage">ส่ง</string>
+    <string name="cancelbtn">ยกเลิก</string>
 </resources>
