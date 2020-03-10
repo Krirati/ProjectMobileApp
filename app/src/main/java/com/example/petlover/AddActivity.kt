@@ -149,7 +149,7 @@ class AddActivity : AppCompatActivity() {
     }
 
     private fun showDatePickerDialog () {
-        val datePickerDialog = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
+        val datePickerDialog = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { _, mYear, mMonth, mDay ->
             binding.birthday.setText("$mDay/$mMonth/$mYear")
         }, year, month, day)
         datePickerDialog.show()
