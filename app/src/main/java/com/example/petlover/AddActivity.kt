@@ -1,6 +1,7 @@
 package com.example.petlover
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
@@ -35,6 +36,9 @@ class AddActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_addpet)
         binding.buttonAdd.setOnClickListener {
             crateNewPet(it)
+        }
+        binding.input.setOnClickListener {
+            showDatePickerDialog()
         }
         floating_select_img.setOnClickListener {
             Log.d("AddActivity", "select img")
@@ -131,11 +135,19 @@ class AddActivity : AppCompatActivity() {
                 Log.w("Add pet img error", "Error adding document", e)
             }
     }
+
     private fun clearField () {
         binding.apply {
             name.text?.clear()
             pedigree.text?.clear()
             birthday.text?.clear()
         }
+    }
+
+    private fun showDatePickerDialog () {
+//        val datePickerDialog = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { datePicker, year, monthOfyear, dayOfMonth ->
+//            textView.setText("" + dayOfMonth + " " + monthOfyear + ", " + year)
+//        }, year, month, day)
+//        datePickerDialog.show()
     }
 }
