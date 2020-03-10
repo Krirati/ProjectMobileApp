@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
                 if(!it.isSuccessful) return@addOnCompleteListener
                 Log.d("login","Successfully login ${it.result?.user?.uid}")
                 val intent = Intent(this, Bottomnavigation::class.java)
-                finishAffinity();
+                finish()
                 startActivity(intent)
 
             }.addOnFailureListener{
