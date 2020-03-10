@@ -13,9 +13,9 @@ import com.example.petlover.ui.setting.SettingsActivity
 
 class UserFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = UserFragment()
-    }
+//    companion object {
+//        fun newInstance() = UserFragment()
+//    }
 
     private lateinit var viewModel: UserViewModel
 

@@ -12,9 +12,6 @@
         <activity android:name=".ui.chatlog.Chatlog">
         </activity>
         <activity
-            android:name=".MoredetailsActivity"
-            android:parentActivityName=".Bottomnavigation" />
-        <activity
             android:name=".ui.setting.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".Bottomnavigation" />
