@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petlover.LoginActivity
 import com.example.petlover.R
-import com.example.petlover.ui.user.UserFragment
 import kotlinx.android.synthetic.main.layout_list_item.view.*
 
 class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
@@ -31,9 +30,6 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
         holder.textViewAddress.text = model.place
         holder.imgIcon.setImageResource(model.icon)
         holder.imgStatus.setImageResource(model.status)
-//        holder.itemView.setOnClickListener { View.OnClickListener {
-//           Toast.makeText(parent.context, "Click: "+ user.name , Toast.LENGTH_LONG).show()
-//        } }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
