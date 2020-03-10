@@ -20,15 +20,14 @@ class Chatlog : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlog)
-        var roomuid = "22Mk5iKKLdB4VmT8db2k"
-        var uiduser = "svx67MwBcfO4rQ5dESBDSvXnrCH3"
+        var roomuid = "22Mk5iKKLdB4VmT8db2a"
         getchat(useruid,roomuid)
 
         sendmessagebtn.setOnClickListener{
 
             Log.d("Send",useruid)
             Log.d("Send",edittextmessage.text.toString())
-            if (useruid != null || edittextmessage.text != null) {
+            if (useruid != null && edittextmessage.text != null) {
                 sendmessage(useruid,edittextmessage.text.toString(),roomuid)
             }
             edittextmessage.text.clear()
