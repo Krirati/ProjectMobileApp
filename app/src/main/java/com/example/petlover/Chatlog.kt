@@ -3,37 +3,21 @@ package com.example.petlover
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-<<<<<<< HEAD
-import com.google.firebase.database.*
-=======
-import com.example.petlover.ui.chatlog.ChatfromItem
 import com.example.petlover.ui.chatlog.ChatlogModel
-import com.example.petlover.ui.chatlog.ChattoItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.*
 import kotlinx.android.synthetic.main.activity_chatlog.*
 import kotlinx.android.synthetic.main.layout_list_chatlogincome.view.*
 import kotlinx.android.synthetic.main.layout_list_chatlogoutcome.view.*
->>>>>>> 5cb00b94bd4d6fb882f643775b72e96ab3bb97d2
 import java.util.*
 
 class Chatlog : AppCompatActivity() {
-    private lateinit var database: DatabaseReference
+    var useruid = FirebaseAuth.getInstance().currentUser?.uid.toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlog)
-<<<<<<< HEAD
-        var roomuid: String= "22Mk5iKKLdB4VmT8db2k"
-        var uiduser: String = "svx67MwBcfO4rQ5dESBDSvXnrCH3"
-        getchat(roomuid)
-        sendmessage(uiduser,"Hello Dad",roomuid)
-    }
-
-    fun getchat(uid: String){
-        var database = FirebaseDatabase.getInstance().getReference("/chat/${uid}")
-=======
-        var roomuid = "22Mk5iKKLdB4VmT8db2k"
+        var roomuid = "22Mk5iKKLdB4VmT8db2a"
         getchat(useruid,roomuid)
 
         sendmessagebtn.setOnClickListener{
@@ -53,7 +37,6 @@ class Chatlog : AppCompatActivity() {
         var database = FirebaseDatabase.getInstance().getReference("/chat/${roomuid}")
         val adapter = GroupAdapter<GroupieViewHolder>()
         recyclechatlog.adapter = adapter
->>>>>>> 5cb00b94bd4d6fb882f643775b72e96ab3bb97d2
         database.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
