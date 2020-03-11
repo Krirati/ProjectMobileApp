@@ -17,21 +17,24 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_addpet.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class AddActivity : AppCompatActivity() {
 
     private val db = FirebaseFirestore.getInstance()
     private var selectedPhotoUri: Uri? = null
     private var filenameImg: String? = null
-    private val list = mutableListOf<String>()
+    private val list = ArrayList<String>()
     val calendar = Calendar.getInstance()
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
     val day = calendar.get(Calendar.DAY_OF_MONTH)
+    private var uriImage: Uri? = null
     private lateinit var binding: ActivityAddpetBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,20 +99,22 @@ class AddActivity : AppCompatActivity() {
         val generateId = db.collection("animals").document().id
         val user = FirebaseAuth.getInstance().currentUser?.uid
         filenameImg = UUID.randomUUID().toString()
+        if (list.size == 0) {list.add("Find a couple")}
         val pet = hashMapOf(
             "name" to name,
             "pedigree" to pedigree,
             "birthday" to birthday,
             "gender" to genderString,
-            "imageUID" to filenameImg,
+            "imageUID" to uriImage,
             "category" to list,
             "uid" to generateId,
-            "uidUser" to user
+            "uidUser" to user,
+            "timestamp" to FieldValue.serverTimestamp()
         )
         db.collection("animals").document(generateId).set(pet)
             .addOnSuccessListener {
                 Log.d("Add pet done", "DocumentSnapshot added with ID: $generateId")
-                uploadImageToFirebaseStorage()
+                uploadImageToFirebaseStorage(generateId)
                 binding.apply {
                     buttonAdd.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
@@ -122,7 +127,7 @@ class AddActivity : AppCompatActivity() {
             }
     }
 
-    private fun uploadImageToFirebaseStorage() {
+    private fun uploadImageToFirebaseStorage(generateId: String) {
         Log.w("Add pet image", "uploadImageToFirebaseStorage")
         if (selectedPhotoUri == null) return
         val filename = UUID.randomUUID().toString()
@@ -134,6 +139,9 @@ class AddActivity : AppCompatActivity() {
                 ref.downloadUrl.addOnSuccessListener {
                     Log.d("add img","File Location: $it")
                 }
+                db.collection("animals").document(generateId)
+                    .update("imageUID", "${it.uploadSessionUri}")
+                    .addOnSuccessListener { Log.d("update", "DocumentSnapshot successfully updated!")}
             }
             .addOnFailureListener{e ->
                 Log.w("Add pet img error", "Error adding document", e)

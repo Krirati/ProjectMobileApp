@@ -2,11 +2,11 @@
 <resources>
     <color name="colorPrimary">#f7ba66</color>
     <color name="colorPrimaryDark">#c18a38</color>
-    <color name="colorAccent">#ffec96</color>
+    <color name="colorAccent">#FBE270</color>
     <color name="colorBtn">#f8bb68</color>
     <color name="text">#000000</color>
     <color name="whiht">#FFFF</color>
     <color name="greyBackground">#FDFCFC</color>
-    <color name="detail">#DDDDDD</color>
+    <color name="detail">#656565</color>
     <color name="btnAccept">#E96606</color>
 </resources>

@@ -1,13 +1,16 @@
 package com.example.petlover.ui.home
 
-import java.util.*
+
+import com.google.firebase.Timestamp
 
 data class Model(
-    val name: String,
-    val gender: Int,
-    val date: String,
-    val place: String,
-    val contact: String,
-    val icon: Int,
-    val status: Int
+    val name: String ="",
+    val gender: String ="",
+    val birthday: String ="",
+//    val imageUID: Uri? = null,
+    val pedigree: String ="",
+    val uid: String ="",
+    val uidUser: String ="",
+    val timestamp: Timestamp? = null,
+    val category: ArrayList<String>? = null
 )
