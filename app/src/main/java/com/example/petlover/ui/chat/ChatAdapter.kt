@@ -1,20 +1,14 @@
 package com.example.petlover.ui.chat
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import com.example.petlover.R
 import androidx.recyclerview.widget.RecyclerView
-import com.example.petlover.Bottomnavigation
-import com.example.petlover.ui.chatlog.Chatlog
+import com.example.petlover.Chatlog
 import kotlinx.android.synthetic.main.layout_list_chat.view.*
-import kotlinx.android.synthetic.main.layout_list_item.view.*
 
 //import com.example.petlover.Chat
 
