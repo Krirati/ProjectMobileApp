@@ -3,34 +3,21 @@ package com.example.petlover
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_chatlog.*
 import java.util.*
 
 class Chatlog : AppCompatActivity() {
     private lateinit var database: DatabaseReference
-    private lateinit var auth: FirebaseAuth
-    var useruid = FirebaseAuth.getInstance().currentUser?.uid.toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlog)
-        var roomuid = "22Mk5iKKLdB4VmT8db2a"
-        getchat(useruid,roomuid)
-
-        sendmessagebtn.setOnClickListener{
-
-            Log.d("Send",useruid)
-            Log.d("Send",edittextmessage.text.toString())
-            if (useruid != null && edittextmessage.text != null) {
-                sendmessage(useruid,edittextmessage.text.toString(),roomuid)
-            }
-            edittextmessage.text.clear()
-            getchat(useruid,roomuid)
-        }
-
+        var roomuid: String= "22Mk5iKKLdB4VmT8db2k"
+        var uiduser: String = "svx67MwBcfO4rQ5dESBDSvXnrCH3"
+        getchat(roomuid)
+        sendmessage(uiduser,"Hello Dad",roomuid)
     }
-    fun getchat(uid: String, roomuid: String){
+
+    fun getchat(uid: String){
         var database = FirebaseDatabase.getInstance().getReference("/chat/${uid}")
         database.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
