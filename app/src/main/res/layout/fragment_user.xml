@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
-        android:text="10"
+        android:text="0"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/post"
         app:layout_constraintStart_toStartOf="@+id/post"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/roboto"
-        android:text="10"
+        android:text="0"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/friend"
         app:layout_constraintHorizontal_bias="0.482"
@@ -98,7 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="169dp" />
+        app:layout_constraintGuide_begin="150dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerListAnimals"
@@ -121,6 +121,6 @@
         app:backgroundTint="@color/colorBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/ic_add_black_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

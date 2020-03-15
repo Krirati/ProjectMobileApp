@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.petlover.AddActivity
 
 import com.example.petlover.R
-import com.example.petlover.ui.home.HomeAdapter
+
 import com.example.petlover.ui.home.Model
+import com.example.petlover.ui.home.UserAdapter
 import com.example.petlover.ui.setting.SettingsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -37,6 +38,15 @@ class UserFragment : Fragment() {
         }
         val recycleViewAnimals = view.findViewById(R.id.recyclerListAnimals) as RecyclerView
         recycleViewAnimals.layoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
+//        val chat = ArrayList<Model>()
+//        chat.add(Model("dog"))
+//        chat.add(Model("cat"))
+//        chat.add(Model("ant"))
+//        chat.add(Model("bird"))
+//        chat.add(Model("bird"))
+//        val adapter = UserAdapter(chat)
+//        recycleViewAnimals.setHasFixedSize(true)
+//        recycleViewAnimals.adapter = adapter
         getListPet(recycleViewAnimals)
         return view
     }
@@ -78,7 +88,7 @@ class UserFragment : Fragment() {
                     val data = document.toObject(Model::class.java)
                     listAnimals.add(data)
                 }
-                val adapter = HomeAdapter(listAnimals)
+                val adapter = UserAdapter(listAnimals)
                 recyclerListAnimals.adapter = adapter
 
             }
