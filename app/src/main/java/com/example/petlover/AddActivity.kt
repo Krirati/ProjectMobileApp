@@ -47,6 +47,9 @@ class AddActivity : AppCompatActivity() {
         binding.input.setOnClickListener {
             showDatePickerDialog()
         }
+        binding.birthday.setOnClickListener{
+            showDatePickerDialog()
+        }
         binding.floatingSelectImg.setOnClickListener {
             Log.d("AddActivity", "select img")
             val intent = Intent(Intent.ACTION_PICK)

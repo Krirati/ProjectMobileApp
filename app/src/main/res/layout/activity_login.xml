@@ -29,9 +29,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@android:dimen/notification_large_icon_height"
         android:layout_marginTop="@android:dimen/notification_large_icon_height"
-        android:text="@string/login"
+        android:text="PetLover"
         android:textColor="@android:color/black"
         android:textSize="40sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -5,11 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
+        android:fontFamily="@font/roboto"
         android:text="Post"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/friend"
@@ -23,6 +25,7 @@
         android:id="@+id/countPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
         android:text="10"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/post"
@@ -35,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
+        android:fontFamily="@font/roboto"
         android:text="Friend"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto"
         android:text="10"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/friend"
@@ -59,6 +64,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="50dp"
         android:background="@drawable/button_curve"
+        android:fontFamily="@font/roboto"
         android:text="Edit profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/friend" />
@@ -68,13 +74,14 @@
         android:id="@+id/buttonAdd"
         android:layout_width="wrap_content"
         android:layout_height="43dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginEnd="36dp"
         android:drawableStart="@drawable/ic_add_black_24dp"
         android:text="@string/addH"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintVertical_bias="0.741" />
 
     <ImageView
         android:id="@+id/img_profile"
@@ -92,5 +99,28 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="169dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerListAnimals"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="42dp"
+        app:backgroundTint="@color/colorBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

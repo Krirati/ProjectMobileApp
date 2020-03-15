@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isInvisible
@@ -57,6 +58,6 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
         val textContact = itemView.findViewById(R.id.contact) as TextView
         val imgIcon = itemView.findViewById(R.id.iconType) as ImageButton
         val imgStatus = itemView.findViewById(R.id.iconStatus) as ImageButton
-
+        val imgPet = itemView.findViewById(R.id.imagePet) as ImageView
     }
 }

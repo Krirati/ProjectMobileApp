@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.petlover.R
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ChatFragment : Fragment() {
 
     private lateinit var notificationsViewModel: ChatViewModel
     private lateinit var database: DatabaseReference
-
+    private val db = FirebaseFirestore.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,5 +45,8 @@ class ChatFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
         return root
+    }
+    private fun getListChat () {
+        db.collection("chat")
     }
 }

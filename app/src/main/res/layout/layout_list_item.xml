@@ -146,7 +146,7 @@
                 tools:srcCompat="@drawable/love" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imagePet"
                 android:layout_width="177dp"
                 android:layout_height="134dp"
                 android:layout_marginStart="4dp"
