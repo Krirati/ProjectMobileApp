@@ -67,7 +67,7 @@ class UserAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
         }
         val dialog: AlertDialog = builder.create()
         dialog.show()
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.GREEN)
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#43a047"))
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED)
     }
 }
