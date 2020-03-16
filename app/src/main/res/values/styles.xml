@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textViewStyle">@style/anonymous_pro_font</item>
+        <item name="android:textViewStyle">@font/roboto</item>
         <item name="fontFamily">@font/roboto</item>
     </style>
 
@@ -39,7 +39,7 @@
     </style>
 
     <style name="anonymous_pro_font">
-        <item name="android:fontFamily">@font/anonymous_pro</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 
     <style name="MyMainRoundedActionButton" parent="@android:style/TextAppearance">

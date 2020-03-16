@@ -1,22 +1,26 @@
 package com.example.petlover.ui.tab_page
 
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.petlover.R
+import com.example.petlover.databinding.FragmentCoupleBinding
 import com.example.petlover.ui.home.HomeAdapter
 import com.example.petlover.ui.home.HomeViewModel
 import com.example.petlover.ui.home.Model
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_couple.*
 import java.util.ArrayList
 
 
@@ -24,7 +28,7 @@ class CoupleFragment : Fragment() {
     var listItem = ArrayList<Model>()
     private lateinit var homeViewModel: HomeViewModel
     private val db = FirebaseFirestore.getInstance()
-
+    private lateinit var binding: FragmentCoupleBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,14 +36,23 @@ class CoupleFragment : Fragment() {
     ): View? {
         homeViewModel =
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_couple, container, false)
-        val recyclerView = root.findViewById(R.id.recyclerView) as RecyclerView
-        val progressBarHome = root.findViewById(R.id.progressBarHome) as ProgressBar
-        recyclerView.layoutManager = GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)
-        logRecyclerView(progressBarHome, recyclerView)
-        return root
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_couple,container,false)
+        logRecyclerView()
+        binding.apply {
+            recyclerView.layoutManager = GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)
+            swipeRefreshLayout.setOnRefreshListener {
+                Handler().postDelayed({
+                    listItem.clear()
+                    logRecyclerView()
+                    binding.swipeRefreshLayout.isRefreshing = false
+                },3000)
+            }
+            swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#008744")
+                ,Color.parseColor("#0057e7"),Color.parseColor("#d62d20"))
+        }
+        return binding.root
     }
-    private fun logRecyclerView(progressBarHome: ProgressBar, recyclerView: RecyclerView) {
+    private fun logRecyclerView() {
         db.collection("animals")
             .whereArrayContains("category", "Find a couple")
             .get()
@@ -50,8 +63,8 @@ class CoupleFragment : Fragment() {
                     listItem.add(data)
                 }
                 val adapter = HomeAdapter(listItem)
-                recyclerView.adapter = adapter
-                progressBarHome.visibility = View.INVISIBLE
+                binding.recyclerView.adapter = adapter
+                binding.progressBarHome.visibility = View.INVISIBLE
             }
             .addOnFailureListener { exception ->
                 Log.w("Data in animals", "Error getting documents.", exception)

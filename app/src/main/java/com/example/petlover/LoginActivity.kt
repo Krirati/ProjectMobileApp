@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener{
                 if(!it.isSuccessful) return@addOnCompleteListener
                 Log.d("login","Successfully login ${it.result?.user?.uid}")
-                val intent = Intent(this, Bottomnavigation::class.java)
+                val intent = Intent(this, NavigationActivity::class.java)
                 finish()
                 startActivity(intent)
 
@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
     private fun checkUser () {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-            val intent = Intent(this, Bottomnavigation::class.java)
+            val intent = Intent(this, NavigationActivity::class.java)
             finishAffinity();
             startActivity(intent)
         }

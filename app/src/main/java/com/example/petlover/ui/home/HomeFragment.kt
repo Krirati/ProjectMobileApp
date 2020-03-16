@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.petlover.R
-import com.example.petlover.databinding.FragmentHomeBinding
 import com.example.petlover.ui.setting.SettingsActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.FirebaseFirestore
@@ -36,9 +35,9 @@ class HomeFragment : Fragment() {
         val fragmentAdapter = fragmentManager?.let { MyPagerAdapter(it) }
         viewPager.adapter = fragmentAdapter
         tabs.setupWithViewPager(viewPager)
-        tabs.getTabAt(0)?.setIcon(R.drawable.love)
-        tabs.getTabAt(1)?.setIcon(R.drawable.love)
-        tabs.getTabAt(2)?.setIcon(R.drawable.love)
+//        tabs.getTabAt(0)?.setIcon(R.drawable.love)
+//        tabs.getTabAt(1)?.setIcon(R.drawable.love)
+//        tabs.getTabAt(2)?.setIcon(R.drawable.love)
         setHasOptionsMenu(true)
         return root
     }

@@ -36,12 +36,6 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
             "Male" -> holder.textGender.setImageResource(R.drawable.male)
             "Female" -> holder.textGender.setImageResource(R.drawable.female)
         }
-        when (model.category?.get(0)) {
-            "Find a couple" -> holder.imgStatus.setImageResource(R.drawable.love)
-            "Lost animals" -> holder.imgStatus.setImageResource(R.drawable.love)
-            "Find friends" -> holder.imgStatus.setImageResource(R.drawable.love)
-            else -> holder.imgStatus.isInvisible
-        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -57,7 +51,7 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
         val textViewAddress = itemView.findViewById(R.id.place) as TextView
         val textContact = itemView.findViewById(R.id.contact) as TextView
         val imgIcon = itemView.findViewById(R.id.iconType) as ImageButton
-        val imgStatus = itemView.findViewById(R.id.iconStatus) as ImageButton
+//        val imgStatus = itemView.findViewById(R.id.iconStatus) as ImageButton
         val imgPet = itemView.findViewById(R.id.imagePet) as ImageView
     }
 }

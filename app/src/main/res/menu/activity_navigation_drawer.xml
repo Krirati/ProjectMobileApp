@@ -16,6 +16,7 @@
             android:id="@+id/navigation_user"
             android:icon="@drawable/ic_person_black_24dp"
             android:title="@string/user" />
+    </group>
         <item
             android:id="@+id/navigation_settings"
             android:icon="@drawable/ic_settings_black_24dp"
@@ -24,5 +25,5 @@
             android:id="@+id/navigation_logout"
             android:icon="@drawable/ic_input_black_24dp"
             android:title="@string/sign_out" />
-    </group>
+
 </menu>

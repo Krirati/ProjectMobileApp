@@ -9,4 +9,6 @@
     <color name="greyBackground">#FDFCFC</color>
     <color name="detail">#656565</color>
     <color name="btnAccept">#E96606</color>
+    <color name="btnChip">#ECECEC</color>
+    <color name="btnCancel">#D6D6D6</color>
 </resources>

@@ -25,9 +25,28 @@
         android:name="com.example.petlover.ui.user.UserFragment"
         android:label="@string/user"
         tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_navigation_user_to_editUserFragment"
+            app:destination="@id/editUserFragment" />
+        <action
+            android:id="@+id/action_navigation_user_to_addActivity"
+            app:destination="@id/addActivity" />
     </fragment>
     <fragment
         android:id="@+id/coupleFragment"
         android:name="com.example.petlover.ui.tab_page.CoupleFragment"
         android:label="CoupleFragment" />
+    <fragment
+        android:id="@+id/editUserFragment"
+        android:name="com.example.petlover.ui.user.EditUserFragment"
+        android:label="fragment_edit_user"
+        tools:layout="@layout/fragment_edit_user" />
+    <fragment
+        android:id="@+id/addActivity"
+        android:name="com.example.petlover.AddActivity"
+        android:label="AddActivity" >
+        <action
+            android:id="@+id/action_addActivity_to_navigation_user"
+            app:destination="@id/navigation_user" />
+    </fragment>
 </navigation>
