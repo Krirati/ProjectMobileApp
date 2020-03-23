@@ -26,9 +26,15 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model: ChatModel = modelChatModel[position]
         holder.bind(modelChatModel[position])
-        holder.username.text = model.username
-        holder.message.text = model.msg
-        holder.time.text = model.time
+        holder.username.text = model.uidsender
+        holder.message.text = model.uidreciver
+//        holder.username.text = model.username
+//        holder.message.text = model.msg
+//        holder.time.text = model.time?.toDate().toString()
+        holder.cardItem.setOnClickListener {
+            val intent = Intent(it.context, Chatlog::class.java)
+            it.context.startActivity(intent)
+        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -37,12 +43,13 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
             itemView.context.startActivity(intent)
         }}
         fun bind(chatMsg: ChatModel) {
-            when (chatMsg.username === "cat") {
-                true -> itemView.cardchat.setBackgroundResource(R.color.colorAccent)
-            }
+//            when (chatMsg.username === "cat") {
+//                true -> itemView.cardchat.setBackgroundResource(R.color.colorAccent)
+//            }
         }
         val username = itemView.findViewById(R.id.username) as TextView
         val message = itemView.findViewById(R.id.message) as TextView
         val time = itemView.findViewById(R.id.time) as TextView
+        val cardItem = itemView.cardchat
     }
 }
