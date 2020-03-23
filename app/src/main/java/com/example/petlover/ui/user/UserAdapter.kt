@@ -49,7 +49,7 @@ class UserAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
         val builder = AlertDialog.Builder(view.context)
         builder.setTitle("Delete ${model.name}")
         builder.setMessage("Do you really want to delete it?")
-        builder.setPositiveButton("Yes") { dialogInterface, i ->
+        builder.setPositiveButton("Yes") { dialogInterface, _ ->
             db.collection("animals").document(model.uid)
                 .delete()
                 .addOnSuccessListener { Log.d("Delete pet", "DocumentSnapshot successfully deleted!")

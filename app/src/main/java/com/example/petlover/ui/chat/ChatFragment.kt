@@ -1,6 +1,7 @@
 package com.example.petlover.ui.chat
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petlover.R
+import com.example.petlover.ui.model.Model
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -20,6 +23,10 @@ class ChatFragment : Fragment() {
     private lateinit var notificationsViewModel: ChatViewModel
     private lateinit var database: DatabaseReference
     private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
+    private val firebasedatabase = FirebaseDatabase.getInstance()
+    private lateinit var listChat: ArrayList<Model>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,9 +51,22 @@ class ChatFragment : Fragment() {
         val adapter = ChatAdapter(chat)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
+        getIDListChat()
         return root
     }
-    private fun getListChat () {
-        db.collection("chat")
+    private fun getIDListChat () {
+        db.collection("users")
+            .whereEqualTo("uid","${auth.currentUser?.uid}")
+            .get()
+            .addOnSuccessListener {documents ->
+                for (document in documents) {
+                    Log.d("Data in user animal","${document.id} => ${document.data}")
+                    val data = document.toObject(Model::class.java)
+                    listChat.add(data)
+                }
+            }
+
+//        val database = firebasedatabase.getReference("/chat/").orderByChild("uid1")
+//        database.addChildEventListener()
     }
 }

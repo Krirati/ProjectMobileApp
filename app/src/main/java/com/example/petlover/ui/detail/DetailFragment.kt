@@ -1,6 +1,7 @@
 package com.example.petlover.ui.detail
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +12,18 @@ import androidx.databinding.DataBindingUtil
 
 import com.example.petlover.R
 import com.example.petlover.databinding.FragmentDetailBinding
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private var isOpen: Boolean = false
+    private lateinit var dbs : FirebaseStorage
+    private val db = FirebaseFirestore.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,6 +61,50 @@ class DetailFragment : Fragment() {
                 Toast.makeText(context,"YOU click Chat",Toast.LENGTH_SHORT).show()
             }
         }
+        getDataPet ()
         return binding.root
+    }
+    private fun getDataPet () {
+        val args = DetailFragmentArgs.fromBundle(arguments!!)
+//        Toast.makeText(context,"Name Pet: ${args.petID}",Toast.LENGTH_SHORT).show()
+        var userPost = ""
+        db.collection("animals")
+            .document(args.petID)
+            .get()
+            .addOnSuccessListener {
+                binding.apply {
+                    nameAnimal.text = it.get("name").toString()
+                    pedigree.text = it.get("pedigree").toString()
+                    textViewPlacr.text = it.get("place").toString()
+                    textViewBirthday.text = it.get("birthday").toString()
+                    textViewCall.text = it.get("contact").toString()
+                    val timestamp = it["timestamp"] as com.google.firebase.Timestamp
+                    val milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
+                    val sdf = SimpleDateFormat("MM/dd/yyyy")
+                    val netDate = Date(milliseconds)
+                    val date = sdf.format(netDate).toString()
+                    time.text = date
+                    when (it.get("gender").toString()) {
+                        "Male" -> gender2.setImageResource(R.drawable.male)
+                        "Female" -> gender2.setImageResource(R.drawable.female)
+                    }
+                    userPost = it.get("uidUser") as String
+                    db.collection("users")
+                        .document(userPost)
+                        .get()
+                        .addOnSuccessListener {
+                            binding.apply {
+                                user.text = it.get("email").toString()
+                                if (textViewCall.text == null) textViewCall.text = it.get("contact").toString()
+                            }
+                        }
+                }
+            }
+            .addOnFailureListener {
+                view?.let { it1 -> Snackbar.make(it1,"Load fail",Snackbar.LENGTH_SHORT).show() }
+            }
+        Toast.makeText(context,"Name user: ${userPost}",Toast.LENGTH_SHORT).show()
+
+
     }
 }

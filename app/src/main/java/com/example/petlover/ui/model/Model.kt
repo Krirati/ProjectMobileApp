@@ -11,6 +11,5 @@ data class Model(
     val pedigree: String ="",
     val uid: String ="",
     val uidUser: String ="",
-    val timestamp: Timestamp? = null,
-    val category: ArrayList<String>? = null
+    val timestamp: Timestamp? = null
 )

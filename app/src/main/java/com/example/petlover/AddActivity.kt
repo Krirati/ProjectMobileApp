@@ -85,49 +85,6 @@ class AddActivity : Fragment() {
         }
         return binding.root
     }
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-////        binding = DataBindingUtil.setContentView(this,R.layout.activity_addpet)
-//        binding.buttonAdd.setOnClickListener {
-//            crateNewPet(it)
-//        }
-//        binding.input.setOnClickListener {
-//            showDatePickerDialog()
-//        }
-//        binding.birthday.setOnClickListener{
-//            showDatePickerDialog()
-//        }
-//        binding.floatingSelectImg.setOnClickListener {
-//            Log.d("AddActivity", "select img")
-//            val intent = Intent(Intent.ACTION_PICK)
-//            intent.type = "image/*"
-//            startActivityForResult(intent,0)
-//        }
-//        binding.btnCancel.setOnClickListener {
-//
-//        }
-//
-//        // Loop through the chips
-//        for (index in 0 until binding.chipGroup.childCount) {
-//            val chip:Chip = binding.chipGroup.getChildAt(index) as Chip
-//
-//            // Set the chip checked change listener
-//            chip.setOnCheckedChangeListener{view, isChecked ->
-//                if (isChecked){
-//                    list.add(view.text.toString())
-//                    chip.setChipBackgroundColorResource(R.color.colorPrimary)
-//                }else{
-//                    list.remove(view.text.toString())
-//                    chip.setChipBackgroundColorResource(R.color.greyBackground)
-//                }
-//                if (list.isNotEmpty()){
-//                    // SHow the selection
-//                    Toast.makeText(this,"Selected $list",Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
-//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -217,7 +174,7 @@ class AddActivity : Fragment() {
 
     private fun showDatePickerDialog () {
         val datePickerDialog = DatePickerDialog(view?.context,DatePickerDialog.OnDateSetListener { _, mYear, mMonth, mDay ->
-            binding.birthday.setText("$mDay/$mMonth/$mYear")
+            binding.birthday.setText("${mDay}/${mMonth}/${mYear}")
         }, year, month, day)
         datePickerDialog.show()
     }

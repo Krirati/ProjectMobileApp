@@ -63,7 +63,11 @@
         android:id="@+id/detailFragment"
         android:name="com.example.petlover.ui.detail.DetailFragment"
         android:label="@string/detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="petID"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/friendFragment"
         android:name="com.example.petlover.ui.tab_page.FriendFragment"
