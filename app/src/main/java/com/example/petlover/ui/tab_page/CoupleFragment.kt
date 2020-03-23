@@ -8,19 +8,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
 import com.example.petlover.R
 import com.example.petlover.databinding.FragmentCoupleBinding
 import com.example.petlover.ui.home.HomeAdapter
 import com.example.petlover.ui.home.HomeViewModel
-import com.example.petlover.ui.home.Model
+import com.example.petlover.ui.model.Model
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_couple.*
 import java.util.ArrayList
 
 

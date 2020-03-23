@@ -1,7 +1,6 @@
 package com.example.petlover.ui.home
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +8,11 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.isInvisible
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petlover.LoginActivity
 import com.example.petlover.R
+import com.example.petlover.ui.model.Model
 import kotlinx.android.synthetic.main.layout_list_item.view.*
 
 class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
@@ -28,7 +28,7 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model: Model = modelItems[position]
         holder.textViewName.text = model.name
-        holder.textContact.text = model.timestamp.toString()
+        holder.textContact.text = model.timestamp?.toDate().toString()
 //        holder.textViewAddress.text = model.category?.get(0)
 //        holder.imgIcon.setImageResource(model.icon)
 //        holder.imgStatus.setImageResource(model.status)
@@ -41,9 +41,10 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         init {
             itemView.cardView.setOnClickListener {
-                Toast.makeText(itemView.context,"Click",Toast.LENGTH_SHORT).show()
-                val intent = Intent(itemView.context, LoginActivity::class.java)
-                itemView.context.startActivity(intent)
+//                Toast.makeText(itemView.context,"Click",Toast.LENGTH_SHORT).show()
+//                val intent = Intent(itemView.context, LoginActivity::class.java)
+//                itemView.context.startActivity(intent)
+                Navigation.findNavController(it).navigate(R.id.action_navigation_home_to_detailFragment)
             }
         }
         val textViewName = itemView.findViewById(R.id.text_name) as TextView

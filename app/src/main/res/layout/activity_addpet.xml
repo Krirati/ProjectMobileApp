@@ -6,7 +6,7 @@
     <data>
         <variable
             name="myPet"
-            type="com.example.petlover.MyPet" />
+            type="com.example.petlover.ui.model.MyPet" />
     </data>
     <ScrollView
         android:layout_width="match_parent"

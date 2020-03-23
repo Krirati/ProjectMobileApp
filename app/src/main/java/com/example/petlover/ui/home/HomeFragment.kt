@@ -2,26 +2,21 @@ package com.example.petlover.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.ProgressBar
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.Navigation
 import androidx.viewpager.widget.ViewPager
 import com.example.petlover.R
+import com.example.petlover.ui.model.Model
 import com.example.petlover.ui.setting.SettingsActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.activity_bottomnavigation.*
 import java.util.ArrayList
 
 class HomeFragment : Fragment() {
-    var listItem = ArrayList<Model>()
     private lateinit var homeViewModel: HomeViewModel
-    private val db = FirebaseFirestore.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,14 +27,17 @@ class HomeFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         val tabs = root.findViewById(R.id.tabs) as TabLayout
         val viewPager = root.findViewById(R.id.viewPager) as ViewPager
-        val fragmentAdapter = fragmentManager?.let { MyPagerAdapter(it) }
+        val fragmentAdapter = MyPagerAdapter(childFragmentManager)
         viewPager.adapter = fragmentAdapter
         tabs.setupWithViewPager(viewPager)
-//        tabs.getTabAt(0)?.setIcon(R.drawable.love)
-//        tabs.getTabAt(1)?.setIcon(R.drawable.love)
-//        tabs.getTabAt(2)?.setIcon(R.drawable.love)
         setHasOptionsMenu(true)
         return root
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

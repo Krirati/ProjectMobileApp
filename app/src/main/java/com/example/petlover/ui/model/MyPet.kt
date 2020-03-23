@@ -1,4 +1,4 @@
-package com.example.petlover
+package com.example.petlover.ui.model
 
 import com.google.type.LatLng
 

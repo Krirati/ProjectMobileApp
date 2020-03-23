@@ -146,9 +146,6 @@ class AddActivity : Fragment() {
             buttonAdd.isClickable = false
             progressBar.visibility = View.VISIBLE
         }
-//        val name = findViewById<TextInputEditText>(R.id.name).text.toString()
-//        val pedigree = findViewById<TextInputEditText>(R.id.pedigree).text.toString()
-//        val birthday = findViewById<TextInputEditText>(R.id.birthday).text.toString()
         val name = binding.name.text.toString()
         val pedigree = binding.pedigree.text.toString()
         val birthday = binding.birthday.text.toString()

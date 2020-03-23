@@ -1,20 +1,24 @@
 package com.example.petlover.ui.tab_page
 
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.petlover.R
+import com.example.petlover.databinding.FragmentFriendBinding
 import com.example.petlover.ui.home.HomeAdapter
 import com.example.petlover.ui.home.HomeViewModel
-import com.example.petlover.ui.home.Model
+import com.example.petlover.ui.model.Model
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_friend.*
 
@@ -23,6 +27,7 @@ class FriendFragment : Fragment() {
     var listItem = ArrayList<Model>()
     private lateinit var homeViewModel: HomeViewModel
     private val db = FirebaseFirestore.getInstance()
+    private lateinit var binding: FragmentFriendBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -30,17 +35,31 @@ class FriendFragment : Fragment() {
     ): View? {
         homeViewModel =
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_friend, container, false)
-        val recyclerView_friend = root.findViewById(R.id.recyclerView_friend) as RecyclerView
-        val progressBar = root.findViewById(R.id.progressBar_friend) as ProgressBar
-        recyclerView_friend.layoutManager = GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)
-        logRecyclerView(progressBar)
-        return root
+//        val root = inflater.inflate(R.layout.fragment_friend, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_friend,container,false)
+        binding.apply {
+            recyclerViewFriend.layoutManager = GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)
+            swipeRefreshLayoutFriend.setOnRefreshListener {
+                Handler().postDelayed({
+                    listItem.clear()
+                    logRecyclerView()
+                    binding.swipeRefreshLayoutFriend.isRefreshing = false
+                },3000)
+            }
+            swipeRefreshLayoutFriend.setColorSchemeColors(
+                Color.parseColor("#008744")
+                , Color.parseColor("#0057e7"), Color.parseColor("#d62d20"))
+        }
+//        val recyclerView_friend = root.findViewById(R.id.recyclerView_friend) as RecyclerView
+//        val progressBar = root.findViewById(R.id.progressBar_friend) as ProgressBar
+
+        logRecyclerView()
+        return binding.root
     }
 
-    private fun logRecyclerView(progressBar: ProgressBar) {
+    private fun logRecyclerView() {
         db.collection("animals")
-            .whereArrayContains("category", "Find friend")
+            .whereArrayContains("category", "Find a couple")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
@@ -49,8 +68,8 @@ class FriendFragment : Fragment() {
                     listItem.add(data)
                 }
                 val adapter = HomeAdapter(listItem)
-                recyclerView_friend.adapter = adapter
-                progressBar.visibility = View.INVISIBLE
+                binding.recyclerViewFriend.adapter = adapter
+                binding.progressBarFriend.visibility = View.INVISIBLE
             }
             .addOnFailureListener { exception ->
                 Log.w("Data in animals", "Error getting documents.", exception)

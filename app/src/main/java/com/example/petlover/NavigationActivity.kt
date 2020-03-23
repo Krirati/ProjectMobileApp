@@ -36,7 +36,7 @@ class NavigationActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home, R.id.navigation_notifications, R.id.navigation_user,
-                R.id.navigation_settings,R.id.navigation_logout
+                R.id.navigation_settings
             ), drawerLayout
         )
         updateNavHeader()
@@ -82,7 +82,15 @@ class NavigationActivity : AppCompatActivity() {
         val headerView: View = navView.getHeaderView(0)
         val navUsername: TextView = headerView.findViewById(R.id.nav_username)
         val navEmail: TextView = headerView.findViewById(R.id.nav_email)
-        navUsername.setText(firebaseAuth?.displayName)
+        navUsername.setText(firebaseAuth?.email)
+//        if (firebaseAuth?.displayName == null) {
+//            db.collection("users").document("${firebaseAuth?.uid}")
+//                .get()
+//                .addOnSuccessListener {
+//                    navUsername.setText("nine")
+//                }
+//
+//        }
         navEmail.setText(firebaseAuth?.email)
     }
 

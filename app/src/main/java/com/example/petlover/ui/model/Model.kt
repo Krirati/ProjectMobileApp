@@ -1,4 +1,4 @@
-package com.example.petlover.ui.home
+package com.example.petlover.ui.model
 
 
 import com.google.firebase.Timestamp

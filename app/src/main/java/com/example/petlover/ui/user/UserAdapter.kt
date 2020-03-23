@@ -1,21 +1,17 @@
 package com.example.petlover.ui.home
 
-import android.content.Intent
 import android.graphics.Color
-import android.opengl.Visibility
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.petlover.LoginActivity
 import com.example.petlover.R
+import com.example.petlover.ui.model.Model
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.layout_list_item.view.*
 
 class UserAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 

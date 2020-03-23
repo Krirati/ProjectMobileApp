@@ -1,6 +1,5 @@
 package com.example.petlover.ui.user
 
-import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -9,14 +8,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.petlover.AddActivity
 
 import com.example.petlover.R
 import com.example.petlover.databinding.FragmentUserBinding
 
-import com.example.petlover.ui.home.Model
+import com.example.petlover.ui.model.Model
 import com.example.petlover.ui.home.UserAdapter
-import com.example.petlover.ui.setting.SettingsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 

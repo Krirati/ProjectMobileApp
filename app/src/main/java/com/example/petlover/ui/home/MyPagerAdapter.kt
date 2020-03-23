@@ -36,5 +36,4 @@ class MyPagerAdapter (fm: FragmentManager) : FragmentPagerAdapter(fm) {
             //and this method will set our
         }
     }
-
 }

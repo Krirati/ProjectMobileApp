@@ -14,7 +14,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        checkUser ()
+//        checkUser ()
         signin_btn.setOnClickListener {
             loginfun()
         }
@@ -24,7 +24,15 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
+    override fun onStart() {
+        super.onStart()
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val intent = Intent(this, NavigationActivity::class.java)
+            finishAffinity();
+            startActivity(intent)
+        }
+    }
     private fun loginfun(){
         val email = findViewById<TextInputEditText>(R.id.inputEmaillogin).text.toString()
         val pass = findViewById<TextInputEditText>(R.id.passlogin).text.toString()
@@ -44,12 +52,14 @@ class LoginActivity : AppCompatActivity() {
                 showwronglogin.text = somwrong
                 showwronglogin.visibility = View.VISIBLE}
     }
+
     private fun checkUser () {
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            val intent = Intent(this, NavigationActivity::class.java)
-            finishAffinity();
-            startActivity(intent)
-        }
+//        val user = FirebaseAuth.getInstance().currentUser
+//        if (user != null) {
+//            val intent = Intent(this, NavigationActivity::class.java)
+//            finishAffinity();
+//            startActivity(intent)
+//        }
     }
+
 }

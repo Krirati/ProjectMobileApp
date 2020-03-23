@@ -1,4 +1,4 @@
-package com.example.petlover.ui.user
+package com.example.petlover.ui.model
 
 data class UserModel(
     val username: String? = "",

@@ -30,7 +30,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/anonymous_pro"
                 android:text="@string/name"
+                android:textColor="@color/colorPrimary"
                 android:textSize="32sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/gender"
                 app:layout_constraintStart_toStartOf="@+id/iconType"
                 app:layout_constraintTop_toTopOf="parent"
@@ -63,27 +65,16 @@
                 app:layout_constraintVertical_bias="0.526"
                 app:srcCompat="@drawable/ic_call_black_24dp" />
 
-            <!--            <TextView-->
-            <!--                android:id="@+id/date"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginStart="16dp"-->
-            <!--                android:text="@string/date"-->
-            <!--                android:textColor="@color/detail"-->
-            <!--                app:layout_constraintBottom_toBottomOf="@+id/text_date"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/text_date"-->
-            <!--                app:layout_constraintTop_toTopOf="@+id/text_date" />-->
-
             <ImageButton
                 android:id="@+id/iconType"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginStart="216dp"
+                android:layout_marginStart="24dp"
                 android:background="@null"
                 android:contentDescription="@string/type_pet"
                 android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="@+id/gender"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imagePet"
                 app:srcCompat="@drawable/corgi" />
 
             <ImageButton
@@ -127,30 +118,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/contact"
                 tools:srcCompat="@drawable/female" />
 
-            <!--            <ImageButton-->
-            <!--                android:id="@+id/iconStatus"-->
-            <!--                android:layout_width="25dp"-->
-            <!--                android:layout_height="25dp"-->
-            <!--                android:layout_marginStart="8dp"-->
-            <!--                android:layout_marginTop="8dp"-->
-            <!--                android:background="@null"-->
-            <!--                android:contentDescription="@string/find"-->
-            <!--                android:scaleType="fitXY"-->
-            <!--                app:layout_constraintBottom_toBottomOf="@+id/gender"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/iconType"-->
-            <!--                app:layout_constraintTop_toTopOf="@+id/gender"-->
-            <!--                app:layout_constraintVertical_bias="1.0"-->
-            <!--                tools:srcCompat="@drawable/love" />-->
-
             <ImageView
                 android:id="@+id/imagePet"
-                android:layout_width="136dp"
-                android:layout_height="141dp"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.487"
-                app:srcCompat="@android:mipmap/sym_def_app_icon" />
+                app:srcCompat="@drawable/ic_launcher_background" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
