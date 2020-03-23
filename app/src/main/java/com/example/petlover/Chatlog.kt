@@ -3,9 +3,9 @@ package com.example.petlover
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.petlover.ui.chatlog.ChatlogModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.firestore.FirebaseFirestore
 import com.xwray.groupie.*
 import kotlinx.android.synthetic.main.activity_chatlog.*
 import kotlinx.android.synthetic.main.layout_list_chatlogincome.view.*
@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.layout_list_chatlogoutcome.view.*
 import java.util.*
 
 class Chatlog : AppCompatActivity() {
+    val db = FirebaseFirestore.getInstance()
     var useruid = FirebaseAuth.getInstance().currentUser?.uid.toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,43 +35,35 @@ class Chatlog : AppCompatActivity() {
     }
 
     fun getchat(uiduser: String,roomuid: String){
-        var database = FirebaseDatabase.getInstance().getReference("/chat/${roomuid}")
         val adapter = GroupAdapter<GroupieViewHolder>()
         recyclechatlog.adapter = adapter
-        database.addListenerForSingleValueEvent(object: ValueEventListener{
-            override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-
-            override fun onDataChange(p0: DataSnapshot) {
-                p0.children.forEach{
-                    val messa = it.getValue(ChatlogModel::class.java)
-                    if (messa != null) {
-                        if (messa.fromuid != uiduser){
-                            adapter.add(ChatfromItem(messa.msg))
-                        }
-                        else{
-                            adapter.add(ChattoItem(messa.msg))
-                        }
-
-
+        db.collection("chat").document(roomuid).collection("chat").orderBy("timestamp")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    if(document.data["fromuid"] != uiduser){
+                        adapter.add(ChatfromItem(document.data["msg"].toString()))
                     }
-                    Log.d("Message", it.toString())
+                    else{
+                        adapter.add(ChattoItem(document.data["msg"].toString()))
+                    }
+                    Log.d("getdata", "${document.id} => ${document.data["msg"]}")
                 }
             }
-        })
-
     }
 
     fun sendmessage(uiduser: String,msg: String,roomuid: String){
         var database = FirebaseDatabase.getInstance()
         val timeStamp: String? = Calendar.getInstance().time.toString()
         val randuid = database.reference.push().key
+        val word = hashMapOf(
+            "fromuid" to uiduser,
+            "msg" to msg,
+            "timestamp" to timeStamp
+        )
         Log.d("firebase",randuid)
-        val setmssage =
-            ChatlogModel(uiduser, msg, timeStamp)
         if (randuid != null) {
-            database.reference.child("chat").child(roomuid).child(randuid).setValue(setmssage)
+            db.collection("chat").document(roomuid).collection("chat").document(randuid).set(word)
         }
     }
 
