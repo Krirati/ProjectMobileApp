@@ -9,7 +9,7 @@
     android:paddingHorizontal="@dimen/activity_margin_top">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardchat"
+        android:id="@+id/cardChat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="1dp"

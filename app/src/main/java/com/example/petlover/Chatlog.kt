@@ -20,7 +20,8 @@ class Chatlog : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlog)
-        var roomuid = "22Mk5iKKLdB4VmT8db2a"
+//        var roomuid = "22Mk5iKKLdB4VmT8db2a"
+        var roomuid = intent.getStringExtra("uidRoom").toString()
         getchat(useruid,roomuid)
 
         sendmessagebtn.setOnClickListener{

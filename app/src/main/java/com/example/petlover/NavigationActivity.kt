@@ -82,7 +82,8 @@ class NavigationActivity : AppCompatActivity() {
         val headerView: View = navView.getHeaderView(0)
         val navUsername: TextView = headerView.findViewById(R.id.nav_username)
         val navEmail: TextView = headerView.findViewById(R.id.nav_email)
-        navUsername.setText(firebaseAuth?.email)
+//        if (firebaseAuth?.displayName == null) navUsername.setText(firebaseAuth?.email) else navUsername.setText(firebaseAuth?.displayName)
+        navUsername.text = firebaseAuth?.email
 //        if (firebaseAuth?.displayName == null) {
 //            db.collection("users").document("${firebaseAuth?.uid}")
 //                .get()
@@ -91,7 +92,7 @@ class NavigationActivity : AppCompatActivity() {
 //                }
 //
 //        }
-        navEmail.setText(firebaseAuth?.email)
+        navEmail.text = firebaseAuth?.email
     }
 
 }

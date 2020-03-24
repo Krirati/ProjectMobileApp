@@ -34,7 +34,7 @@
         <activity
             android:name=".AddActivity"
             android:label="Add new pet" />
-        <activity android:name=".ui.description.Description" />
+<!--        <activity android:name=".ui.description.Description" />-->
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_bottomnavigation" />
