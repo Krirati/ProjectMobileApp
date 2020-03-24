@@ -1,6 +1,8 @@
 package com.example.petlover.ui.chat
 
+import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,10 +25,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 class ChatFragment : Fragment() {
 
     private lateinit var notificationsViewModel: ChatViewModel
-    private lateinit var database: DatabaseReference
     private val db = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
-    private var chat = ArrayList<ChatModel>()
+    var chat = ArrayList<ChatModel>()
     private lateinit var binding: FragmentNotificationsBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,24 +38,34 @@ class ChatFragment : Fragment() {
             ViewModelProviders.of(this).get(ChatViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_notifications, container, false)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications,container,false)
-//        val textView: TextView = root.findViewById(R.id.text_notifications)
-//        notificationsViewModel.text.observe(this, Observer {
-//            textView.text = it
-//        })  may be use
-        binding.recyclerViewChat.layoutManager = GridLayoutManager(context,1, GridLayoutManager.VERTICAL, false)
-
+        binding.apply {
+            recyclerViewChat.layoutManager = GridLayoutManager(context,1, GridLayoutManager.VERTICAL, false)
+            swipeRefreshLayoutChat.setOnRefreshListener {
+                Handler().postDelayed({
+                    getIDListChat()
+                    binding.swipeRefreshLayoutChat.isRefreshing = false
+                },3000)
+            }
+            swipeRefreshLayoutChat.setColorSchemeColors(
+                Color.parseColor("#008744")
+                , Color.parseColor("#0057e7"), Color.parseColor("#d62d20"))
+        }
         getIDListChat()
         return binding.root
     }
     private fun getIDListChat () {
+        chat.clear()
         db.collection("chat")
             .whereArrayContains("uids","${auth.currentUser?.uid}")
+//            .whereArrayContains("uids","inihDPgz7rMHYRtFja0SUSacVM72")
             .get()
             .addOnSuccessListener {documents ->
                 for (document in documents) {
                     Log.d("DataChat: ","${document.id} => ${document.data}")
                     chat.add(ChatModel("${document.data["uidsender"]}"
-                        , "${document.data["uidreciver"]}", "${document.data["status"]}", "${document.id}"))
+                        , "${document.data["uidreciver"]}", "${document.data["status"]}",
+                        document.id))
+                    Log.d("DataChat: ","${document.data["status"]}")
                 }
                 val adapter = ChatAdapter(chat)
                 binding.recyclerViewChat.adapter = adapter
