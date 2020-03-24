@@ -1,5 +1,6 @@
 package com.example.petlover.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,8 +10,10 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.example.petlover.Chatlog
 
 import com.example.petlover.R
+import com.example.petlover.RegisterActivity
 import com.example.petlover.databinding.FragmentDetailBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
@@ -20,6 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DetailFragment : Fragment() {
+    private lateinit var uidreciveruser: String
     private lateinit var binding: FragmentDetailBinding
     private var isOpen: Boolean = false
     private lateinit var dbs : FirebaseStorage
@@ -106,5 +110,19 @@ class DetailFragment : Fragment() {
         Toast.makeText(context,"Name user: ${userPost}",Toast.LENGTH_SHORT).show()
 
 
+    }
+    private fun chatcreateroom(uidreciver:String){
+        val intent = Intent(context, RegisterActivity::class.java).putExtra("uidreciver",uidreciver)
+        startActivity(intent)
+    }
+    private fun checkchat(uidreciver:String){
+        db.collection("chat").get().addOnSuccessListener { john ->
+            for (uid in john){
+                if (uid["uidreciver"].toString() == uidreciver){
+                    val intent = Intent(context, RegisterActivity::class.java).putExtra("uidreciver",uidreciver)
+                    startActivity(intent)
+                }
+            }
+        }
     }
 }

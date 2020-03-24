@@ -1,5 +1,6 @@
 package com.example.petlover
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.layout_list_chatlogoutcome.view.*
 import java.util.*
 
 class Chatlog : AppCompatActivity() {
+    val uidreciver = intent.getStringExtra("uidreciver")
     val db = FirebaseFirestore.getInstance()
     var useruid = FirebaseAuth.getInstance().currentUser?.uid.toString()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,7 @@ class Chatlog : AppCompatActivity() {
     }
 
     fun getchat(uiduser: String,roomuid: String){
+        Log.d("uid",uidreciver)
         val adapter = GroupAdapter<GroupieViewHolder>()
         recyclechatlog.adapter = adapter
         db.collection("chat").document(roomuid).collection("chat").orderBy("timestamp")
