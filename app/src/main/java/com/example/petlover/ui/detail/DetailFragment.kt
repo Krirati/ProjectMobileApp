@@ -62,6 +62,7 @@ class DetailFragment : Fragment() {
                 Toast.makeText(context,"YOU click map",Toast.LENGTH_SHORT).show()
             }
             floatingChatButton.setOnClickListener {
+                checkchat()
                 Toast.makeText(context,"YOU click Chat",Toast.LENGTH_SHORT).show()
             }
         }
@@ -115,14 +116,30 @@ class DetailFragment : Fragment() {
         val intent = Intent(context, RegisterActivity::class.java).putExtra("uidreciver",uidreciver)
         startActivity(intent)
     }
-    private fun checkchat(uidreciver:String){
-        db.collection("chat").get().addOnSuccessListener { john ->
-            for (uid in john){
-                if (uid["uidreciver"].toString() == uidreciver){
-                    val intent = Intent(context, RegisterActivity::class.java).putExtra("uidreciver",uidreciver)
-                    startActivity(intent)
+    private fun checkchat(){
+        var uiduser:String
+        val args = DetailFragmentArgs.fromBundle(arguments!!)
+        db.collection("animals")
+            .document(args.petID)
+            .get().addOnSuccessListener {
+                uiduser = it.get("uidUser") as String
+                Log.d("uiduser",uiduser)
+                db.collection("chat").get().addOnSuccessListener { reciver ->
+                    for (uid in reciver){
+                        Log.d("readdata", uid.id)
+                        if(uiduser == uid["uidsender"]){
+                            val intent = Intent(context, Chatlog::class.java).putExtra("uidRoom",uid.id)
+                            startActivity(intent)
+                            break
+                        }
+                        Log.d("readdata",uid["status"].toString())
+                        /*if (uid["uidreciver"].toString() == uidreciver){
+
+                        }*/
+                    }
                 }
             }
-        }
+
+
     }
 }

@@ -14,13 +14,11 @@ import kotlinx.android.synthetic.main.layout_list_chatlogoutcome.view.*
 import java.util.*
 
 class Chatlog : AppCompatActivity() {
-    val uidreciver = intent.getStringExtra("uidreciver")
     val db = FirebaseFirestore.getInstance()
     var useruid = FirebaseAuth.getInstance().currentUser?.uid.toString()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlog)
-//        var roomuid = "22Mk5iKKLdB4VmT8db2a"
         var roomuid = intent.getStringExtra("uidRoom").toString()
         getchat(useruid,roomuid)
 
@@ -38,7 +36,6 @@ class Chatlog : AppCompatActivity() {
     }
 
     fun getchat(uiduser: String,roomuid: String){
-        Log.d("uid",uidreciver)
         val adapter = GroupAdapter<GroupieViewHolder>()
         recyclechatlog.adapter = adapter
         db.collection("chat").document(roomuid).collection("chat").orderBy("timestamp")
