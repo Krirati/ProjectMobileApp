@@ -50,9 +50,6 @@ class FriendFragment : Fragment() {
                 Color.parseColor("#008744")
                 , Color.parseColor("#0057e7"), Color.parseColor("#d62d20"))
         }
-//        val recyclerView_friend = root.findViewById(R.id.recyclerView_friend) as RecyclerView
-//        val progressBar = root.findViewById(R.id.progressBar_friend) as ProgressBar
-
         logRecyclerView()
         return binding.root
     }
@@ -60,7 +57,7 @@ class FriendFragment : Fragment() {
     private fun logRecyclerView() {
         listItem.clear()
         db.collection("animals")
-            .whereArrayContains("category", "Find a couple")
+            .whereArrayContains("category", "Find friends")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {

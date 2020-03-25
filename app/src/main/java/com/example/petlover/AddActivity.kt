@@ -82,7 +82,7 @@ class AddActivity : Fragment() {
                 }
                 if (list.isNotEmpty()){
                     // SHow the selection
-                    Toast.makeText(view.context,"Selected $list",Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(view.context,"Selected $list",Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -158,6 +158,9 @@ class AddActivity : Fragment() {
                         .update("imageUID", "${it}")
                         .addOnSuccessListener { Log.d("update", "DocumentSnapshot $it")}
                 }
+                db.collection("animals").document(generateId)
+                    .update("imgRef", "${it.metadata?.path}")
+                    .addOnSuccessListener { Log.d("update", "DocumentSnapshot $it")}
             }
             .addOnFailureListener{e ->
                 Log.w("Add pet img error", "Error adding document", e)

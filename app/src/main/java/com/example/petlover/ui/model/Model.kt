@@ -12,5 +12,6 @@ data class Model(
     val pedigree: String ="",
     val uid: String ="",
     val uidUser: String ="",
-    val timestamp: Timestamp? = null
+    val timestamp: Timestamp? = null,
+    val imgRef: String?= ""
 )

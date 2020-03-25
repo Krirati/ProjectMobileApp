@@ -90,6 +90,7 @@ class UserFragment : Fragment() {
     }
     private fun getListPet () {
         listAnimals.clear()
+        countPost = 0
         db.collection("animals")
             .whereEqualTo("uidUser","${auth.currentUser?.uid}")
             .get()
