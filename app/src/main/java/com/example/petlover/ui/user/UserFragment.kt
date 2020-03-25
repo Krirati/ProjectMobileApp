@@ -1,5 +1,7 @@
 package com.example.petlover.ui.user
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -10,12 +12,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.petlover.LoginActivity
 
 import com.example.petlover.R
 import com.example.petlover.databinding.FragmentUserBinding
 
 import com.example.petlover.ui.model.Model
 import com.example.petlover.ui.home.UserAdapter
+import com.example.petlover.ui.setting.SettingsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -75,7 +79,10 @@ class UserFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_setting -> {
-                view?.let { Navigation.findNavController(it).navigate(R.id.action_navigation_user_to_editUserFragment) }
+//                view?.let { Navigation.findNavController(it).navigate(R.id.action_navigation_user_to_editUserFragment) }
+                val intent = Intent(context, SettingsActivity::class.java)
+                startActivity(intent)
+//                finish()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -85,7 +92,9 @@ class UserFragment : Fragment() {
             .get()
             .addOnSuccessListener {documents->
                 Log.d("Data in user ","${documents.id} => ${documents.data}")
-                binding.name.text = documents.get("email").toString()
+                binding.apply {
+                    name.text = documents.get("email").toString()
+                }
             }
     }
     private fun getListPet () {

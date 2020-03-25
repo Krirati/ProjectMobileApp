@@ -17,6 +17,10 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
+import com.example.petlover.ui.chat.ChatFragment
+import com.example.petlover.ui.home.HomeFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -82,17 +86,10 @@ class NavigationActivity : AppCompatActivity() {
         val headerView: View = navView.getHeaderView(0)
         val navUsername: TextView = headerView.findViewById(R.id.nav_username)
         val navEmail: TextView = headerView.findViewById(R.id.nav_email)
-//        if (firebaseAuth?.displayName == null) navUsername.setText(firebaseAuth?.email) else navUsername.setText(firebaseAuth?.displayName)
-        navUsername.text = firebaseAuth?.email
-//        if (firebaseAuth?.displayName == null) {
-//            db.collection("users").document("${firebaseAuth?.uid}")
-//                .get()
-//                .addOnSuccessListener {
-//                    navUsername.setText("nine")
-//                }
-//
-//        }
+        if (firebaseAuth?.displayName == null) navUsername.setText(firebaseAuth?.email) else navUsername.setText(firebaseAuth?.displayName)
+//        navUsername.text = firebaseAuth?.email
         navEmail.text = firebaseAuth?.email
+
     }
 
 }

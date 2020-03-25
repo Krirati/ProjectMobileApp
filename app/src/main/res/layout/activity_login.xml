@@ -103,7 +103,8 @@
         android:text="@string/forgot_passwords"
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/sigup"
@@ -186,9 +187,9 @@
         app:layout_constraintTop_toBottomOf="@+id/forgetpass" />
 
     <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="130dp"
-        android:layout_height="40dp"
+        android:id="@+id/sign_in_google"
+        android:layout_width="185dp"
+        android:layout_height="45dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -40,7 +40,7 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
                 Log.d("UserAdapeter", "${it.id} => ${it.data}")
                 holder.username.text = it.data?.get("username").toString()
             }
-        holder.message.text = model.uidsender
+        holder.message.text = "มีข้อความที่ยังไม่ได้อ่าน"
 //        holder.time.text = model.time?.toDate().toString()
         when (model.status == "unread") {
             true -> holder.cardItem.setBackgroundResource(R.color.colorAccent)
