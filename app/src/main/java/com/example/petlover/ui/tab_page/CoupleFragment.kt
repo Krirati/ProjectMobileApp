@@ -50,6 +50,7 @@ class CoupleFragment : Fragment() {
         return binding.root
     }
     private fun logRecyclerView() {
+        listItem.clear()
         db.collection("animals")
             .whereArrayContains("category", "Find a couple")
             .get()

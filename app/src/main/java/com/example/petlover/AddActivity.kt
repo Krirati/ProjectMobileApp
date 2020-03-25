@@ -21,6 +21,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -38,7 +39,7 @@ class AddActivity : Fragment() {
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
     val day = calendar.get(Calendar.DAY_OF_MONTH)
-    private var uriImage: Uri? = null
+    private var uriImage: String? = null
     private lateinit var binding: ActivityAddpetBinding
 
     override fun onCreateView(
@@ -47,23 +48,25 @@ class AddActivity : Fragment() {
     ): View? {
 //        val view: View = inflater.inflate(R.layout.fragment_user, container, false)
         binding = DataBindingUtil.inflate(inflater, R.layout.activity_addpet,container,false)
-        binding.buttonAdd.setOnClickListener {
-            crateNewPet(it)
-        }
-        binding.input.setOnClickListener {
-            showDatePickerDialog()
-        }
-        binding.birthday.setOnClickListener{
-            showDatePickerDialog()
-        }
-        binding.floatingSelectImg.setOnClickListener {
-            Log.d("AddActivity", "select img")
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent,0)
-        }
-        binding.btnCancel.setOnClickListener {
-            clearField()
+        binding.apply {
+            buttonAdd.setOnClickListener {
+                crateNewPet(it)
+            }
+            input.setOnClickListener {
+                showDatePickerDialog()
+            }
+            birthday.setOnClickListener{
+                showDatePickerDialog()
+            }
+            floatingSelectImg.setOnClickListener {
+                Log.d("AddActivity", "select img")
+                val intent = Intent(Intent.ACTION_PICK)
+                intent.type = "image/*"
+                startActivityForResult(intent,0)
+            }
+            btnCancel.setOnClickListener {
+                clearField()
+            }
         }
         for (index in 0 until binding.chipGroup.childCount) {
             val chip:Chip = binding.chipGroup.getChildAt(index) as Chip
@@ -151,10 +154,10 @@ class AddActivity : Fragment() {
                 Log.d("Add pet img done", "Successfully uploaded image: ${it.metadata?.path}")
                 ref.downloadUrl.addOnSuccessListener {
                     Log.d("add img","File Location: $it")
+                    db.collection("animals").document(generateId)
+                        .update("imageUID", "${it}")
+                        .addOnSuccessListener { Log.d("update", "DocumentSnapshot $it")}
                 }
-                db.collection("animals").document(generateId)
-                    .update("imageUID", "${it.uploadSessionUri}")
-                    .addOnSuccessListener { Log.d("update", "DocumentSnapshot successfully updated!")}
             }
             .addOnFailureListener{e ->
                 Log.w("Add pet img error", "Error adding document", e)
@@ -173,7 +176,7 @@ class AddActivity : Fragment() {
     }
 
     private fun showDatePickerDialog () {
-        val datePickerDialog = DatePickerDialog(view?.context,DatePickerDialog.OnDateSetListener { _, mYear, mMonth, mDay ->
+        val datePickerDialog = DatePickerDialog(context,DatePickerDialog.OnDateSetListener { _, mYear, mMonth, mDay ->
             binding.birthday.setText("${mDay}/${mMonth}/${mYear}")
         }, year, month, day)
         datePickerDialog.show()

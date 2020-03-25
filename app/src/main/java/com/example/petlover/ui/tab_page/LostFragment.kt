@@ -54,8 +54,9 @@ class LostFragment : Fragment() {
     }
 
     private fun logRecyclerView() {
+        listItem.clear()
         db.collection("animals")
-            .whereArrayContains("category", "Find friend")
+            .whereArrayContains("category", "Lost animals")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {

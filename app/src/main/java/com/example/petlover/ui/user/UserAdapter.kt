@@ -53,7 +53,7 @@ class UserAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
             db.collection("animals").document(model.uid)
                 .delete()
                 .addOnSuccessListener { Log.d("Delete pet", "DocumentSnapshot successfully deleted!")
-                    Snackbar.make(view,"Ok, delete success",Snackbar.LENGTH_SHORT).show()}
+                    Snackbar.make(view,"Done, delete success",Snackbar.LENGTH_SHORT).show()}
                 .addOnFailureListener { e -> Log.w("Error delete pet", "Error deleting document", e)
                     Snackbar.make(view,"Fail, delete fail",Snackbar.LENGTH_SHORT).show()}
 

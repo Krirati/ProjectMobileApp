@@ -207,6 +207,15 @@
                     app:chipStrokeColor="@color/btnChip"
                     app:rippleColor="@color/btnChip" />
 
+                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFriends"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/find_friends"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    app:chipBackgroundColor="@color/btnChip" />
+
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipLost"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
@@ -216,16 +225,6 @@
                     android:text="@string/lost_animals"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     app:chipBackgroundColor="@color/btnChip" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipFriends"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/find_friends"
-                    android:textAppearance="@style/TextAppearance.AppCompat"
-                    app:chipBackgroundColor="@color/btnChip" />
-
             </com.google.android.material.chip.ChipGroup>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton

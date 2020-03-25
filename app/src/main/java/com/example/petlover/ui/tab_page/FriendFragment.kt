@@ -58,6 +58,7 @@ class FriendFragment : Fragment() {
     }
 
     private fun logRecyclerView() {
+        listItem.clear()
         db.collection("animals")
             .whereArrayContains("category", "Find a couple")
             .get()
