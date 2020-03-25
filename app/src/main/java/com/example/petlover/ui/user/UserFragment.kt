@@ -1,7 +1,9 @@
 package com.example.petlover.ui.user
 
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
@@ -31,12 +33,23 @@ class UserFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user,container,false)
-        binding.floatingActionButton.setOnClickListener {
-
-            Navigation.findNavController(it).navigate(R.id.action_navigation_user_to_addActivity)
+        binding.apply {
+            floatingActionButton.setOnClickListener {
+                Navigation.findNavController(it).navigate(R.id.action_navigation_user_to_addActivity)
+            }
+            recyclerListAnimals.layoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
+            swipeRefreshLayoutUser.setOnRefreshListener {
+                Handler().postDelayed({
+                    listAnimals.clear()
+                    getListPet()
+                    swipeRefreshLayoutUser.isRefreshing = false
+                },3000)
+            }
+            swipeRefreshLayoutUser.setColorSchemeColors(
+                Color.parseColor("#008744")
+                , Color.parseColor("#0057e7"), Color.parseColor("#d62d20"))
         }
         getUser()
-        binding.recyclerListAnimals.layoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
         getListPet()
         return binding.root
     }
@@ -76,6 +89,8 @@ class UserFragment : Fragment() {
             }
     }
     private fun getListPet () {
+        listAnimals.clear()
+        countPost = 0
         db.collection("animals")
             .whereEqualTo("uidUser","${auth.currentUser?.uid}")
             .get()
