@@ -1,5 +1,6 @@
 package com.example.petlover.ui.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,8 +10,10 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.example.petlover.Chatlog
 
 import com.example.petlover.R
+import com.example.petlover.RegisterActivity
 import com.example.petlover.databinding.FragmentDetailBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
@@ -20,6 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DetailFragment : Fragment() {
+    private lateinit var uidreciveruser: String
     private lateinit var binding: FragmentDetailBinding
     private var isOpen: Boolean = false
     private lateinit var dbs : FirebaseStorage
@@ -58,6 +62,7 @@ class DetailFragment : Fragment() {
                 Toast.makeText(context,"YOU click map",Toast.LENGTH_SHORT).show()
             }
             floatingChatButton.setOnClickListener {
+                checkchat()
                 Toast.makeText(context,"YOU click Chat",Toast.LENGTH_SHORT).show()
             }
         }
@@ -104,6 +109,36 @@ class DetailFragment : Fragment() {
                 view?.let { it1 -> Snackbar.make(it1,"Load fail",Snackbar.LENGTH_SHORT).show() }
             }
         Toast.makeText(context,"Name user: ${userPost}",Toast.LENGTH_SHORT).show()
+
+
+    }
+    private fun chatcreateroom(uidreciver:String){
+        val intent = Intent(context, RegisterActivity::class.java).putExtra("uidreciver",uidreciver)
+        startActivity(intent)
+    }
+    private fun checkchat(){
+        var uiduser:String
+        val args = DetailFragmentArgs.fromBundle(arguments!!)
+        db.collection("animals")
+            .document(args.petID)
+            .get().addOnSuccessListener {
+                uiduser = it.get("uidUser") as String
+                Log.d("uiduser",uiduser)
+                db.collection("chat").get().addOnSuccessListener { reciver ->
+                    for (uid in reciver){
+                        Log.d("readdata", uid.id)
+                        if(uiduser == uid["uidsender"]){
+                            val intent = Intent(context, Chatlog::class.java).putExtra("uidRoom",uid.id)
+                            startActivity(intent)
+                            break
+                        }
+                        Log.d("readdata",uid["status"].toString())
+                        /*if (uid["uidreciver"].toString() == uidreciver){
+
+                        }*/
+                    }
+                }
+            }
 
 
     }

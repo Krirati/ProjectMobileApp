@@ -1,5 +1,6 @@
 package com.example.petlover
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,7 +19,6 @@ class Chatlog : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlog)
-//        var roomuid = "22Mk5iKKLdB4VmT8db2a"
         var roomuid = intent.getStringExtra("uidRoom").toString()
         getchat(useruid,roomuid)
 
