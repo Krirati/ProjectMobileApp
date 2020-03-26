@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
@@ -154,7 +155,8 @@ class DetailFragment : Fragment() {
                             Log.d("uuu",randuid)
                             val newroom = hashMapOf(
                                 "uidsender" to useruid,
-                                "uidreciver" to uiduser
+                                "uidreciver" to uiduser,
+                                "timestamp" to FieldValue.serverTimestamp()
                             )
                             if (randuid != null) {
                                 db.collection("chat").document(randuid).set(newroom)

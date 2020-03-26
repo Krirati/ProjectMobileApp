@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.xwray.groupie.*
 import kotlinx.android.synthetic.main.activity_chatlog.*
@@ -62,9 +63,14 @@ class Chatlog : AppCompatActivity() {
             "msg" to msg,
             "timestamp" to timeStamp
         )
+        val status = hashMapOf(
+            "timestamp" to FieldValue.serverTimestamp(),
+            "status" to "unread"
+        )
         Log.d("firebase",randuid)
         if (randuid != null) {
             db.collection("chat").document(roomuid).collection("chat").document(randuid).set(word)
+            db.collection("chat").document(roomuid).update(status)
         }
     }
 

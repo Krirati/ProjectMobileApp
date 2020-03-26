@@ -14,6 +14,9 @@ import com.example.petlover.Chatlog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.layout_list_chat.view.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 //import com.example.petlover.Chat
 
@@ -32,7 +35,7 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model: ChatModel = modelChatModel[position]
-        val uid = if (model.uidsender !== auth?.uid) model.uidsender else model.uidreciver
+        val uid = if (model.uidsender == auth?.uid) model.uidreciver else model.uidsender
         db.collection("users")
             .document("$uid")
             .get()
@@ -40,12 +43,14 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
                 Log.d("UserAdapeter", "${it.id} => ${it.data}")
                 holder.username.text = it.data?.get("username").toString()
             }
-        holder.message.text = "มีข้อความที่ยังไม่ได้อ่าน"
-//        holder.time.text = model.time?.toDate().toString()
+        holder.message.text = "มีข้อความ"
+        val timestamp = model.timestamp?.toDate().toString().split('G')
+        holder.time.text = timestamp[0]
         when (model.status == "unread") {
             true -> holder.cardItem.setBackgroundResource(R.color.colorAccent)
         }
         holder.cardItem.setOnClickListener {
+            db.collection("chat").document("${model.idRoom}").update("status", "read")
             val intent = Intent(it.context, Chatlog::class.java)
             intent.putExtra("uidRoom", "${model.idRoom}")
             it.context.startActivity(intent)
@@ -53,10 +58,6 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        init {itemView.cardchat.setOnClickListener {
-//            val intent = Intent(itemView.context, Chatlog::class.java)
-//            itemView.context.startActivity(intent)
-//        }}
         val username = itemView.findViewById(R.id.username) as TextView
         val message = itemView.findViewById(R.id.message) as TextView
         val time = itemView.findViewById(R.id.time) as TextView

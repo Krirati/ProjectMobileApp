@@ -10,5 +10,6 @@ data class ChatModel(
     val uidsender: String?,
     val uidreciver: String?,
     val status: String?,
-    val idRoom: String?
+    val idRoom: String?,
+    val timestamp: Timestamp?
     )
