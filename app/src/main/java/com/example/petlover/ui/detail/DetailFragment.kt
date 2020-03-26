@@ -123,6 +123,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun checkchat(){
+        var count = 0
         var useruid = FirebaseAuth.getInstance().currentUser?.uid.toString()
         var uiduser:String
         val args = DetailFragmentArgs.fromBundle(arguments!!)
@@ -131,29 +132,36 @@ class DetailFragment : Fragment() {
             .get().addOnSuccessListener {
                 uiduser = it.get("uidUser") as String
                 Log.d("uiduser",uiduser)
-                db.collection("chat").whereEqualTo("uidreciver",uiduser).whereEqualTo("uidsender",useruid).get().addOnSuccessListener { reciver ->
+                Log.d("uiduser",useruid)
+                db.collection("chat").whereEqualTo("uidreciver",uiduser).whereEqualTo("uidsender",useruid).get()
+                    .addOnSuccessListener { reciver ->
+                        Log.d("hh","Hello error")
                     for (uid in reciver){
-                        Log.d("readdata", uid.id)
-                        if(uiduser == uid["uidsender"]){
+                        if (uid["uidreciver"] == uiduser){
                             val intent = Intent(context, Chatlog::class.java).putExtra("uidRoom",uid.id)
                             startActivity(intent)
-                            break
+                            Log.d("readdata", uid.id)
+                            count = 1
                         }
-                        Log.d("readdata",uid["status"].toString())
+
                     }
-                }.addOnFailureListener{
-                    var database = FirebaseDatabase.getInstance()
-                    val randuid = database.reference.push().key
-                    val newroom = hashMapOf(
-                        "uidsender" to useruid,
-                        "uidreciver" to uiduser
-                    )
-                    if (randuid != null) {
-                        db.collection("chat").document(randuid).set(newroom)
-                    }
+                        Log.d("count",count.toString())
+                        if (count != 1){
+                            var database = FirebaseDatabase.getInstance()
+                            val randuid = database.reference.push().key
+                            Log.d("uuu",randuid)
+                            val newroom = hashMapOf(
+                                "uidsender" to useruid,
+                                "uidreciver" to uiduser
+                            )
+                            if (randuid != null) {
+                                db.collection("chat").document(randuid).set(newroom)
+                                val intent = Intent(context, Chatlog::class.java).putExtra("uidRoom",randuid)
+                                startActivity(intent)
+                            }
+                        }
+
                 }
             }
-
-
     }
 }
