@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.petlover">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -9,15 +10,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.chatlog.Chatlog">
+        <activity
+            android:name=".NavigationActivity"
+            android:label="@string/title_activity_navigation"
+            android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
+        <activity android:name=".Chatlog"></activity>
         <activity
             android:name=".ui.setting.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".Bottomnavigation" />
         <activity
             android:name=".RegisterActivity"
-            android:theme="@style/AppTheme.splash"/>
+            android:theme="@style/AppTheme.splash" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/NoActionBar">
@@ -30,13 +36,13 @@
         <activity
             android:name=".AddActivity"
             android:label="Add new pet" />
-        <activity android:name=".ui.description.Description" />
+<!--        <activity android:name=".ui.description.Description" />-->
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_bottomnavigation" />
         <activity
             android:name=".Bottomnavigation"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
 
         <meta-data
             android:name="preloaded_fonts"

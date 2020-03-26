@@ -22,20 +22,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/activity_margin_top">
+            android:padding="2dp">
 
             <TextView
                 android:id="@+id/text_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="82dp"
                 android:fontFamily="@font/anonymous_pro"
                 android:text="@string/name"
+                android:textColor="@color/colorPrimary"
                 android:textSize="32sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/gender"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.592"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/iconType"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.113" />
 
@@ -66,28 +65,16 @@
                 app:layout_constraintVertical_bias="0.526"
                 app:srcCompat="@drawable/ic_call_black_24dp" />
 
-            <!--            <TextView-->
-            <!--                android:id="@+id/date"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginStart="16dp"-->
-            <!--                android:text="@string/date"-->
-            <!--                android:textColor="@color/detail"-->
-            <!--                app:layout_constraintBottom_toBottomOf="@+id/text_date"-->
-            <!--                app:layout_constraintStart_toEndOf="@+id/text_date"-->
-            <!--                app:layout_constraintTop_toTopOf="@+id/text_date" />-->
-
             <ImageButton
                 android:id="@+id/iconType"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginStart="220dp"
+                android:layout_marginStart="24dp"
                 android:background="@null"
                 android:contentDescription="@string/type_pet"
                 android:scaleType="fitXY"
-
                 app:layout_constraintBottom_toBottomOf="@+id/gender"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imagePet"
                 app:srcCompat="@drawable/corgi" />
 
             <ImageButton
@@ -120,41 +107,27 @@
                 android:id="@+id/gender"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="20dp"
                 android:background="@null"
                 android:contentDescription="@string/gender"
                 android:scaleType="fitXY"
                 android:text="@string/gender"
                 android:textColor="@color/detail"
-                app:layout_constraintStart_toEndOf="@+id/iconStatus"
-                app:layout_constraintTop_toBottomOf="@+id/contact"
-                tools:srcCompat="@drawable/femenine" />
-
-            <ImageButton
-                android:id="@+id/iconStatus"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@null"
-                android:contentDescription="@string/find"
-                android:scaleType="fitXY"
-                app:layout_constraintBottom_toBottomOf="@+id/gender"
                 app:layout_constraintStart_toEndOf="@+id/iconType"
-                app:layout_constraintTop_toTopOf="@+id/gender"
-                app:layout_constraintVertical_bias="1.0"
-                tools:srcCompat="@drawable/love" />
+                app:layout_constraintTop_toBottomOf="@+id/contact"
+                tools:srcCompat="@drawable/female" />
 
             <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="177dp"
-                android:layout_height="134dp"
-                android:layout_marginStart="4dp"
+                android:id="@+id/imagePet"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@android:mipmap/sym_def_app_icon" />
+                app:layout_constraintVertical_bias="0.487"
+                app:srcCompat="@drawable/ic_launcher_background" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

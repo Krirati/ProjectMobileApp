@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#f7ba66</color>
-    <color name="colorPrimaryDark">#c18a38</color>
-    <color name="colorAccent">#ffec96</color>
+    <color name="colorPrimary">#f8bb68</color>
+    <color name="colorPrimaryDark">#c28b3a</color>
+    <color name="colorAccent">#ffed98</color>
     <color name="colorBtn">#f8bb68</color>
     <color name="text">#000000</color>
     <color name="whiht">#FFFF</color>
     <color name="greyBackground">#FDFCFC</color>
-    <color name="detail">#DDDDDD</color>
+    <color name="detail">#656565</color>
     <color name="btnAccept">#E96606</color>
+    <color name="btnChip">#ECECEC</color>
+    <color name="btnCancel">#D6D6D6</color>
 </resources>

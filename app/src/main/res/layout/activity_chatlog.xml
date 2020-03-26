@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.chatlog.Chatlog">
+    tools:context=".Chatlog">
 
     <EditText
         android:id="@+id/edittextmessage"
@@ -37,6 +37,7 @@
         android:layout_width="413dp"
         android:layout_height="532dp"
         android:layout_marginBottom="6dp"
+        android:padding="@dimen/activity_horizontal_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/sendmessagebtn"
         app:layout_constraintEnd_toEndOf="parent"

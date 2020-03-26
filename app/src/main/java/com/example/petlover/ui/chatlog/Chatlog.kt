@@ -3,6 +3,8 @@ package com.example.petlover.ui.chatlog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.petlover.ChatfromItem
+import com.example.petlover.ChattoItem
 import com.example.petlover.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -11,7 +13,6 @@ import kotlinx.android.synthetic.main.activity_chatlog.*
 import kotlinx.android.synthetic.main.layout_list_chatlogincome.view.*
 import kotlinx.android.synthetic.main.layout_list_chatlogoutcome.view.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Chatlog : AppCompatActivity() {
     private lateinit var database: DatabaseReference

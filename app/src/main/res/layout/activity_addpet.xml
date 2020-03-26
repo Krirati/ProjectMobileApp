@@ -6,7 +6,7 @@
     <data>
         <variable
             name="myPet"
-            type="com.example.petlover.MyPet" />
+            type="com.example.petlover.ui.model.MyPet" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -94,18 +94,34 @@
 
             <Button
                 android:id="@+id/buttonAdd"
-                android:layout_width="195dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_width="115dp"
+                android:layout_height="47dp"
+                android:layout_marginBottom="28dp"
                 android:background="@drawable/button_curve"
                 android:elevation="10dp"
                 android:text="@string/addH"
-                android:textColor="@color/whiht"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/btnCancel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnCancel" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="115dp"
+                android:layout_height="47dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_curve_fail"
+                android:elevation="10dp"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/buttonAdd"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -171,14 +187,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
+                app:chipSpacingHorizontal="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.375"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7"
-                app:singleSelection="false"
-                app:chipSpacingHorizontal="2dp">
+                app:singleSelection="false">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipCouple"
@@ -187,7 +202,19 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:text="@string/find_a_couple"
-                    android:textAppearance="@style/TextAppearance.AppCompat" />
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    app:chipBackgroundColor="@color/btnChip"
+                    app:chipStrokeColor="@color/btnChip"
+                    app:rippleColor="@color/btnChip" />
+
+                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFriends"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/find_friends"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    app:chipBackgroundColor="@color/btnChip" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipLost"
@@ -196,16 +223,8 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:text="@string/lost_animals"
-                    android:textAppearance="@style/TextAppearance.AppCompat" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipFriends"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/find_friends"
-                    android:textAppearance="@style/TextAppearance.AppCompat" />
-
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    app:chipBackgroundColor="@color/btnChip" />
             </com.google.android.material.chip.ChipGroup>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -232,13 +251,14 @@
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyle"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/buttonAdd"
-                app:layout_constraintEnd_toEndOf="@+id/buttonAdd"
-                app:layout_constraintStart_toStartOf="@+id/buttonAdd"
-                app:layout_constraintTop_toTopOf="@+id/buttonAdd" />
+                android:layout_width="137dp"
+                android:layout_height="120dp"
+                android:background="@color/cardview_light_background"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView"

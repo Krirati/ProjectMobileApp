@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
-    android:background="@drawable/login">
+    android:background="@drawable/login"
+    tools:context=".RegisterActivity">
 
     <TextView
         android:id="@+id/login2"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@android:dimen/notification_large_icon_height"
         android:layout_marginTop="@android:dimen/notification_large_icon_height"
-        android:text="@string/register"
+        android:text="PetLover"
         android:textColor="@android:color/black"
         android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,6 +63,7 @@
             android:padding="@dimen/activity_margin_top"
             android:textColor="@android:color/black" />
     </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/confirmpassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -86,9 +87,10 @@
 
     <Button
         android:id="@+id/signup_btn"
-        android:layout_width="195dp"
-        android:layout_height="50dp"
+        android:layout_width="135dp"
+        android:layout_height="57dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="44dp"
         android:background="@drawable/button_curve"
         android:elevation="10dp"
         android:text="@string/register"
@@ -96,23 +98,27 @@
         android:textColor="@color/whiht"
         android:textSize="18sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/cancel_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showwrog" />
+        app:layout_constraintTop_toTopOf="@+id/cancel_btn"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/cancel_btn"
-        android:layout_width="195dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="188dp"
-        android:background="@drawable/button_curve"
+        android:layout_width="135dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_curve_fail"
         android:elevation="10dp"
         android:text="@string/cancelbtn"
         android:textAllCaps="false"
         android:textColor="@color/whiht"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/signup_btn"
+        app:layout_constraintHorizontal_bias="0.309"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/showwrog" />
 

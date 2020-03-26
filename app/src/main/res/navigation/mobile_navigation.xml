@@ -9,27 +9,71 @@
         android:id="@+id/navigation_home"
         android:name="com.example.petlover.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.petlover.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_coupleFragment"
+            app:destination="@id/coupleFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_friendFragment"
+            app:destination="@id/friendFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_lostFragment"
+            app:destination="@id/lostFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_detailFragment"
+            app:destination="@id/detailFragment"
+            app:popUpTo="@id/coupleFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.petlover.ui.chat.ChatFragment"
         android:label="@string/chat"
         tools:layout="@layout/fragment_notifications" />
-<!--    <fragment-->
-<!--        android:id="@+id/navigation_description"-->
-<!--        android:name="com.example.petlover.ui.description.Description"-->
-<!--        android:label="@string/add_a_new_pet"-->
-<!--        tools:layout="@layout/activity_addpet" />-->
     <fragment
         android:id="@+id/navigation_user"
         android:name="com.example.petlover.ui.user.UserFragment"
         android:label="@string/user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_navigation_user_to_editUserFragment"
+            app:destination="@id/editUserFragment" />
+        <action
+            android:id="@+id/action_navigation_user_to_addActivity"
+            app:destination="@id/addActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/coupleFragment"
+        android:name="com.example.petlover.ui.tab_page.CoupleFragment"
+        android:label="CoupleFragment" />
+    <fragment
+        android:id="@+id/editUserFragment"
+        android:name="com.example.petlover.ui.user.EditUserFragment"
+        android:label="fragment_edit_user"
+        tools:layout="@layout/fragment_edit_user" />
+    <fragment
+        android:id="@+id/addActivity"
+        android:name="com.example.petlover.AddActivity"
+        android:label="AddActivity" >
+        <action
+            android:id="@+id/action_addActivity_to_navigation_user"
+            app:destination="@id/navigation_user" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.petlover.ui.detail.DetailFragment"
+        android:label="@string/detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="petID"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/friendFragment"
+        android:name="com.example.petlover.ui.tab_page.FriendFragment"
+        android:label="FriendFragment" />
+    <fragment
+        android:id="@+id/lostFragment"
+        android:name="com.example.petlover.ui.tab_page.LostFragment"
+        android:label="LostFragment" />
 </navigation>

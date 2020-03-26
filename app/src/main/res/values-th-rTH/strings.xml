@@ -48,4 +48,8 @@
     <string name="wrongconfirm">รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน</string>
     <string name="sendmessage">ส่ง</string>
     <string name="cancelbtn">ยกเลิก</string>
+    <string name="by">โดย</string>
+    <string name="birthday">วันเกิด</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="sign_out">ออกจากระบบ</string>
 </resources>

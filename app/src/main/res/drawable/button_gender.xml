@@ -6,5 +6,5 @@
         android:state_checked="true"/>
     <item android:drawable="@drawable/disable_button_gender"
         android:state_enabled="false"
-        android:state_selected="false"/>
+        android:state_selected="false" />
 </selector>

@@ -1,35 +1,61 @@
 package com.example.petlover.ui.user
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.*
-import android.widget.Button
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.petlover.AddActivity
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.petlover.LoginActivity
 
 import com.example.petlover.R
+import com.example.petlover.databinding.FragmentUserBinding
+
+import com.example.petlover.ui.model.Model
+import com.example.petlover.ui.home.UserAdapter
 import com.example.petlover.ui.setting.SettingsActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class UserFragment : Fragment() {
 
-//    companion object {
-//        fun newInstance() = UserFragment()
-//    }
-
     private lateinit var viewModel: UserViewModel
-
+    private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
+    private var listAnimals = ArrayList<Model>()
+    private lateinit var binding: FragmentUserBinding
+    private var countPost: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_user, container, false)
-        val btnadd = view.findViewById(R.id.buttonAdd) as Button
-        btnadd.setOnClickListener {
-            val intent = Intent(context, AddActivity::class.java)
-            startActivity(intent)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user,container,false)
+        binding.apply {
+            floatingActionButton.setOnClickListener {
+                Navigation.findNavController(it).navigate(R.id.action_navigation_user_to_addActivity)
+            }
+            recyclerListAnimals.layoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
+            swipeRefreshLayoutUser.setOnRefreshListener {
+                Handler().postDelayed({
+                    listAnimals.clear()
+                    getListPet()
+                    swipeRefreshLayoutUser.isRefreshing = false
+                },3000)
+            }
+            swipeRefreshLayoutUser.setColorSchemeColors(
+                Color.parseColor("#008744")
+                , Color.parseColor("#0057e7"), Color.parseColor("#d62d20"))
         }
-        return view
+        getUser()
+        getListPet()
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -53,10 +79,44 @@ class UserFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_setting -> {
+//                view?.let { Navigation.findNavController(it).navigate(R.id.action_navigation_user_to_editUserFragment) }
                 val intent = Intent(context, SettingsActivity::class.java)
                 startActivity(intent)
+//                finish()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+    private fun getUser () {
+        db.collection("users").document("${auth.currentUser?.uid}")
+            .get()
+            .addOnSuccessListener {documents->
+                Log.d("Data in user ","${documents.id} => ${documents.data}")
+                binding.apply {
+                    name.text = documents.get("email").toString()
+                }
+            }
+    }
+    private fun getListPet () {
+        listAnimals.clear()
+        countPost = 0
+        db.collection("animals")
+            .whereEqualTo("uidUser","${auth.currentUser?.uid}")
+            .get()
+            .addOnSuccessListener { documents->
+                for (document in documents) {
+                    Log.d("Data in user animal","${document.id} => ${document.data}")
+                    val data = document.toObject(Model::class.java)
+                    listAnimals.add(data)
+                    countPost++
+                }
+                val adapter = UserAdapter(listAnimals)
+                binding.recyclerListAnimals.adapter = adapter
+                binding.numPost.text = countPost.toString()
+                binding.numFriend.text = countPost.toString()
+            }
+            .addOnFailureListener { exception ->
+                Log.w("Data in animals", "Error getting documents.", exception)
+            }
     }
 }
