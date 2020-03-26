@@ -1,83 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Petlover</string>
-    <string name="edit">Edit</string>
-    <string name="name">Name</string>
-    <string name="sex">Gender</string>
-    <string name="age">ฺBirthday</string>
-    <string name="cancle">Cancel</string>
-    <string name="detail">Detail</string>
-    <string name="addimg">Add image</string>
-    <string name="title_activity_bottomnavigation" translatable="false">Bottomnavigation</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="typzssage">Type a Message</string>
-    <string name="username">Username</string>
-    <string name="navitouser">Location Username</string>
-    <string name="seachtitle">Search</string>
-    <string name="friendpet">Find Friend</string>
-    <string name="lostpet">Lost Pet</string>
-    <string name="typesearch">Type for Search</string>
-    <string name="desciption">Desciption</string>
-    <string name="addH">Add</string>f
-    <string name="thai">Thai</string>
-    <string name="time">time</string>
-    <string name="find">find</string>
-    <string name="type_pet">typePet</string>
-    <string name="chat_button">chat</string>
-    <string name="index_0">Index = 0</string>
-    <string name="add_a_new_pet">Add a new pet</string>
-    <string name="category">Category</string>
-    <string name="search">Search</string>
-    <string name="contact">Contact</string>
-    <string name="place">Place</string>
-    <string name="gender">Gender</string>
-    <string name="date">Date:</string>
-    <string name="user">User</string>
-    <string name="chat">Chat</string>
-    <string name="login">Login</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="forgot_passwords">Forgot Password</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="don_t_have_an_account">Don\'t have Account ?</string>
-    <string name="setting" translatable="false">setting</string>
-    <string name="title_activity_settings" translatable="false">Settings</string>
+<!--    <string name="app_name">Petlover</string>-->
+<!--    <string name="edit">Edit</string>-->
+<!--    <string name="name">Name</string>-->
+<!--    <string name="sex">Gender</string>-->
+<!--    <string name="age">ฺBirthday</string>-->
+<!--    <string name="cancle">Cancel</string>-->
+<!--    <string name="detail">Detail</string>-->
+<!--    <string name="addimg">Add image</string>-->
+<!--    <string name="title_activity_bottomnavigation" translatable="false">Bottomnavigation</string>-->
+<!--    <string name="title_home">Home</string>-->
+<!--    <string name="title_dashboard">Dashboard</string>-->
+<!--    <string name="title_notifications">Notifications</string>-->
+<!--    <string name="typzssage">Type a Message</string>-->
+<!--    <string name="username">Username</string>-->
+<!--    <string name="navitouser">Location Username</string>-->
+<!--    <string name="seachtitle">Search</string>-->
+<!--    <string name="friendpet">Find Friend</string>-->
+<!--    <string name="lostpet">Lost Pet</string>-->
+<!--    <string name="typesearch">Type for Search</string>-->
+<!--    <string name="desciption">Desciption</string>-->
+<!--    <string name="addH">Add</string>f-->
+<!--    <string name="thai">Thai</string>-->
+<!--    <string name="time">time</string>-->
+<!--    <string name="find">find</string>-->
+<!--    <string name="type_pet">typePet</string>-->
+<!--    <string name="chat_button">chat</string>-->
+<!--    <string name="index_0">Index = 0</string>-->
+<!--    <string name="add_a_new_pet">Add a new pet</string>-->
+<!--    <string name="category">Category</string>-->
+<!--    <string name="search">Search</string>-->
+<!--    <string name="contact">Contact</string>-->
+<!--    <string name="place">Place</string>-->
+<!--    <string name="gender">Gender</string>-->
+<!--    <string name="date">Date:</string>-->
+<!--    <string name="user">User</string>-->
+<!--    <string name="chat">Chat</string>-->
+<!--    <string name="login">Login</string>-->
+<!--    <string name="email">Email</string>-->
+<!--    <string name="password">Password</string>-->
+<!--    <string name="forgot_passwords">Forgot Password</string>-->
+<!--    <string name="sign_up">Sign Up</string>-->
+<!--    <string name="don_t_have_an_account">Don\'t have Account ?</string>-->
+<!--    <string name="setting" translatable="false">setting</string>-->
+<!--    <string name="title_activity_settings" translatable="false">Settings</string>-->
 
-    <!-- Preference Titles -->
-    <string name="messages_header" translatable="false">Messages</string>
-    <string name="sync_header" translatable="false">Sync</string>
-    <string name="logout_header" translatable="false">Logout</string>
+<!--    &lt;!&ndash; Preference Titles &ndash;&gt;-->
+<!--    <string name="messages_header" translatable="false">Messages</string>-->
+<!--    <string name="sync_header" translatable="false">Sync</string>-->
+<!--    <string name="logout_header" translatable="false">Logout</string>-->
 
 
-    <!-- Messages Preferences -->
-    <string name="signature_title" translatable="false">Your signature</string>
-    <string name="reply_title" translatable="false">Default reply action</string>
+<!--    &lt;!&ndash; Messages Preferences &ndash;&gt;-->
+<!--    <string name="signature_title" translatable="false">Your signature</string>-->
+<!--    <string name="reply_title" translatable="false">Default reply action</string>-->
 
-    <!-- Sync Preferences -->
-    <string name="sync_title" translatable="false">Sync email periodically</string>
-    <string name="attachment_title" translatable="false">Download incoming attachments</string>
-    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>
-    <string name="pedigree">Pedigree</string>
-    <string name="register">Register</string>
-    <string name="confirm_password">Confirm password</string>
-    <string name="map">map</string>
-    <string name="wrongconfirm">Your password and confirmation password do not match.</string>
-    <string name="cancelbtn">Cancel</string>
-    <string name="female" translatable="false">Female</string>
-    <string name="male" translatable="false">Male</string>
-    <string name="select_image" translatable="false">Select image</string>
-    <string name="find_a_couple" translatable="false">Find a couple</string>
-    <string name="lost_animals" translatable="false">Lost animals</string>
-    <string name="find_friends" translatable="false">Find friends</string>
-    <string name="images" translatable="false">Images</string>
-    <string name="sendmessage">Send</string>
-    <string name="hintmessage" translatable="false">Enter Message</string>
-    <string name="sign_out">Sign out</string>
-    <string name="cancel">Cancel</string>
-    <string name="by">By</string>
-    <string name="birthday">birthday</string>
+<!--    &lt;!&ndash; Sync Preferences &ndash;&gt;-->
+<!--    <string name="sync_title" translatable="false">Sync email periodically</string>-->
+<!--    <string name="attachment_title" translatable="false">Download incoming attachments</string>-->
+<!--    <string name="attachment_summary_on" translatable="false">Automatically download attachments for incoming emails-->
+<!--    </string>-->
+<!--    <string name="attachment_summary_off" translatable="false">Only download attachments when manually requested</string>-->
+<!--    <string name="pedigree">Pedigree</string>-->
+<!--    <string name="register">Register</string>-->
+<!--    <string name="confirm_password">Confirm password</string>-->
+<!--    <string name="map">map</string>-->
+<!--    <string name="wrongconfirm">Your password and confirmation password do not match.</string>-->
+<!--    <string name="cancelbtn">Cancel</string>-->
+<!--    <string name="female" translatable="false">Female</string>-->
+<!--    <string name="male" translatable="false">Male</string>-->
+<!--    <string name="select_image" translatable="false">Select image</string>-->
+<!--    <string name="find_a_couple" translatable="false">Find a couple</string>-->
+<!--    <string name="lost_animals" translatable="false">Lost animals</string>-->
+<!--    <string name="find_friends" translatable="false">Find friends</string>-->
+<!--    <string name="images" translatable="false">Images</string>-->
+<!--    <string name="sendmessage">Send</string>-->
+<!--    <string name="hintmessage" translatable="false">Enter Message</string>-->
+<!--    <string name="sign_out">Sign out</string>-->
+<!--    <string name="cancel">Cancel</string>-->
+<!--    <string name="by">By</string>-->
+<!--    <string name="birthday">birthday</string>-->
 </resources>

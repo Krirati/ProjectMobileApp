@@ -17,10 +17,13 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import com.example.petlover.ui.chat.ChatFragment
 import com.example.petlover.ui.home.HomeFragment
+import com.example.petlover.ui.user.UserFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -46,15 +49,33 @@ class NavigationActivity : AppCompatActivity() {
         updateNavHeader()
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-//        navView.setNavigationItemSelectedListener { it ->
-//            when (it.itemId) {
-//                R.id.navigation_logout -> {
-//                    logout()
-//                    true
-//                }
-//                else -> true
-//            }
-//        }
+        var fragment: Fragment? = null
+        navView.setNavigationItemSelectedListener{ it ->
+            when (it.itemId) {
+                R.id.navigation_logout -> {
+                    logout()
+                }
+                R.id.navigation_home -> {
+                    fragment = HomeFragment()
+                }
+                R.id.navigation_notifications -> {
+                    fragment = ChatFragment()
+                }
+                R.id.navigation_user -> {
+                    fragment = UserFragment()
+                }
+                R.id.navigation_settings -> {
+                    Toast.makeText(this, "Update clicked", Toast.LENGTH_SHORT).show()
+                }
+            }
+            if (fragment != null) {
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.nav_host_fragment, fragment!!)
+                transaction.commit()
+            }
+            drawerLayout.closeDrawer(GravityCompat.START)
+            return@setNavigationItemSelectedListener true
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -91,5 +112,10 @@ class NavigationActivity : AppCompatActivity() {
         navEmail.text = firebaseAuth?.email
 
     }
+    private fun NavigationView.setNavigationItemSelectedListener(navigationActivity: NavigationActivity) {
+        navigationActivity.supportFragmentManager
+    }
 
 }
+
+
