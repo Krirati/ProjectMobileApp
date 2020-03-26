@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_detail.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -133,7 +134,9 @@ class DetailFragment : Fragment() {
                 uiduser = it.get("uidUser") as String
                 Log.d("uiduser",uiduser)
                 Log.d("uiduser",useruid)
-                db.collection("chat").whereEqualTo("uidreciver",uiduser).whereEqualTo("uidsender",useruid).get()
+                db.collection("chat")
+                    .whereIn("uidreciver", listOf(uiduser, useruid))
+                    .get()
                     .addOnSuccessListener { reciver ->
                         Log.d("hh","Hello error")
                     for (uid in reciver){
@@ -143,7 +146,6 @@ class DetailFragment : Fragment() {
                             Log.d("readdata", uid.id)
                             count = 1
                         }
-
                     }
                         Log.d("count",count.toString())
                         if (count != 1){
