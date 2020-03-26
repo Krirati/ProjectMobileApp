@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.layout_list_item.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -172,6 +173,7 @@ class AddFragment : Fragment() {
             birthday.text?.clear()
             location.text?.clear()
             imageView.visibility = View.GONE
+            inputContact.text?.clear()
         }
         selectedPhotoUri = null
     }

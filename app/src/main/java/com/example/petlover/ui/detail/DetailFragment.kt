@@ -100,6 +100,7 @@ class DetailFragment : Fragment() {
                         .load("${it.get("imageUID")}")
                         .placeholder(R.drawable.ic_launcher_foreground)
                         .error(R.drawable.ic_launcher_foreground)
+                        .rotate(90F)
                         .into(imageViewPet)
                     userPost = it.get("uidUser") as String
                     db.collection("users")
