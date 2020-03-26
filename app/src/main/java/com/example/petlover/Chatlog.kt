@@ -22,6 +22,17 @@ class Chatlog : AppCompatActivity() {
         setContentView(R.layout.activity_chatlog)
         var roomuid = intent.getStringExtra("uidRoom").toString()
         getchat(useruid,roomuid)
+        db.collection("chat").document(roomuid).collection("chat").addSnapshotListener{
+                snapshot, e ->
+            if (e != null) {
+                Log.w("TAG", "Listen failed.", e)
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null && snapshot.size() != 0) {
+                getchat(useruid,roomuid)
+            }
+        }
 
         sendmessagebtn.setOnClickListener{
 
@@ -31,7 +42,6 @@ class Chatlog : AppCompatActivity() {
                 sendmessage(useruid,edittextmessage.text.toString(),roomuid)
             }
             edittextmessage.text.clear()
-            getchat(useruid,roomuid)
         }
 
     }
@@ -45,9 +55,11 @@ class Chatlog : AppCompatActivity() {
                 for (document in result) {
                     if(document.data["fromuid"] != uiduser){
                         adapter.add(ChatfromItem(document.data["msg"].toString()))
+                        recyclechatlog.scrollToPosition(adapter.itemCount-1)
                     }
                     else{
                         adapter.add(ChattoItem(document.data["msg"].toString()))
+                        recyclechatlog.scrollToPosition(adapter.itemCount-1)
                     }
                     Log.d("getdata", "${document.id} => ${document.data["msg"]}")
                 }
@@ -56,12 +68,11 @@ class Chatlog : AppCompatActivity() {
 
     fun sendmessage(uiduser: String,msg: String,roomuid: String){
         var database = FirebaseDatabase.getInstance()
-        val timeStamp: String? = Calendar.getInstance().time.toString()
         val randuid = database.reference.push().key
         val word = hashMapOf(
             "fromuid" to uiduser,
             "msg" to msg,
-            "timestamp" to timeStamp
+            "timestamp" to FieldValue.serverTimestamp()
         )
         val status = hashMapOf(
             "timestamp" to FieldValue.serverTimestamp(),
