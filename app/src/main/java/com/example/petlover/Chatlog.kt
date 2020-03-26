@@ -56,12 +56,11 @@ class Chatlog : AppCompatActivity() {
 
     fun sendmessage(uiduser: String,msg: String,roomuid: String){
         var database = FirebaseDatabase.getInstance()
-        val timeStamp: String? = Calendar.getInstance().time.toString()
         val randuid = database.reference.push().key
         val word = hashMapOf(
             "fromuid" to uiduser,
             "msg" to msg,
-            "timestamp" to timeStamp
+            "timestamp" to FieldValue.serverTimestamp()
         )
         val status = hashMapOf(
             "timestamp" to FieldValue.serverTimestamp(),
