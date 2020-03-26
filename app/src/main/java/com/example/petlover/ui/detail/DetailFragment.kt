@@ -17,6 +17,8 @@ import com.example.petlover.RegisterActivity
 import com.example.petlover.databinding.FragmentDetailBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
@@ -112,11 +114,9 @@ class DetailFragment : Fragment() {
 
 
     }
-    private fun chatcreateroom(uidreciver:String){
-        val intent = Intent(context, RegisterActivity::class.java).putExtra("uidreciver",uidreciver)
-        startActivity(intent)
-    }
+
     private fun checkchat(){
+        var useruid = FirebaseAuth.getInstance().currentUser?.uid.toString()
         var uiduser:String
         val args = DetailFragmentArgs.fromBundle(arguments!!)
         db.collection("animals")
@@ -124,7 +124,7 @@ class DetailFragment : Fragment() {
             .get().addOnSuccessListener {
                 uiduser = it.get("uidUser") as String
                 Log.d("uiduser",uiduser)
-                db.collection("chat").get().addOnSuccessListener { reciver ->
+                db.collection("chat").whereEqualTo("uidreciver",uiduser).whereEqualTo("uidsender",useruid).get().addOnSuccessListener { reciver ->
                     for (uid in reciver){
                         Log.d("readdata", uid.id)
                         if(uiduser == uid["uidsender"]){
@@ -133,9 +133,16 @@ class DetailFragment : Fragment() {
                             break
                         }
                         Log.d("readdata",uid["status"].toString())
-                        /*if (uid["uidreciver"].toString() == uidreciver){
-
-                        }*/
+                    }
+                }.addOnFailureListener{
+                    var database = FirebaseDatabase.getInstance()
+                    val randuid = database.reference.push().key
+                    val newroom = hashMapOf(
+                        "uidsender" to useruid,
+                        "uidreciver" to uiduser
+                    )
+                    if (randuid != null) {
+                        db.collection("chat").document(randuid).set(newroom)
                     }
                 }
             }
