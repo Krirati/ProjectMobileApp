@@ -43,13 +43,14 @@ class HomeFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
         inflater.inflate(R.menu.menu_search, menu)
-        val item = menu.findItem(R.id.action_setting)
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+        
+//        val item = menu.findItem(R.id.action_search)
+//        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_setting -> {
+            R.id.action_search -> {
                 val intent = Intent(context, SettingsActivity::class.java)
                 startActivity(intent)
             }

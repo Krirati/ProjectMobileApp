@@ -45,6 +45,7 @@
     <string name="setting" translatable="false">setting</string>
     <string name="title_activity_settings" translatable="false">Settings</string>
 
+
     <!-- Preference Titles -->
     <string name="messages_header" translatable="false">Messages</string>
     <string name="sync_header" translatable="false">Sync</string>
@@ -94,6 +95,6 @@
 
     <string name="home_second" translatable="false">Home Second</string>
     <string name="edit_user_fragment" translatable="false">Edit user fragment</string>
-    <string name="location">Location</string>
+    <string name="location" translatable="false">Location</string>
 </resources>
 
