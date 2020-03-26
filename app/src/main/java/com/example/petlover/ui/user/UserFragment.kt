@@ -22,7 +22,6 @@ import com.example.petlover.ui.home.UserAdapter
 import com.example.petlover.ui.setting.SettingsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_user.*
 
 class UserFragment : Fragment() {
 
