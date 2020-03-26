@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -95,6 +96,11 @@ class DetailFragment : Fragment() {
                         "Male" -> gender2.setImageResource(R.drawable.male)
                         "Female" -> gender2.setImageResource(R.drawable.female)
                     }
+                    Picasso.get()
+                        .load("${it.get("imageUID")}")
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .error(R.drawable.ic_launcher_foreground)
+                        .into(imageViewPet)
                     userPost = it.get("uidUser") as String
                     db.collection("users")
                         .document(userPost)

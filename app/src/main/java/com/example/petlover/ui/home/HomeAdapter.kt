@@ -33,7 +33,7 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model: Model = modelItems[position]
         holder.textViewName.text = model.name
-        holder.textContact.text = model.timestamp?.toDate().toString()
+        holder.textContact.text = model.contact
         holder.textViewAddress.text = model.uid
         when (model.gender) {
             "Male" -> holder.textGender.setImageResource(R.drawable.male)
