@@ -22,6 +22,17 @@ class Chatlog : AppCompatActivity() {
         setContentView(R.layout.activity_chatlog)
         var roomuid = intent.getStringExtra("uidRoom").toString()
         getchat(useruid,roomuid)
+        db.collection("chat").document(roomuid).collection("chat").addSnapshotListener{
+                snapshot, e ->
+            if (e != null) {
+                Log.w("TAG", "Listen failed.", e)
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null && snapshot.size() != 0) {
+                getchat(useruid,roomuid)
+            }
+        }
 
         sendmessagebtn.setOnClickListener{
 
@@ -31,7 +42,6 @@ class Chatlog : AppCompatActivity() {
                 sendmessage(useruid,edittextmessage.text.toString(),roomuid)
             }
             edittextmessage.text.clear()
-            getchat(useruid,roomuid)
         }
 
     }
