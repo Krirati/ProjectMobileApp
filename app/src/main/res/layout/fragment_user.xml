@@ -34,7 +34,7 @@
                         android:id="@+id/cardView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingEnd="@dimen/activity_margin_top"
+                        android:padding="@dimen/activity_horizontal_margin"
                         app:cardCornerRadius="2dp"
                         app:cardElevation="3dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,6 @@
                                 android:layout_marginTop="16dp"
                                 android:layout_marginEnd="24dp"
                                 android:src="@android:mipmap/sym_def_app_icon"
-
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,15 +64,15 @@
                                 android:text="@string/name"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
-                                app:layout_constraintStart_toStartOf="@+id/textView9"
+                                app:layout_constraintStart_toStartOf="@+id/email"
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
-                                android:id="@+id/textView9"
+                                android:id="@+id/email"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
-                                android:text="@string/place"
+                                android:text="@string/email"
                                 android:textColor="@android:color/darker_gray"
                                 app:layout_constraintStart_toStartOf="@+id/textView10"
                                 app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -84,72 +83,74 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="40dp"
                                 android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
                                 android:text="@string/contact"
                                 android:textColor="@android:color/darker_gray"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-                            <View
-                                android:id="@+id/view"
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_marginStart="4dp"
-                                android:layout_marginTop="16dp"
-                                android:layout_marginEnd="4dp"
-                                android:background="#EDEBEB"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-                            <TextView
-                                android:id="@+id/textView12"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Post"
-                                android:textColor="@android:color/darker_gray"
-                                app:layout_constraintEnd_toStartOf="@+id/textView14"
-                                app:layout_constraintHorizontal_bias="0.529"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/numPost" />
-
-                            <TextView
-                                android:id="@+id/numPost"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="0"
-                                android:textStyle="bold"
-                                app:layout_constraintEnd_toEndOf="@+id/textView12"
-                                app:layout_constraintEnd_toStartOf="@+id/numFriend"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/view" />
-
-                            <TextView
-                                android:id="@+id/textView14"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="Friend"
-                                android:textColor="@android:color/darker_gray"
                                 app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="@+id/numFriend"
-                                app:layout_constraintStart_toStartOf="@+id/numFriend"
-                                app:layout_constraintTop_toBottomOf="@+id/numFriend" />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/email" />
 
-                            <TextView
-                                android:id="@+id/numFriend"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:text="0"
-                                android:textStyle="bold"
-                                app:layout_constraintBottom_toTopOf="@+id/textView14"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintStart_toEndOf="@+id/numPost"
-                                app:layout_constraintTop_toBottomOf="@+id/view" />
+                            <!--                            <View-->
+                            <!--                                android:id="@+id/view"-->
+                            <!--                                android:layout_width="match_parent"-->
+                            <!--                                android:layout_height="1dp"-->
+                            <!--                                android:layout_marginStart="4dp"-->
+                            <!--                                android:layout_marginTop="16dp"-->
+                            <!--                                android:layout_marginEnd="4dp"-->
+                            <!--                                android:background="#EDEBEB"-->
+                            <!--                                app:layout_constraintEnd_toEndOf="parent"-->
+                            <!--                                app:layout_constraintStart_toStartOf="parent"-->
+                            <!--                                app:layout_constraintTop_toBottomOf="@+id/textView10" />-->
+
+                            <!--                            <TextView-->
+                            <!--                                android:id="@+id/textView12"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="8dp"-->
+                            <!--                                android:text="@string/post"-->
+                            <!--                                android:textColor="@android:color/darker_gray"-->
+                            <!--                                app:layout_constraintEnd_toStartOf="@+id/textView14"-->
+                            <!--                                app:layout_constraintHorizontal_bias="0.529"-->
+                            <!--                                app:layout_constraintStart_toStartOf="parent"-->
+                            <!--                                app:layout_constraintTop_toBottomOf="@+id/numPost" />-->
+
+                            <!--                            <TextView-->
+                            <!--                                android:id="@+id/numPost"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="8dp"-->
+                            <!--                                android:text="@string/_0"-->
+                            <!--                                android:textStyle="bold"-->
+                            <!--                                app:layout_constraintEnd_toEndOf="@+id/textView12"-->
+                            <!--                                app:layout_constraintEnd_toStartOf="@+id/numFriend"-->
+                            <!--                                app:layout_constraintHorizontal_bias="0.5"-->
+                            <!--                                app:layout_constraintStart_toStartOf="parent"-->
+                            <!--                                app:layout_constraintTop_toBottomOf="@+id/view" />-->
+
+                            <!--                            <TextView-->
+                            <!--                                android:id="@+id/textView14"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="8dp"-->
+                            <!--                                android:text="@string/friend"-->
+                            <!--                                android:textColor="@android:color/darker_gray"-->
+                            <!--                                app:layout_constraintBottom_toBottomOf="parent"-->
+                            <!--                                app:layout_constraintEnd_toEndOf="@+id/numFriend"-->
+                            <!--                                app:layout_constraintStart_toStartOf="@+id/numFriend"-->
+                            <!--                                app:layout_constraintTop_toBottomOf="@+id/numFriend" />-->
+
+                            <!--                            <TextView-->
+                            <!--                                android:id="@+id/numFriend"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_marginTop="8dp"-->
+                            <!--                                android:text="@string/_0"-->
+                            <!--                                android:textStyle="bold"-->
+                            <!--                                app:layout_constraintBottom_toTopOf="@+id/textView14"-->
+                            <!--                                app:layout_constraintEnd_toEndOf="parent"-->
+                            <!--                                app:layout_constraintHorizontal_bias="0.5"-->
+                            <!--                                app:layout_constraintStart_toEndOf="@+id/numPost"-->
+                            <!--                                app:layout_constraintTop_toBottomOf="@+id/view" />-->
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
 
