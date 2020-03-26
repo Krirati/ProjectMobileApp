@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
         inflater.inflate(R.menu.menu_search, menu)
-        
+
 //        val item = menu.findItem(R.id.action_search)
 //        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
     }
