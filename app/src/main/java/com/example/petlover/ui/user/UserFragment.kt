@@ -91,7 +91,8 @@ class UserFragment : Fragment() {
             .addOnSuccessListener {documents->
                 Log.d("Data in user ","${documents.id} => ${documents.data}")
                 binding.apply {
-                    name.text = documents.get("email").toString()
+                    name.text = documents.get("username").toString()
+                    email.text = documents.get("email").toString()
                 }
             }
     }
@@ -110,8 +111,8 @@ class UserFragment : Fragment() {
                 }
                 val adapter = UserAdapter(listAnimals)
                 binding.recyclerListAnimals.adapter = adapter
-                binding.numPost.text = countPost.toString()
-                binding.numFriend.text = countPost.toString()
+//                binding.numPost.text = countPost.toString()
+//                binding.numFriend.text = countPost.toString()
             }
             .addOnFailureListener { exception ->
                 Log.w("Data in animals", "Error getting documents.", exception)

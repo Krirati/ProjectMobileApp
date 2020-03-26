@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.example.petlover.R
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.petlover.Chatlog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_list_chat.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -47,8 +49,19 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
         val timestamp = model.timestamp?.toDate().toString().split('G')
         holder.time.text = timestamp[0]
         when (model.status == "unread") {
-            true -> holder.cardItem.setBackgroundResource(R.color.colorAccent)
+            true -> {
+                holder.cardItem.setBackgroundResource(R.color.colorAccent)
+                holder.message.text = "มีข้อความใหม่"
+            }
+            else -> {
+                holder.message.text = "ไม่มีข้อความใหม่"
+            }
         }
+        Picasso.get()
+            .load("${model.status}")
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .error(R.drawable.ic_launcher_foreground)
+            .into(holder.imgUser)
         holder.cardItem.setOnClickListener {
             db.collection("chat").document("${model.idRoom}").update("status", "read")
             val intent = Intent(it.context, Chatlog::class.java)
@@ -62,6 +75,7 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
         val message = itemView.findViewById(R.id.message) as TextView
         val time = itemView.findViewById(R.id.time) as TextView
         val cardItem = itemView.findViewById(R.id.cardchat) as CardView
+        val imgUser = itemView.findViewById(R.id.userImg) as ImageView
 
     }
 }

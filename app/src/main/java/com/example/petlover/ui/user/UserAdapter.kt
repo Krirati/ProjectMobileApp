@@ -13,6 +13,7 @@ import com.example.petlover.ui.model.Model
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 
 class UserAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
@@ -30,7 +31,11 @@ class UserAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model: Model = modelItems[position]
         holder.textViewName.text = model.name
-//        holder.imgPet.set = model.timestamp.toString()
+        Picasso.get()
+            .load("${model.imageUID}")
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .error(R.drawable.ic_launcher_foreground)
+            .into(holder.imgPet)
         holder.btnEdit.setOnClickListener { view ->
             editItem(view, model)
         }
@@ -43,6 +48,7 @@ class UserAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
         val textViewName = itemView.findViewById(R.id.animalsName) as TextView
         val btnEdit = itemView.findViewById(R.id.btnEdit) as ImageButton
         val btnDelete = itemView.findViewById(R.id.btnDelete) as ImageButton
+        val imgPet = itemView.findViewById(R.id.imagePet) as ImageView
     }
     private fun editItem(view: View, model: Model) {
         Toast.makeText(view.context,"Edit ${model.name}",Toast.LENGTH_SHORT).show()

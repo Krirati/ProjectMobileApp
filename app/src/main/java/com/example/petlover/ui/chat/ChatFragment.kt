@@ -45,8 +45,12 @@ class ChatFragment : Fragment() {
                 Color.parseColor("#008744")
                 , Color.parseColor("#0057e7"), Color.parseColor("#d62d20"))
         }
-        getIDListChat()
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        getIDListChat()
     }
     private fun getIDListChat () {
         chat.clear()
