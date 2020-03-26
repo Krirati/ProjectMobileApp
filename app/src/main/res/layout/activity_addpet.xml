@@ -80,7 +80,7 @@
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Location"
+                android:hint="@string/location"
                 app:layout_constraintStart_toStartOf="@+id/inputPedigree"
                 app:layout_constraintTop_toBottomOf="@+id/input">
 
@@ -92,6 +92,23 @@
                     android:text="@={myPet.location}" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutContact"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/contact"
+                app:layout_constraintStart_toStartOf="@+id/inputLocation"
+                app:layout_constraintTop_toBottomOf="@+id/inputLocation">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_call_black_24dp"
+                    android:text="@={myPet.contact}" />
+            </com.google.android.material.textfield.TextInputLayout>
             <Button
                 android:id="@+id/buttonAdd"
                 android:layout_width="115dp"
@@ -129,11 +146,10 @@
                 android:id="@+id/gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="@string/gender"
                 android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/inputLocation"
-                app:layout_constraintTop_toBottomOf="@+id/inputLocation" />
+                app:layout_constraintStart_toStartOf="@+id/textInputLayoutContact"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutContact" />
 
             <RadioGroup
                 android:id="@+id/radioGroupGender"

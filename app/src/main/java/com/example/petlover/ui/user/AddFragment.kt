@@ -1,4 +1,4 @@
-package com.example.petlover
+package com.example.petlover.ui.user
 
 import android.app.Activity
 import android.app.DatePickerDialog
@@ -11,25 +11,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import com.example.petlover.R
 import com.example.petlover.databinding.ActivityAddpetBinding
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_addpet.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AddActivity : Fragment() {
+class AddFragment : Fragment() {
 
     private val db = FirebaseFirestore.getInstance()
     private var selectedPhotoUri: Uri? = null
@@ -47,7 +42,8 @@ class AddActivity : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 //        val view: View = inflater.inflate(R.layout.fragment_user, container, false)
-        binding = DataBindingUtil.inflate(inflater, R.layout.activity_addpet,container,false)
+        binding = DataBindingUtil.inflate(inflater,
+            R.layout.activity_addpet,container,false)
         binding.apply {
             buttonAdd.setOnClickListener {
                 crateNewPet(it)
@@ -113,6 +109,7 @@ class AddActivity : Fragment() {
         val genderString = resources.getResourceEntryName(genderId)
         val generateId = db.collection("animals").document().id
         val user = FirebaseAuth.getInstance().currentUser?.uid
+        val contact = binding.inputContact.text.toString()
         filenameImg = UUID.randomUUID().toString()
         if (list.size == 0) {list.add("Find a couple")}
         val pet = hashMapOf(
@@ -122,6 +119,7 @@ class AddActivity : Fragment() {
             "gender" to genderString,
             "imageUID" to uriImage,
             "category" to list,
+            "contact" to contact,
             "uid" to generateId,
             "uidUser" to user,
             "timestamp" to FieldValue.serverTimestamp()

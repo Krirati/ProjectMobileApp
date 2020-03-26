@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddActivity"
+            android:name=".ui.user.AddFragment"
             android:label="Add new pet" />
 <!--        <activity android:name=".ui.description.Description" />-->
         <activity

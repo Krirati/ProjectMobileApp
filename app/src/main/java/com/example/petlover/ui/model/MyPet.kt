@@ -7,5 +7,6 @@ data class MyPet (
     var pedigree: String = "",
     var gender: String = "",
     var birthday: String = "",
-    var location: String? = ""
+    var location: String? = "",
+    var contact: String?
 )

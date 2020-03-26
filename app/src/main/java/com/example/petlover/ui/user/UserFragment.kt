@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.petlover.LoginActivity
 
 import com.example.petlover.R
 import com.example.petlover.databinding.FragmentUserBinding
@@ -39,7 +38,7 @@ class UserFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user,container,false)
         binding.apply {
             floatingActionButton.setOnClickListener {
-                Navigation.findNavController(it).navigate(R.id.action_navigation_user_to_addActivity)
+                Navigation.findNavController(it).navigate(R.id.action_navigation_user_to_addFragment2)
             }
             recyclerListAnimals.layoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
             swipeRefreshLayoutUser.setOnRefreshListener {
@@ -79,7 +78,6 @@ class UserFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_setting -> {
-//                view?.let { Navigation.findNavController(it).navigate(R.id.action_navigation_user_to_editUserFragment) }
                 val intent = Intent(context, SettingsActivity::class.java)
                 startActivity(intent)
 //                finish()

@@ -94,5 +94,6 @@
 
     <string name="home_second" translatable="false">Home Second</string>
     <string name="edit_user_fragment" translatable="false">Edit user fragment</string>
+    <string name="location">Location</string>
 </resources>
 

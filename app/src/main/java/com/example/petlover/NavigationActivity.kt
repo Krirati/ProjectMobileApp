@@ -49,33 +49,33 @@ class NavigationActivity : AppCompatActivity() {
         updateNavHeader()
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        var fragment: Fragment? = null
-        navView.setNavigationItemSelectedListener{ it ->
-            when (it.itemId) {
-                R.id.navigation_logout -> {
-                    logout()
-                }
-                R.id.navigation_home -> {
-                    fragment = HomeFragment()
-                }
-                R.id.navigation_notifications -> {
-                    fragment = ChatFragment()
-                }
-                R.id.navigation_user -> {
-                    fragment = UserFragment()
-                }
-                R.id.navigation_settings -> {
-                    Toast.makeText(this, "Update clicked", Toast.LENGTH_SHORT).show()
-                }
-            }
-            if (fragment != null) {
-                val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.nav_host_fragment, fragment!!)
-                transaction.commit()
-            }
-            drawerLayout.closeDrawer(GravityCompat.START)
-            return@setNavigationItemSelectedListener true
-        }
+//        var fragment: Fragment? = null
+//        navView.setNavigationItemSelectedListener{ it ->
+//            when (it.itemId) {
+//                R.id.navigation_logout -> {
+//                    logout()
+//                }
+//                R.id.navigation_home -> {
+//                    fragment = HomeFragment()
+//                }
+//                R.id.navigation_notifications -> {
+//                    fragment = ChatFragment()
+//                }
+//                R.id.navigation_user -> {
+//                    fragment = UserFragment()
+//                }
+//                R.id.navigation_settings -> {
+//                    Toast.makeText(this, "Update clicked", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//            if (fragment != null) {
+//                val transaction = supportFragmentManager.beginTransaction()
+//                transaction.replace(R.id.nav_host_fragment, fragment!!)
+//                transaction.commit()
+//            }
+//            drawerLayout.closeDrawer(GravityCompat.START)
+//            return@setNavigationItemSelectedListener true
+//        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
