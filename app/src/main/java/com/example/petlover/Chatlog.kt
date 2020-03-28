@@ -38,7 +38,7 @@ class Chatlog : AppCompatActivity() {
 
             Log.d("Send",useruid)
             Log.d("Send",edittextmessage.text.toString())
-            if (useruid != null && edittextmessage.text != null) {
+            if (edittextmessage.text.isNotBlank()) {
                 sendmessage(useruid,edittextmessage.text.toString(),roomuid)
             }
             edittextmessage.text.clear()
