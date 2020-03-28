@@ -59,7 +59,7 @@ class RegisterActivity : AppCompatActivity() {
                             .addOnSuccessListener { Log.d("RegisterActivity", "DocumentSnapshot successfully written!") }
                             .addOnFailureListener { e -> Log.w("RegisterActivity", "Error writing document", e) }
                     }
-                    val intent = Intent(this, Bottomnavigation::class.java)
+                    val intent = Intent(this, NavigationActivity::class.java)
                     finishAffinity();
                     startActivity(intent)
                 }.addOnFailureListener{

@@ -40,9 +40,6 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_bottomnavigation" />
-        <activity
-            android:name=".Bottomnavigation"
-            android:windowSoftInputMode="adjustPan" />
 
         <meta-data
             android:name="preloaded_fonts"

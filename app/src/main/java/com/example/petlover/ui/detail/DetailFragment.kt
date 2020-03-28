@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.core.view.isInvisible
 import androidx.databinding.DataBindingUtil
 import com.example.petlover.Chatlog
 
@@ -33,6 +34,8 @@ class DetailFragment : Fragment() {
     private var isOpen: Boolean = false
     private lateinit var dbs : FirebaseStorage
     private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance().currentUser
+    private var userPost = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,9 +57,9 @@ class DetailFragment : Fragment() {
                     floatingActionButton.setImageResource(R.drawable.ic_unfold_more_black_24dp)
                     isOpen = false
                 } else {
-                    floatingChatButton.startAnimation(fabOpen)
                     floatingMapButton.startAnimation(fabOpen)
                     floatingActionButton.startAnimation(antiFabClockwise)
+                    floatingChatButton.startAnimation(fabOpen)
                     floatingChatButton.isClickable = true
                     floatingMapButton.isClickable = true
                     floatingActionButton.setImageResource(R.drawable.ic_unfold_less_black_24dp)
@@ -77,7 +80,7 @@ class DetailFragment : Fragment() {
     private fun getDataPet () {
         val args = DetailFragmentArgs.fromBundle(arguments!!)
 //        Toast.makeText(context,"Name Pet: ${args.petID}",Toast.LENGTH_SHORT).show()
-        var userPost = ""
+//        var userPost = ""
         db.collection("animals")
             .document(args.petID)
             .get()
@@ -104,7 +107,7 @@ class DetailFragment : Fragment() {
                         .error(R.drawable.ic_launcher_foreground)
                         .rotate(90F)
                         .into(imageViewPet)
-                    userPost = it.get("uidUser") as String
+                    userPost = it.get("uidUser").toString()
                     db.collection("users")
                         .document(userPost)
                         .get()
@@ -119,9 +122,6 @@ class DetailFragment : Fragment() {
             .addOnFailureListener {
                 view?.let { it1 -> Snackbar.make(it1,"Load fail",Snackbar.LENGTH_SHORT).show() }
             }
-        Toast.makeText(context,"Name user: ${userPost}",Toast.LENGTH_SHORT).show()
-
-
     }
 
     private fun checkchat(){

@@ -98,5 +98,6 @@
     <string name="post" translatable="false">Post</string>
     <string name="_0" translatable="false">0</string>
     <string name="friend" translatable="false">Friend</string>
+    <string name="displayname">Displayname</string>
 </resources>
 

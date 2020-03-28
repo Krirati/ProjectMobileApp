@@ -12,7 +12,7 @@ import com.example.petlover.ui.model.Model
 import com.example.petlover.ui.setting.SettingsActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_bottomnavigation.*
+
 import java.util.ArrayList
 
 class HomeFragment : Fragment() {

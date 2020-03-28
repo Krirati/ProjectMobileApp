@@ -20,11 +20,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputName"
+        android:id="@+id/inputDisplayName"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="350dp"
         android:layout_height="50dp"
-        android:hint="@string/email"
+        android:hint="@string/displayname"
         android:textColorHint="@color/detail"
         app:hintEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,6 +33,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.31">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/displayName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:padding="@dimen/activity_margin_top"
+            android:textColor="@android:color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:hint="@string/email"
+        android:textColorHint="@color/detail"
+        app:hintEnabled="true"
+        app:layout_constraintStart_toStartOf="@+id/inputDisplayName"
+        app:layout_constraintTop_toBottomOf="@+id/inputDisplayName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputEmailreg"
