@@ -38,7 +38,7 @@ class Chatlog : AppCompatActivity() {
 
             Log.d("Send",useruid)
             Log.d("Send",edittextmessage.text.toString())
-            if (useruid != null && edittextmessage.text != null) {
+            if (edittextmessage.text.isNotBlank()) {
                 sendmessage(useruid,edittextmessage.text.toString(),roomuid)
             }
             edittextmessage.text.clear()
@@ -55,9 +55,11 @@ class Chatlog : AppCompatActivity() {
                 for (document in result) {
                     if(document.data["fromuid"] != uiduser){
                         adapter.add(ChatfromItem(document.data["msg"].toString()))
+                        recyclechatlog.scrollToPosition(adapter.itemCount-1)
                     }
                     else{
                         adapter.add(ChattoItem(document.data["msg"].toString()))
+                        recyclechatlog.scrollToPosition(adapter.itemCount-1)
                     }
                     Log.d("getdata", "${document.id} => ${document.data["msg"]}")
                 }

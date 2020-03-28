@@ -76,6 +76,7 @@ class Chatlog : AppCompatActivity() {
         if (randuid != null) {
             database.reference.child("chat").child(roomuid).child(randuid).setValue(setmssage)
         }
+        Log.d("roomId",roomuid)
     }
 
 }
