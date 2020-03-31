@@ -147,7 +147,7 @@ class DetailFragment : Fragment() {
                     .addOnSuccessListener { reciver ->
                         Log.d("hh","Hello error")
                     for (uid in reciver){
-                        if (uid["uidreciver"] == uiduser){
+                        if ((uid["uidreciver"] == uiduser && uid["uidsender"] == useruid) || (uid["uidreciver"] == useruid && uid["uidsender"] == uiduser)){
                             val intent = Intent(context, Chatlog::class.java).putExtra("uidRoom",uid.id)
                             startActivity(intent)
                             Log.d("readdata", uid.id)
