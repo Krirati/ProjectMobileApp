@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 
@@ -26,6 +27,7 @@ import com.example.petlover.ui.home.HomeFragment
 import com.example.petlover.ui.user.UserFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 
 class NavigationActivity : AppCompatActivity() {
 
@@ -107,9 +109,14 @@ class NavigationActivity : AppCompatActivity() {
         val headerView: View = navView.getHeaderView(0)
         val navUsername: TextView = headerView.findViewById(R.id.nav_username)
         val navEmail: TextView = headerView.findViewById(R.id.nav_email)
+        val navImg: ImageView = headerView.findViewById(R.id.nav_img)
         if (firebaseAuth?.displayName == null) navUsername.setText(firebaseAuth?.email) else navUsername.setText(firebaseAuth?.displayName)
-//        navUsername.text = firebaseAuth?.email
         navEmail.text = firebaseAuth?.email
+        Picasso.get()
+            .load("${firebaseAuth?.photoUrl}")
+            .placeholder(R.drawable.ic_launcher_foreground)
+            .error(R.drawable.ic_launcher_foreground)
+            .into(navImg)
 
     }
     private fun NavigationView.setNavigationItemSelectedListener(navigationActivity: NavigationActivity) {

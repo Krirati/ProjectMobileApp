@@ -35,7 +35,6 @@ class FriendFragment : Fragment() {
     ): View? {
         homeViewModel =
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
-//        val root = inflater.inflate(R.layout.fragment_friend, container, false)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_friend,container,false)
         binding.apply {
             recyclerViewFriend.layoutManager = GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)

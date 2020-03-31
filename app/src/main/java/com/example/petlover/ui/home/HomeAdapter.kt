@@ -49,16 +49,6 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
             .placeholder(R.drawable.ic_launcher_foreground)
             .error(R.drawable.ic_launcher_foreground)
             .into(holder.imgPet)
-//        dbStorage.reference
-//            .child("images/${model.imageUID}")
-//            .downloadUrl
-//            .addOnSuccessListener {
-//                Log.d("img","${it}")
-//            }
-//            .addOnFailureListener {
-//                holder.imgPet.setImageResource(R.drawable.ic_launcher_foreground)
-//            }
-
     }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val textViewName = itemView.findViewById(R.id.text_name) as TextView

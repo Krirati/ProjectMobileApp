@@ -64,7 +64,6 @@
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:clipChildren="false"
                 android:hint="@string/age"
                 app:boxStrokeColor="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="@+id/inputPedigree"
@@ -72,6 +71,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/birthday"
+                    android:focusableInTouchMode="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
@@ -94,6 +94,7 @@
                     android:id="@+id/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusableInTouchMode="false"
                     android:drawableEnd="@drawable/ic_place_black_24dp"
                     android:text="@={myPet.location}" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -285,12 +286,13 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="8dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/images"
-                android:maxHeight="40dp"
+                android:scaleType="fitXY"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/floating_select_img"

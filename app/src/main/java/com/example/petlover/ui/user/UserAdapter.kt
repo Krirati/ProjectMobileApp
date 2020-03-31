@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.petlover.R
 import com.example.petlover.ui.model.Model
+import com.example.petlover.ui.user.UserFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -37,7 +39,8 @@ class UserAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
             .error(R.drawable.ic_launcher_foreground)
             .into(holder.imgPet)
         holder.btnEdit.setOnClickListener { view ->
-            editItem(view, model)
+            Navigation.findNavController(view).navigate(UserFragmentDirections
+                .actionNavigationUserToAddFragment2("UPDATE", model.uid))
         }
         holder.btnDelete.setOnClickListener { view ->
             deleteItem(view, model)
@@ -50,9 +53,7 @@ class UserAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
         val btnDelete = itemView.findViewById(R.id.btnDelete) as ImageButton
         val imgPet = itemView.findViewById(R.id.imagePet) as ImageView
     }
-    private fun editItem(view: View, model: Model) {
-        Toast.makeText(view.context,"Edit ${model.name}",Toast.LENGTH_SHORT).show()
-    }
+
     private fun deleteItem(view: View, model: Model) {
         val builder = AlertDialog.Builder(view.context)
         builder.setTitle("Delete ${model.name}")
@@ -71,7 +72,7 @@ class UserAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
                     Log.d("Delete pet", "DocumentSnapshot successfully deleted!")
                    }
                 .addOnFailureListener { e ->
-                    Log.w("Error delete pet", "Error deleting document", e)
+                    Log.w("ErrorDelete", "Error deleting document", e)
                     }
         }
         builder.setNegativeButton("No") {dialogInterface, i ->

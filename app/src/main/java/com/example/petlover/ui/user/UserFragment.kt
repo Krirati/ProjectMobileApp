@@ -21,6 +21,8 @@ import com.example.petlover.ui.home.UserAdapter
 import com.example.petlover.ui.setting.SettingsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_user.*
 
 class UserFragment : Fragment() {
 
@@ -38,7 +40,9 @@ class UserFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user,container,false)
         binding.apply {
             floatingActionButton.setOnClickListener {
-                Navigation.findNavController(it).navigate(R.id.action_navigation_user_to_addFragment2)
+//                Navigation.findNavController(it).navigate(R.id.action_navigation_user_to_addFragment2)
+                Navigation.findNavController(it).navigate(UserFragmentDirections
+                    .actionNavigationUserToAddFragment2("ADD",""))
             }
             recyclerListAnimals.layoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
             swipeRefreshLayoutUser.setOnRefreshListener {
@@ -52,11 +56,15 @@ class UserFragment : Fragment() {
                 Color.parseColor("#008744")
                 , Color.parseColor("#0057e7"), Color.parseColor("#d62d20"))
         }
-        getUser()
-        getListPet()
+
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        getUser()
+        getListPet()
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
@@ -86,15 +94,28 @@ class UserFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
     private fun getUser () {
-        db.collection("users").document("${auth.currentUser?.uid}")
-            .get()
-            .addOnSuccessListener {documents->
-                Log.d("Data in user ","${documents.id} => ${documents.data}")
-                binding.apply {
-                    name.text = documents.get("username").toString()
-                    email.text = documents.get("email").toString()
+        if (auth.currentUser?.displayName == null) {
+            db.collection("users").document("${auth.currentUser?.uid}")
+                .get()
+                .addOnSuccessListener {documents->
+                    Log.d("Data in user ","${documents.id} => ${documents.data}")
+                    binding.apply {
+                        name.text = documents.get("username").toString()
+                        email.text = documents.get("email").toString()
+                    }
                 }
+        } else {
+            binding.apply {
+                name.text = auth.currentUser!!.displayName
+                email.text = auth.currentUser!!.email
+                Picasso.get()
+                    .load("${auth.currentUser?.photoUrl}")
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_launcher_foreground)
+                    .into(imgProfile)
+                contact.text = auth.currentUser!!.phoneNumber
             }
+        }
     }
     private fun getListPet () {
         listAnimals.clear()
@@ -110,7 +131,10 @@ class UserFragment : Fragment() {
                     countPost++
                 }
                 val adapter = UserAdapter(listAnimals)
-                binding.recyclerListAnimals.adapter = adapter
+                binding.apply {
+                    recyclerListAnimals.adapter = adapter
+                    progressBarUser.visibility = View.INVISIBLE
+                }
 //                binding.numPost.text = countPost.toString()
 //                binding.numFriend.text = countPost.toString()
             }

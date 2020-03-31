@@ -37,7 +37,14 @@
         android:label="@string/add_a_new_pet"
         tools:layout="@layout/activity_addpet"
         android:id="@+id/addFragment"
-        android:name="com.example.petlover.ui.user.AddFragment"/>
+        android:name="com.example.petlover.ui.user.AddFragment">
+        <argument
+            android:name="events"
+            app:argType="string" />
+        <argument
+            android:name="uidPet"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.petlover.ui.chat.ChatFragment"
