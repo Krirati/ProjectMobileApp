@@ -31,7 +31,6 @@ class ChatFragment : Fragment() {
     ): View? {
         notificationsViewModel =
             ViewModelProviders.of(this).get(ChatViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_notifications,container,false)
         binding.apply {
             recyclerViewChat.layoutManager = GridLayoutManager(context,1, GridLayoutManager.VERTICAL, false)
