@@ -35,7 +35,8 @@ class DetailFragment : Fragment() {
     private var isOpen: Boolean = false
     private lateinit var dbs : FirebaseStorage
     private val db = FirebaseFirestore.getInstance()
-    private val auth = FirebaseAuth.getInstance().currentUser
+    private var latitude: Double=0.toDouble()
+    private var longitude: Double=0.toDouble()
     private var userPost = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -68,16 +69,10 @@ class DetailFragment : Fragment() {
                 }
             }
             floatingMapButton.setOnClickListener {
-                Toast.makeText(context,"YOU click map",Toast.LENGTH_SHORT).show()
-// Creates an Intent that will load a map of San Francisco
-                val gmmIntentUri = Uri.parse("geo:37.7749,-122.4194?q=nine");
-                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                startActivity(mapIntent);
+                openGoogleMap()
             }
             floatingChatButton.setOnClickListener {
                 checkchat()
-                Toast.makeText(context,"YOU click Chat",Toast.LENGTH_SHORT).show()
             }
         }
         getDataPet ()
@@ -94,7 +89,11 @@ class DetailFragment : Fragment() {
                 binding.apply {
                     nameAnimal.text = it.get("name").toString()
                     pedigree.text = it.get("pedigree").toString()
-                    textViewPlacr.text = it.get("place").toString()
+                    val latLng = it.get("latlng").toString().split(",")
+                    val latitudeLongitude = it.get("latlng") as Map<*, *>
+                    latitude = latitudeLongitude["latitude"] as Double
+                    longitude = latitudeLongitude["longitude"] as Double
+                    textViewPlacr.text =  "${latLng[0].split("{")[1]}\n${latLng[1].split("}")[0]}"
                     textViewBirthday.text = it.get("birthday").toString()
                     textViewCall.text = it.get("contact").toString()
                     val timestamp = it["timestamp"] as com.google.firebase.Timestamp
@@ -173,5 +172,12 @@ class DetailFragment : Fragment() {
 
                 }
             }
+    }
+    private fun openGoogleMap () {
+        Toast.makeText(context,"YOU click Chat ${latitude},${longitude}",Toast.LENGTH_SHORT).show()
+        val gmmIntentUri = Uri.parse("google.navigation:q=${latitude},${longitude}&mode=d");
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
     }
 }

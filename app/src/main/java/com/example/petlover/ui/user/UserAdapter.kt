@@ -40,7 +40,7 @@ class UserAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
             .into(holder.imgPet)
         holder.btnEdit.setOnClickListener { view ->
             Navigation.findNavController(view).navigate(UserFragmentDirections
-                .actionNavigationUserToAddFragment2("UPDATE", model.uid))
+                .actionNavigationUserToAddFragment2("UPDATE", model.uid,"0","0"))
         }
         holder.btnDelete.setOnClickListener { view ->
             deleteItem(view, model)

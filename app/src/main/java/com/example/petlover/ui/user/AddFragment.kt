@@ -7,16 +7,15 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import com.google.android.gms.maps.model.LatLng
 import com.example.petlover.R
 import com.example.petlover.databinding.ActivityAddpetBinding
 import com.google.android.material.chip.Chip
@@ -26,7 +25,6 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.layout_list_item.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -59,6 +57,11 @@ class AddFragment : Fragment() {
             }
             birthday.setOnClickListener{
                 showDatePickerDialog()
+            }
+            location.setOnClickListener {
+//                fragmentManager?.let { it -> MapsFragment().show(it,null) }
+                val args = AddFragmentArgs.fromBundle(arguments!!)
+                Navigation.findNavController(it).navigate(AddFragmentDirections.actionAddFragmentToMapsFragment(args.events, args.uidPet,args.latitude,args.longitude))
             }
             floatingSelectImg.setOnClickListener {
                 Log.d("AddActivity", "select img")
@@ -108,17 +111,22 @@ class AddFragment : Fragment() {
                                 "Female"-> radioGroupGender.check(R.id.Female)
                             }
                             val chipSelect = it.get("category") as ArrayList<*>
-                            view?.let { it1 -> Snackbar.make(it1,"GetData ${chipSelect}",Snackbar.LENGTH_SHORT).show() }
                                 for ( i in chipSelect.indices) {
                                     chipGroup.check(
                                         when (chipSelect[i]) {
-                                            "Find a couple" -> R.id.chipLost
-                                            "Find a friends" -> R.id.chipLost
+                                            "Find a couple" -> R.id.chipCouple
+                                            "Find friends" -> R.id.chipFriends
                                             "Lost animals" -> R.id.chipLost
-                                            else -> R.id.chipCouple
+                                            else -> -1
                                        }
                                     )
                                 }
+                            if (args.latitude.toDouble() !== 0.0) {
+                                location.setText("${args.latitude},${args.longitude}").toString()
+                            } else {
+                                val latLng = it.get("latlng") as Map<*, *>
+                                location.setText("${latLng["latitude"]},${latLng["longitude"]}")
+                            }
                             imageView.visibility = View.VISIBLE
                             Picasso.get()
                                 .load("${it.get("imageUID")}")
@@ -129,6 +137,12 @@ class AddFragment : Fragment() {
                     .addOnFailureListener {
                         view?.let { it1 -> Snackbar.make(it1,"Get data fail",Snackbar.LENGTH_SHORT).show() }
                     }
+            }
+            "ADD" -> {
+                binding.apply {
+                    location.setText("${args.latitude},${args.longitude}").toString()
+
+                }
             }
         }
         return binding.root
@@ -164,7 +178,7 @@ class AddFragment : Fragment() {
                     buttonAdd.isClickable = false
                     progressBar.visibility = View.VISIBLE
                 }
-
+                val latlng = LatLng(args.latitude.toDouble(),args.longitude.toDouble())
                 val pet = hashMapOf(
                     "name" to name,
                     "pedigree" to pedigree,
@@ -175,6 +189,7 @@ class AddFragment : Fragment() {
                     "contact" to contact,
                     "uid" to generateId,
                     "uidUser" to user,
+                    "latlng" to latlng,
                     "timestamp" to FieldValue.serverTimestamp()
                 )
                 db.collection("animals").document(generateId).set(pet)
@@ -199,6 +214,8 @@ class AddFragment : Fragment() {
                     buttonAdd.isClickable = false
                     progressBar.visibility = View.VISIBLE
                     deleteImage(args.uidPet)
+                    val latlng = location.text.toString().split(",")
+                    val latitudeLongitude = LatLng(latlng[0].toDouble(),latlng[1].toDouble())
                     val petUpdate = hashMapOf(
                         "name" to name,
                         "pedigree" to pedigree,
@@ -206,6 +223,7 @@ class AddFragment : Fragment() {
                         "gender" to genderString,
                         "imageUID" to uriImage,
                         "category" to list,
+                        "latlng" to latitudeLongitude,
                         "contact" to contact
                     )
                     db.collection("animals").document(args.uidPet)
@@ -258,6 +276,7 @@ class AddFragment : Fragment() {
             birthday.text?.clear()
             location.text?.clear()
             imageView.visibility = View.GONE
+            location.text?.clear()
             inputContact.text?.clear()
         }
         selectedPhotoUri = null

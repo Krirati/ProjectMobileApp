@@ -1,5 +1,6 @@
 package com.example.petlover.ui.home
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +11,16 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.petlover.R
 import com.example.petlover.ui.model.Model
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
-import com.squareup.picasso.PicassoProvider
 import kotlinx.android.synthetic.main.layout_list_item.view.*
 
 class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     val namePet: String = ""
-    val dbStorage = FirebaseStorage.getInstance()
+    val db = FirebaseFirestore.getInstance()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.layout_list_item, parent, false)
         return ViewHolder(v)
@@ -30,11 +30,18 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
         return modelItems.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model: Model = modelItems[position]
         holder.textViewName.text = model.name
         holder.textContact.text = model.contact
-        holder.textViewAddress.text = model.uid
+//        db.collection("animals").document(model.uid).get()
+//            .addOnSuccessListener {
+////                val latLng = it.get("latlng") as Map<*, *>
+//                val latLng = it.get("latlng").toString().split(",")
+//                holder.textViewAddress.text = "${latLng[0].split("{")[1]}\n${latLng[1].split("}")[0]}"
+//            }
+        holder.textViewAddress.text = model.birthday
         when (model.gender) {
             "Male" -> holder.textGender.setImageResource(R.drawable.male)
             "Female" -> holder.textGender.setImageResource(R.drawable.female)

@@ -44,6 +44,14 @@
         <argument
             android:name="uidPet"
             app:argType="string" />
+        <action
+            android:id="@+id/action_addFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+        <argument
+            android:name="latitude"
+            app:argType="string" />
+        <argument android:name="longitude"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/navigation_notifications"
@@ -72,4 +80,27 @@
         android:id="@+id/lostFragment"
         android:name="com.example.petlover.ui.tab_page.LostFragment"
         android:label="LostFragment" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.petlover.MapsFragment"
+        android:label="MapsFragment" >
+        <action
+            android:id="@+id/action_mapsFragment_to_addFragment"
+            app:destination="@id/addFragment"
+            app:popUpTo="@id/addFragment" />
+        <argument
+            android:name="events"
+            app:argType="string" />
+        <argument
+            android:name="uidPet"
+            app:argType="string" />
+        <argument
+            android:name="latitude"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="longitude"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 </navigation>

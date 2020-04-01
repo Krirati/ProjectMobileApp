@@ -1,7 +1,9 @@
 package com.example.petlover.ui.model
 
 
+import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.Timestamp
+import com.google.firebase.firestore.GeoPoint
 
 data class Model(
     val name: String ="",

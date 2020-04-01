@@ -42,7 +42,7 @@ class UserFragment : Fragment() {
             floatingActionButton.setOnClickListener {
 //                Navigation.findNavController(it).navigate(R.id.action_navigation_user_to_addFragment2)
                 Navigation.findNavController(it).navigate(UserFragmentDirections
-                    .actionNavigationUserToAddFragment2("ADD",""))
+                    .actionNavigationUserToAddFragment2("ADD","","0","0"))
             }
             recyclerListAnimals.layoutManager = GridLayoutManager(context,1,GridLayoutManager.VERTICAL,false)
             swipeRefreshLayoutUser.setOnRefreshListener {
@@ -94,12 +94,14 @@ class UserFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
     private fun getUser () {
-        if (auth.currentUser?.displayName == null) {
-            db.collection("users").document("${auth.currentUser?.uid}")
+        if (auth.currentUser?.displayName == "") {
+            db.collection("users")
+                .document("${auth.currentUser?.uid}")
                 .get()
                 .addOnSuccessListener {documents->
                     Log.d("Data in user ","${documents.id} => ${documents.data}")
                     binding.apply {
+//                        val fullname = documents.get("email").toString().split("@")
                         name.text = documents.get("username").toString()
                         email.text = documents.get("email").toString()
                     }

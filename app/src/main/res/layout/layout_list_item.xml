@@ -43,10 +43,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/index_0"
                 android:textColor="@color/detail"
                 android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/text_place"
                 app:layout_constraintTop_toBottomOf="@+id/text_name" />
 
@@ -90,7 +92,7 @@
                 app:layout_constraintStart_toStartOf="@+id/text_contact"
                 app:layout_constraintTop_toTopOf="@+id/place"
                 app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/ic_place_black_24dp" />
+                app:srcCompat="@drawable/ic_date_range_black_24dp" />
 
             <TextView
                 android:id="@+id/contact"

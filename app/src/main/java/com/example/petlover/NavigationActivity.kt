@@ -45,7 +45,7 @@ class NavigationActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home, R.id.navigation_notifications, R.id.navigation_user,
-                R.id.navigation_settings
+                R.id.navigation_logout
             ), drawerLayout
         )
         updateNavHeader()
@@ -110,7 +110,19 @@ class NavigationActivity : AppCompatActivity() {
         val navUsername: TextView = headerView.findViewById(R.id.nav_username)
         val navEmail: TextView = headerView.findViewById(R.id.nav_email)
         val navImg: ImageView = headerView.findViewById(R.id.nav_img)
-        if (firebaseAuth?.displayName == null) navUsername.setText(firebaseAuth?.email) else navUsername.setText(firebaseAuth?.displayName)
+        if (firebaseAuth?.displayName == "") {
+//            val name = firebaseAuth.email.toString().split("@")
+//            navUsername.setText(name[0].toString())
+            db.collection("users")
+                .document("${firebaseAuth.uid}")
+                .get()
+                .addOnSuccessListener {documents->
+                        navUsername.text = documents.get("username").toString()
+                    }
+
+        } else {
+            navUsername.setText(firebaseAuth?.displayName)
+        }
         navEmail.text = firebaseAuth?.email
         Picasso.get()
             .load("${firebaseAuth?.photoUrl}")
@@ -119,10 +131,6 @@ class NavigationActivity : AppCompatActivity() {
             .into(navImg)
 
     }
-    private fun NavigationView.setNavigationItemSelectedListener(navigationActivity: NavigationActivity) {
-        navigationActivity.supportFragmentManager
-    }
-
 }
 
 
