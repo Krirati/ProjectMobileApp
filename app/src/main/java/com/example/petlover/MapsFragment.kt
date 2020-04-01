@@ -42,11 +42,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
     companion object {
         private val MY_PERMISSION_CODE: Int = 1000
     }
-//    private val callback = OnMapReadyCallback { googleMap ->
-//        val sydney = LatLng(-34.0, 151.0)
-//        googleMap.addMarker(MarkerOptions().position(sydney).title("Current location"))
-//        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-//    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -77,11 +73,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
 
     private fun checkLocationPermission (): Boolean {
         if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(activity!!.parent, Manifest.permission.ACCESS_FINE_LOCATION)) {
-//                ActivityCompat.requestPermissions(activity!!.parent, arrayOf(
-//                    Manifest.permission.ACCESS_FINE_LOCATION
-//                ), MY_PERMISSION_CODE)
-//            } else {
             activity?.let {
                 ActivityCompat.requestPermissions(
                     it, arrayOf(
@@ -170,7 +161,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
             }
             Navigation.findNavController(it).navigate(MapsFragmentDirections.actionMapsFragmentToAddFragment(args.events, uid ,latitude.toString(),longitude.toString()))
         }
-        val args = MapsFragmentArgs.fromBundle(arguments!!)
+//        val args = MapsFragmentArgs.fromBundle(arguments!!)
 //        if (args.latitude !== null) {
 //            val latlng = LatLng(args.latitude!!.toDouble(),args.longitude!!.toDouble())
 //            val markerOptions = MarkerOptions()
@@ -206,10 +197,4 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
             mMap.addMarker(markerOptions)
         }
     }
-
-//    override fun onStop() {
-//        fusedLocationProviderClient.removeLocationUpdates(locationCallback)
-//        super.onStop()
-//    }
-
 }
