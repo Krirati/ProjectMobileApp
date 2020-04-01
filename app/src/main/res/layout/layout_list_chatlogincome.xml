@@ -23,11 +23,21 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_curve"
-        android:maxWidth="240dp"
+        android:maxWidth="200dp"
         android:padding="@dimen/activity_margin_top"
-        android:text="This is my Meassage Fuck your mother fucker"
+        android:text="This is my Meassage "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/userincomeimg"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/timeincome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,7 +30,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DetailFragment : Fragment() {
-    private lateinit var uidreciveruser: String
+    var useruid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+    var database = FirebaseDatabase.getInstance()
     private lateinit var binding: FragmentDetailBinding
     private var isOpen: Boolean = false
     private lateinit var dbs : FirebaseStorage
@@ -131,7 +132,6 @@ class DetailFragment : Fragment() {
 
     private fun checkchat(){
         var count = 0
-        var useruid = FirebaseAuth.getInstance().currentUser?.uid.toString()
         var uiduser:String
         val args = DetailFragmentArgs.fromBundle(arguments!!)
         db.collection("animals")
@@ -147,7 +147,9 @@ class DetailFragment : Fragment() {
                         Log.d("hh","Hello error")
                     for (uid in reciver){
                         if ((uid["uidreciver"] == uiduser && uid["uidsender"] == useruid) || (uid["uidreciver"] == useruid && uid["uidsender"] == uiduser)){
-                            val intent = Intent(context, Chatlog::class.java).putExtra("uidRoom",uid.id)
+                            val intent = Intent(context, Chatlog::class.java)
+                                intent.putExtra("uidRoom",uid.id)
+                                intent.putExtra("reciveruid",uiduser)
                             startActivity(intent)
                             Log.d("readdata", uid.id)
                             count = 1
@@ -155,7 +157,6 @@ class DetailFragment : Fragment() {
                     }
                         Log.d("count",count.toString())
                         if (count != 1){
-                            var database = FirebaseDatabase.getInstance()
                             val randuid = database.reference.push().key
                             Log.d("uuu",randuid)
                             val newroom = hashMapOf(
@@ -165,7 +166,9 @@ class DetailFragment : Fragment() {
                             )
                             if (randuid != null) {
                                 db.collection("chat").document(randuid).set(newroom)
-                                val intent = Intent(context, Chatlog::class.java).putExtra("uidRoom",randuid)
+                                val intent = Intent(context, Chatlog::class.java)
+                                intent.putExtra("uidRoom",randuid)
+                                intent.putExtra("reciveruid",uiduser)
                                 startActivity(intent)
                             }
                         }

@@ -38,6 +38,7 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val model: ChatModel = modelChatModel[position]
         val uid = if (model.uidsender == auth?.uid) model.uidreciver else model.uidsender
+        Log.d("uidsss",uid)
         db.collection("users")
             .document("$uid")
             .get()
@@ -66,6 +67,7 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
             db.collection("chat").document("${model.idRoom}").update("status", "read")
             val intent = Intent(it.context, Chatlog::class.java)
             intent.putExtra("uidRoom", "${model.idRoom}")
+            intent.putExtra("reciveruid", uid)
             it.context.startActivity(intent)
         }
     }
