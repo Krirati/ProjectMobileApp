@@ -54,6 +54,7 @@ class HomeFragment : Fragment() {
         menu.clear()
         inflater.inflate(R.menu.menu_search, menu)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         val searchItem = menu.findItem(R.id.action_search)
             if (searchItem != null){
@@ -84,6 +85,9 @@ class HomeFragment : Fragment() {
         }
 =======
         val searchItem = menu.findItem(R.id.action_search)
+=======
+        val searchItem = menu.findItem(R.id.action_search)
+>>>>>>> c74ce4ced98bfa3cbb484481b021ea06877be5fb
 //        if (searchItem != null){
 //            val searchView = searchItem.actionView as SearchView
 //            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
@@ -105,13 +109,19 @@ class HomeFragment : Fragment() {
 //
 //            })
 //        }
+<<<<<<< HEAD
+>>>>>>> c74ce4ced98bfa3cbb484481b021ea06877be5fb
+=======
 >>>>>>> c74ce4ced98bfa3cbb484481b021ea06877be5fb
 
 
 //        val item = menu.findItem(R.id.action_search)
 //        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> c74ce4ced98bfa3cbb484481b021ea06877be5fb
 =======
 >>>>>>> c74ce4ced98bfa3cbb484481b021ea06877be5fb
     }
