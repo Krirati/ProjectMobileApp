@@ -34,12 +34,6 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
         val model: Model = modelItems[position]
         holder.textViewName.text = model.name
         holder.textContact.text = model.contact
-//        db.collection("animals").document(model.uid).get()
-//            .addOnSuccessListener {
-////                val latLng = it.get("latlng") as Map<*, *>
-//                val latLng = it.get("latlng").toString().split(",")
-//                holder.textViewAddress.text = "${latLng[0].split("{")[1]}\n${latLng[1].split("}")[0]}"
-//            }
         holder.textViewAddress.text = model.birthday
         when (model.gender) {
             "Male" -> holder.textGender.setImageResource(R.drawable.male)
