@@ -152,7 +152,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
         val btnGetLocation = view.findViewById<Button>(R.id.getLocation)
         btnGetLocation.setOnClickListener {
             val args = MapsFragmentArgs.fromBundle(arguments!!)
-            var uid = ""
+            var uid: String
             Toast.makeText(view.context,"${args.events} $latitude : $longitude", Toast.LENGTH_SHORT).show()
             uid = if (args.events == "ADD") {
                 ""
