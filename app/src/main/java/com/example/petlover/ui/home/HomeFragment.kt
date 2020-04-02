@@ -3,6 +3,7 @@ package com.example.petlover.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -12,6 +13,8 @@ import com.example.petlover.ui.model.Model
 import com.example.petlover.ui.setting.SettingsActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.FirebaseFirestore
+import android.support.*
+import com.google.firebase.database.snapshot.Index
 
 import java.util.ArrayList
 
@@ -43,6 +46,32 @@ class HomeFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
         inflater.inflate(R.menu.menu_search, menu)
+        val searchItem = menu.findItem(R.id.action_search)
+//        if (searchItem != null){
+//            val searchView = searchItem.actionView as SearchView
+//            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+//                override fun onQueryTextSubmit(query: String?): Boolean {
+//                    return true
+//                }
+//
+//                override fun onQueryTextChange(newText: String?): Boolean {
+//                    val namePet: String = ""
+//                    val db = FirebaseFirestore.getInstance()
+//                    if(newText!!.isNotEmpty()){
+//
+//                    }else{
+//
+//
+//                    }
+//                    return true
+//                }
+//
+//            })
+//        }
+
+
+//        val item = menu.findItem(R.id.action_search)
+//        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
