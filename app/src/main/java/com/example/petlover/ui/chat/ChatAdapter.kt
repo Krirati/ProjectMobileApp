@@ -51,7 +51,7 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
         holder.time.text = timestamp[0]
         when (model.status == "unread") {
             true -> {
-                holder.cardItem.setBackgroundResource(R.color.colorAccent)
+                holder.cardItem.setBackgroundResource(R.color.chatCard)
                 holder.message.text = "มีข้อความใหม่"
             }
             else -> {
