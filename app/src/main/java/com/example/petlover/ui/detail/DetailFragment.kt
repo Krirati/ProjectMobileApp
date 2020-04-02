@@ -81,8 +81,6 @@ class DetailFragment : Fragment() {
     }
     private fun getDataPet () {
         val args = DetailFragmentArgs.fromBundle(arguments!!)
-//        Toast.makeText(context,"Name Pet: ${args.petID}",Toast.LENGTH_SHORT).show()
-//        var userPost = ""
         db.collection("animals")
             .document(args.petID)
             .get()

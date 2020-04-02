@@ -101,7 +101,6 @@ class UserFragment : Fragment() {
                 .addOnSuccessListener {documents->
                     Log.d("Data in user ","${documents.id} => ${documents.data}")
                     binding.apply {
-//                        val fullname = documents.get("email").toString().split("@")
                         name.text = documents.get("username").toString()
                         email.text = documents.get("email").toString()
                         Picasso.get()

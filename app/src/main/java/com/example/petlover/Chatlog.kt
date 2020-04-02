@@ -1,6 +1,7 @@
 package com.example.petlover
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Timestamp
@@ -17,10 +18,10 @@ import kotlinx.android.synthetic.main.layout_list_chatlogincome.view.*
 import kotlinx.android.synthetic.main.layout_list_chatlogoutcome.view.*
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 class Chatlog : AppCompatActivity() {
+    var database = FirebaseDatabase.getInstance()
     var beforedate = "adad"
     var firsttime = 0
     val adapter = GroupAdapter<GroupieViewHolder>()
@@ -103,7 +104,6 @@ class Chatlog : AppCompatActivity() {
                         if(jo == result.size()){
                             msg = document.data["msg"] as String
                             Log.d("lastword",msg)
-
                             var timestamp = document.data["timestamp"] as Timestamp
                             Log.d("Hello",timestamp.toString())
                             val milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
@@ -133,9 +133,8 @@ class Chatlog : AppCompatActivity() {
     }
 
     private fun sendmessage(uiduser: String, msg: String, roomuid: String){
-        var database = FirebaseDatabase.getInstance()
-        val randuid = database.reference.push().key
         val timestamp = FieldValue.serverTimestamp()
+        val randuid = database.reference.push().key
         val word = hashMapOf(
             "fromuid" to uiduser,
             "msg" to msg,
@@ -146,10 +145,10 @@ class Chatlog : AppCompatActivity() {
             "status" to "unread"
         )
         Log.d("firebase",randuid)
+
         if (randuid != null) {
-            db.collection("chat").document(roomuid).collection("chat").document(randuid).set(word).addOnCompleteListener {
-                db.collection("chat").document(roomuid).update(status)
-            }
+            db.collection("chat").document(roomuid).collection("chat").document(randuid).set(word)
+            db.collection("chat").document(roomuid).update(status)
 
         }
     }

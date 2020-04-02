@@ -59,7 +59,7 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
             }
         }
         Picasso.get()
-            .load("${model.status}")
+            .load("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")
             .placeholder(R.drawable.ic_launcher_foreground)
             .error(R.drawable.ic_launcher_foreground)
             .into(holder.imgUser)

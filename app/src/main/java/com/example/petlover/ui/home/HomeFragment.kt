@@ -14,7 +14,14 @@ import com.example.petlover.ui.setting.SettingsActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.FirebaseFirestore
 import android.support.*
+import android.util.Log
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.snapshot.Index
+import kotlinx.android.synthetic.main.layout_list_item.view.*
 
 import java.util.ArrayList
 
@@ -47,34 +54,66 @@ class HomeFragment : Fragment() {
         menu.clear()
         inflater.inflate(R.menu.menu_search, menu)
 <<<<<<< HEAD
+
         val searchItem = menu.findItem(R.id.action_search)
-        if (searchItem != null){
+            if (searchItem != null){
             val searchView = searchItem.actionView as SearchView
+            val db = FirebaseFirestore.getInstance()
+            val  searchableList: MutableList<HomeAdapter.ViewHolder>
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
+                    Log.d("search", query)
                     return true
                 }
-
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    val namePet: String = ""
-                    val db = FirebaseFirestore.getInstance()
-                    if(newText!!.isNotEmpty()){
-
-                    }else{
-
-
-                    }
-                    return true
+                    Log.d("search", newText)
+//                    fun getData(itemView: View): Boolean {
+//                        val textViewName = itemView.findViewById(R.id.text_name) as TextView
+//                            Log.d("search", textViewName.text.toString())
+//                        return true;
+//    //                    val textGender = itemView.findViewById(R.id.gender) as ImageButton
+//    //                    val textViewAddress = itemView.findViewById(R.id.place) as TextView
+//    //                    val textContact = itemView.findViewById(R.id.contact) as TextView
+//    //                    val imgPet = itemView.findViewById(R.id.imagePet) as ImageView
+//    //                    val cardView = itemView.cardView as CardView
+//    //                    val textPedigree = itemView.findViewById(R.id.pedigree) as TextView
+//                    }
+                    return true;
                 }
-
             })
         }
+=======
+        val searchItem = menu.findItem(R.id.action_search)
+//        if (searchItem != null){
+//            val searchView = searchItem.actionView as SearchView
+//            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+//                override fun onQueryTextSubmit(query: String?): Boolean {
+//                    return true
+//                }
+//
+//                override fun onQueryTextChange(newText: String?): Boolean {
+//                    val namePet: String = ""
+//                    val db = FirebaseFirestore.getInstance()
+//                    if(newText!!.isNotEmpty()){
+//
+//                    }else{
+//
+//
+//                    }
+//                    return true
+//                }
+//
+//            })
+//        }
+>>>>>>> c74ce4ced98bfa3cbb484481b021ea06877be5fb
 
 
 //        val item = menu.findItem(R.id.action_search)
 //        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+<<<<<<< HEAD
+
 =======
->>>>>>> f5b58e902d6992b08b89a4145c5c399057d4dd02
+>>>>>>> c74ce4ced98bfa3cbb484481b021ea06877be5fb
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -86,4 +125,5 @@ class HomeFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 }

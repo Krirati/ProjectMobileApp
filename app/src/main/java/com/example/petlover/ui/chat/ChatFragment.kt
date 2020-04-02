@@ -67,6 +67,7 @@ class ChatFragment : Fragment() {
                 }
                 val adapter = ChatAdapter(chat)
                 binding.recyclerViewChat.adapter = adapter
+                binding.progressBarNoti.visibility = View.INVISIBLE
             }
             .addOnFailureListener {e ->
                 Log.w("DataChat", "Error adding document", e)

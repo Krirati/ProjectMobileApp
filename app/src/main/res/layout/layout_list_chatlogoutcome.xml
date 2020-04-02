@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/useroutcomeimg"
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -14,7 +14,7 @@
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/corgi" />
+        android:src="@drawable/profile" />
 
     <TextView
         android:id="@+id/messagetextoutcome"
