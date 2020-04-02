@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#f8bb68</color>
     <color name="colorPrimaryDark">#c28b3a</color>
-    <color name="colorAccent">#ffd95b</color>
+    <color name="colorAccent">#EDD37C</color>
     <color name="colorBtn">#f8bb68</color>
     <color name="chatCard">#F8C683</color>
     <color name="text">#000000</color>
