@@ -1,6 +1,7 @@
 package com.example.petlover
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Timestamp
@@ -40,7 +41,7 @@ class Chatlog : AppCompatActivity() {
                 return@addSnapshotListener
             }
             if (snapshot != null && snapshot.size() != 0) {
-                getchat(useruid,roomuid)
+               getchat(useruid,roomuid)
             }
         }
 
@@ -129,7 +130,11 @@ class Chatlog : AppCompatActivity() {
         }
     }
 
-    private fun sendmessage(uiduser: String, msg: String, roomuid: String){
+    private fun sendmessage(
+        uiduser: String,
+        msg: String,
+        roomuid: String
+    ){
         var database = FirebaseDatabase.getInstance()
         val randuid = database.reference.push().key
         val timestamp = FieldValue.serverTimestamp()
@@ -143,6 +148,7 @@ class Chatlog : AppCompatActivity() {
             "status" to "unread"
         )
         Log.d("firebase",randuid)
+
         if (randuid != null) {
             db.collection("chat").document(roomuid).collection("chat").document(randuid).set(word).addOnCompleteListener {
                 db.collection("chat").document(roomuid).update(status)
