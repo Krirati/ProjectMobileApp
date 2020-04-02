@@ -12,3 +12,7 @@
 /captures
 .externalNativeBuild
 .cxx
+app/src/main/java/com/example/petlover/ui/search/DynamicSearchAdapter.kt
+app/src/main/java/com/example/petlover/ui/search/SearchActivity.kt
+app/src/main/java/com/example/petlover/ui/search/DynamicSearchAdapter.kt
+app/src/main/java/com/example/petlover/ui/home/HomeFragment.kt

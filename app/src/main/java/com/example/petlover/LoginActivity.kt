@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -19,6 +20,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.regex.Pattern
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -66,19 +68,23 @@ class LoginActivity : AppCompatActivity() {
         val pass = findViewById<TextInputEditText>(R.id.passlogin).text.toString()
         Log.d("login",email)
         Log.d("login",pass)
-        auth = FirebaseAuth.getInstance()
-        auth.signInWithEmailAndPassword(email,pass)
-            .addOnCompleteListener{
-                if(!it.isSuccessful) return@addOnCompleteListener
-                Log.d("login","Successfully login ${it.result?.user?.uid}")
-                val intent = Intent(this, NavigationActivity::class.java)
-                finish()
-                startActivity(intent)
+        if (Patterns.EMAIL_ADDRESS.matcher(email).matches() && pass.length > 0) {
+            auth = FirebaseAuth.getInstance()
+            auth.signInWithEmailAndPassword(email,pass)
+                .addOnCompleteListener{
+                    if(!it.isSuccessful) return@addOnCompleteListener
+                    Log.d("login","Successfully login ${it.result?.user?.uid}")
+                    val intent = Intent(this, NavigationActivity::class.java)
+                    finish()
+                    startActivity(intent)
 
-            }.addOnFailureListener{
-                var somwrong: String? = it.message
-                showwronglogin.text = somwrong
-                showwronglogin.visibility = View.VISIBLE}
+                }.addOnFailureListener{
+                    var somwrong: String? = it.message
+                    showwronglogin.text = somwrong
+                    showwronglogin.visibility = View.VISIBLE}
+        } else {
+            Snackbar.make(view3, "Email address or password don't match",Snackbar.LENGTH_SHORT).show()
+        }
     }
     private fun signInGoogle() {
         val signInIntent = googleSignInClient.signInIntent

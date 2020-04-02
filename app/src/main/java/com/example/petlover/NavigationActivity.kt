@@ -51,33 +51,6 @@ class NavigationActivity : AppCompatActivity() {
         updateNavHeader()
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-//        var fragment: Fragment? = null
-//        navView.setNavigationItemSelectedListener{ it ->
-//            when (it.itemId) {
-//                R.id.navigation_logout -> {
-//                    logout()
-//                }
-//                R.id.navigation_home -> {
-//                    fragment = HomeFragment()
-//                }
-//                R.id.navigation_notifications -> {
-//                    fragment = ChatFragment()
-//                }
-//                R.id.navigation_user -> {
-//                    fragment = UserFragment()
-//                }
-//                R.id.navigation_settings -> {
-//                    Toast.makeText(this, "Update clicked", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//            if (fragment != null) {
-//                val transaction = supportFragmentManager.beginTransaction()
-//                transaction.replace(R.id.nav_host_fragment, fragment!!)
-//                transaction.commit()
-//            }
-//            drawerLayout.closeDrawer(GravityCompat.START)
-//            return@setNavigationItemSelectedListener true
-//        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -91,37 +64,33 @@ class NavigationActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun logout(){
-        firebaseAuth.signOut();
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
     private fun updateNavHeader() {
         if (firebaseAuth.currentUser == null) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }
-        var firebaseAuth = FirebaseAuth.getInstance().currentUser
+        val firebaseAuth = FirebaseAuth.getInstance().currentUser
         val navView: NavigationView = findViewById(R.id.nav_view)
         val headerView: View = navView.getHeaderView(0)
         val navUsername: TextView = headerView.findViewById(R.id.nav_username)
         val navEmail: TextView = headerView.findViewById(R.id.nav_email)
         val navImg: ImageView = headerView.findViewById(R.id.nav_img)
-        if (firebaseAuth?.displayName == "") {
-//            val name = firebaseAuth.email.toString().split("@")
-//            navUsername.setText(name[0].toString())
+        if (firebaseAuth?.displayName.isNullOrEmpty()) {
             db.collection("users")
-                .document("${firebaseAuth.uid}")
+                .document("${firebaseAuth?.uid}")
                 .get()
                 .addOnSuccessListener {documents->
-                        navUsername.text = documents.get("username").toString()
+                    navUsername.text = documents.get("username").toString()
+                    Picasso.get()
+                        .load("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .error(R.drawable.ic_launcher_foreground)
+                        .into(navImg)
                     }
 
         } else {
-            navUsername.setText(firebaseAuth?.displayName)
+            navUsername.text = firebaseAuth?.displayName
         }
         navEmail.text = firebaseAuth?.email
         Picasso.get()

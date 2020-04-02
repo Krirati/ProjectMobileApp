@@ -3,9 +3,12 @@ package com.example.petlover.ui.user
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
+import android.hardware.SensorManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -13,7 +16,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -188,85 +193,99 @@ class AddFragment : Fragment() {
         val name = binding.name.text.toString()
         val pedigree = binding.pedigree.text.toString()
         val birthday = binding.birthday.text.toString()
-//        val genderId = binding.radioGroupGender.checkedRadioButtonId
-//        val genderString = resources.getResourceEntryName(genderId)
         val generateId = db.collection("animals").document().id
         val user = FirebaseAuth.getInstance().currentUser?.uid
         val contact = binding.inputContact.text.toString()
         filenameImg = UUID.randomUUID().toString()
         val genderString = gender
         if (list.size == 0) {list.add("Find a couple")}
-        when (args.events) {
-            "ADD" -> {
-                binding.apply {
-                    buttonAdd.isEnabled = false
-                    buttonAdd.isClickable = false
-                    progressBar.visibility = View.VISIBLE
-                }
-                val latlng = LatLng(args.latitude.toDouble(),args.longitude.toDouble())
-                val pet = hashMapOf(
-                    "name" to name,
-                    "pedigree" to pedigree,
-                    "birthday" to birthday,
-                    "gender" to gender,
-                    "imageUID" to uriImage,
-                    "category" to list,
-                    "contact" to contact,
-                    "uid" to generateId,
-                    "uidUser" to user,
-                    "latlng" to latlng,
-                    "timestamp" to FieldValue.serverTimestamp()
-                )
-                db.collection("animals").document(generateId).set(pet)
-                    .addOnSuccessListener {
-                        Log.d("Add pet done", "DocumentSnapshot added with ID: $generateId")
-                        uploadImageToFirebaseStorage(generateId)
-                        binding.apply {
-                            buttonAdd.isEnabled = true
-                            buttonAdd.isClickable = true
-                            progressBar.visibility = View.GONE
-                        }
-                        Snackbar.make(view,"Upload successfully",Snackbar.LENGTH_SHORT).show()
-                        clearField()
+        if (!name.isNullOrEmpty() && !pedigree.isNullOrEmpty() && !birthday.isNullOrEmpty() && list.size>0) {
+            when (args.events) {
+                "ADD" -> {
+                    binding.apply {
+                        buttonAdd.isEnabled = false
+                        buttonAdd.isClickable = false
+                        progressBar.visibility = View.VISIBLE
                     }
-                    .addOnFailureListener { e ->
-                        Log.w("Add pet error", "Error adding document", e)
-                    }
-            }
-            "UPDATE" -> {
-                binding.apply {
-                    buttonAdd.isEnabled = false
-                    buttonAdd.isClickable = false
-                    progressBar.visibility = View.VISIBLE
-                    deleteImage(args.uidPet)
-                    val latlng = location.text.toString().split(",")
-                    val latitudeLongitude = LatLng(latlng[0].toDouble(),latlng[1].toDouble())
-                    val petUpdate = hashMapOf(
+                    val latlng = LatLng(args.latitude.toDouble(),args.longitude.toDouble())
+                    val pet = hashMapOf(
                         "name" to name,
                         "pedigree" to pedigree,
                         "birthday" to birthday,
-                        "gender" to genderString,
+                        "gender" to gender,
                         "imageUID" to uriImage,
                         "category" to list,
-                        "latlng" to latitudeLongitude,
-                        "contact" to contact
+                        "contact" to contact,
+                        "uid" to generateId,
+                        "uidUser" to user,
+                        "latlng" to latlng,
+                        "timestamp" to FieldValue.serverTimestamp()
                     )
-                    db.collection("animals").document(args.uidPet)
-                        .update(petUpdate as Map<String, Any>)
+                    db.collection("animals").document(generateId).set(pet)
                         .addOnSuccessListener {
-                            uploadImageToFirebaseStorage(args.uidPet)
-                            buttonAdd.isEnabled = true
-                            buttonAdd.isClickable = true
-                            progressBar.visibility = View.GONE
-                            Snackbar.make(view,"Update successfully",Snackbar.LENGTH_SHORT).show()
+                            Log.d("Add pet done", "DocumentSnapshot added with ID: $generateId")
+                            uploadImageToFirebaseStorage(generateId)
+                            binding.apply {
+                                buttonAdd.isEnabled = true
+                                buttonAdd.isClickable = true
+                                progressBar.visibility = View.GONE
+                            }
+                            Snackbar.make(view,"Upload successfully",Snackbar.LENGTH_SHORT)
+                                .setAction("OK") {}
+                                .setActionTextColor(Color.GREEN)
+                                .show()
+                            clearField()
                         }
                         .addOnFailureListener { e ->
-                            Log.w("UpdatePet", "Error adding document", e)
-                            Snackbar.make(view,"Update fail try again",Snackbar.LENGTH_SHORT).show()
+                            Log.w("Add pet error", "Error adding document", e)
                         }
                 }
+                "UPDATE" -> {
+                    binding.apply {
+                        buttonAdd.isEnabled = false
+                        buttonAdd.isClickable = false
+                        progressBar.visibility = View.VISIBLE
+                        deleteImage(args.uidPet)
+                        val latlng = location.text.toString().split(",")
+                        val latitudeLongitude = LatLng(latlng[0].toDouble(),latlng[1].toDouble())
+                        val petUpdate = hashMapOf(
+                            "name" to name,
+                            "pedigree" to pedigree,
+                            "birthday" to birthday,
+                            "gender" to genderString,
+                            "imageUID" to uriImage,
+                            "category" to list,
+                            "latlng" to latitudeLongitude,
+                            "contact" to contact
+                        )
+                        db.collection("animals").document(args.uidPet)
+                            .update(petUpdate as Map<String, Any>)
+                            .addOnSuccessListener {
+                                uploadImageToFirebaseStorage(args.uidPet)
+                                buttonAdd.isEnabled = true
+                                buttonAdd.isClickable = true
+                                progressBar.visibility = View.GONE
+                                Snackbar.make(view,"Update successfully",Snackbar.LENGTH_SHORT)
+                                    .setAction("OK") {}
+                                    .setActionTextColor(Color.GREEN)
+                                    .show()
+                            }
+                            .addOnFailureListener { e ->
+                                Log.w("UpdatePet", "Error adding document", e)
+                                Snackbar.make(view,"Update fail try again",Snackbar.LENGTH_SHORT)
+                                    .setAction("Fail") {}
+                                    .setActionTextColor(Color.RED)
+                                    .show()
+                            }
+                    }
 
+                }
             }
+        } else {
+            Snackbar.make(view,"Please fill out all information.",Snackbar.LENGTH_SHORT)
+                .setAction("Fail") {}
+                .setActionTextColor(Color.RED)
+                .show()
         }
     }
 

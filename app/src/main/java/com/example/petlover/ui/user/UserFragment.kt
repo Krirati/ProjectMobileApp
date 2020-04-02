@@ -73,7 +73,7 @@ class UserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
+//        setHasOptionsMenu(true)
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -94,7 +94,7 @@ class UserFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
     private fun getUser () {
-        if (auth.currentUser?.displayName == "") {
+        if (auth.currentUser?.displayName.isNullOrEmpty()) {
             db.collection("users")
                 .document("${auth.currentUser?.uid}")
                 .get()
@@ -104,6 +104,11 @@ class UserFragment : Fragment() {
 //                        val fullname = documents.get("email").toString().split("@")
                         name.text = documents.get("username").toString()
                         email.text = documents.get("email").toString()
+                        Picasso.get()
+                            .load("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png")
+                            .placeholder(R.drawable.ic_launcher_foreground)
+                            .error(R.drawable.ic_launcher_foreground)
+                            .into(imgProfile)
                     }
                 }
         } else {

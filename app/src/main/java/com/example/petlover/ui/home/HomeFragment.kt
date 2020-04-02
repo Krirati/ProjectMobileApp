@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
         inflater.inflate(R.menu.menu_search, menu)
+<<<<<<< HEAD
         val searchItem = menu.findItem(R.id.action_search)
         if (searchItem != null){
             val searchView = searchItem.actionView as SearchView
@@ -72,6 +73,8 @@ class HomeFragment : Fragment() {
 
 //        val item = menu.findItem(R.id.action_search)
 //        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+=======
+>>>>>>> f5b58e902d6992b08b89a4145c5c399057d4dd02
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
