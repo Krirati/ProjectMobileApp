@@ -17,9 +17,11 @@ import kotlinx.android.synthetic.main.layout_list_chatlogincome.view.*
 import kotlinx.android.synthetic.main.layout_list_chatlogoutcome.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 class Chatlog : AppCompatActivity() {
+    var beforedate = "adad"
     var firsttime = 0
     val adapter = GroupAdapter<GroupieViewHolder>()
     val db = FirebaseFirestore.getInstance()
@@ -27,19 +29,19 @@ class Chatlog : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatlog)
-        recyclechatlog.adapter = adapter
         var roomuid = intent.getStringExtra("uidRoom")
         var reciveruid = intent.getStringExtra("reciveruid")
         db.collection("users").document(reciveruid).get().addOnSuccessListener {
             title = it["username"].toString()
         }
+        getchat(useruid,roomuid)
         db.collection("chat").document(roomuid).collection("chat").addSnapshotListener{
                 snapshot, e ->
             if (e != null) {
                 Log.w("errorsnap", "listen:error", e)
                 return@addSnapshotListener
             }
-            if (snapshot != null && snapshot.size() != 0) {
+            if (snapshot != null && snapshot.metadata.hasPendingWrites()){
                 getchat(useruid,roomuid)
             }
         }
@@ -57,11 +59,11 @@ class Chatlog : AppCompatActivity() {
     }
 
     private fun getchat(uiduser: String, roomuid: String){
+        recyclechatlog.adapter = adapter
         val sdf = SimpleDateFormat("HH:mm")
         val daymode = SimpleDateFormat("dd  MMMM  yyyy")
         var msg: String
         var jo = 0
-        var beforedate = "adad"
         if (firsttime == 0){
             Log.d("hello","hello diff")
             db.collection("chat").document(roomuid).collection("chat").orderBy("timestamp")
@@ -92,6 +94,7 @@ class Chatlog : AppCompatActivity() {
             firsttime++
             }
         else{
+            Log.d("hello","hello johny")
             db.collection("chat").document(roomuid).collection("chat").orderBy("timestamp")
                 .get()
                 .addOnSuccessListener { result ->
@@ -147,6 +150,7 @@ class Chatlog : AppCompatActivity() {
             db.collection("chat").document(roomuid).collection("chat").document(randuid).set(word).addOnCompleteListener {
                 db.collection("chat").document(roomuid).update(status)
             }
+
         }
     }
 
