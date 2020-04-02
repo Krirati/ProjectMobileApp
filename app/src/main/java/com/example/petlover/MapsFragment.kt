@@ -153,11 +153,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback{
         btnGetLocation.setOnClickListener {
             val args = MapsFragmentArgs.fromBundle(arguments!!)
             var uid = ""
-            Toast.makeText(view.context,"$latitude : $longitude", Toast.LENGTH_SHORT).show()
-            if (args.events == "ADD") {
-                uid = ""
+            Toast.makeText(view.context,"${args.events} $latitude : $longitude", Toast.LENGTH_SHORT).show()
+            uid = if (args.events == "ADD") {
+                ""
             } else {
-                uid = args.uidPet.toString()
+                args.uidPet
             }
             Navigation.findNavController(it).navigate(MapsFragmentDirections.actionMapsFragmentToAddFragment(args.events, uid ,latitude.toString(),longitude.toString()))
         }

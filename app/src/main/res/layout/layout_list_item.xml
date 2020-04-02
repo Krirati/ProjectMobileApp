@@ -28,13 +28,14 @@
                 android:id="@+id/text_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
                 android:fontFamily="@font/anonymous_pro"
                 android:text="@string/name"
                 android:textColor="@color/colorPrimary"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/gender"
-                app:layout_constraintStart_toStartOf="@+id/iconType"
+                app:layout_constraintStart_toEndOf="@+id/imagePet"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.113" />
 
@@ -50,74 +51,59 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/text_place"
-                app:layout_constraintTop_toBottomOf="@+id/text_name" />
-
-            <ImageButton
-                android:id="@+id/text_contact"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="8dp"
-                android:background="@null"
-                android:contentDescription="@string/type_pet"
-                android:scaleType="fitXY"
-                android:text="@string/contact"
-                app:layout_constraintBottom_toBottomOf="@+id/contact"
-                app:layout_constraintStart_toStartOf="@+id/iconType"
-                app:layout_constraintTop_toTopOf="@+id/contact"
-                app:layout_constraintVertical_bias="0.526"
-                app:srcCompat="@drawable/ic_call_black_24dp" />
-
-            <ImageButton
-                android:id="@+id/iconType"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="24dp"
-                android:background="@null"
-                android:contentDescription="@string/type_pet"
-                android:scaleType="fitXY"
-                app:layout_constraintBottom_toBottomOf="@+id/gender"
-                app:layout_constraintStart_toEndOf="@+id/imagePet"
-                app:srcCompat="@drawable/corgi" />
+                app:layout_constraintTop_toBottomOf="@+id/img_pedigree" />
 
             <ImageButton
                 android:id="@+id/text_place"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginTop="16dp"
                 android:background="@null"
                 android:contentDescription="@string/place"
                 android:scaleType="fitXY"
                 android:text="@string/place"
                 app:layout_constraintBottom_toBottomOf="@+id/place"
-                app:layout_constraintStart_toStartOf="@+id/text_contact"
+                app:layout_constraintStart_toStartOf="@+id/img_pedigree"
                 app:layout_constraintTop_toTopOf="@+id/place"
-                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/ic_date_range_black_24dp" />
 
             <TextView
                 android:id="@+id/contact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/contact"
                 android:textColor="@color/detail"
-                app:layout_constraintStart_toEndOf="@+id/text_contact"
-                app:layout_constraintStart_toStartOf="@+id/place"
-                app:layout_constraintTop_toBottomOf="@+id/place" />
+                app:layout_constraintStart_toEndOf="@+id/img_contact"
+                app:layout_constraintTop_toBottomOf="@+id/text_place" />
+
+            <ImageButton
+                android:id="@+id/img_contact"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@null"
+                android:contentDescription="@string/type_pet"
+                android:scaleType="fitXY"
+                android:text="@string/contact"
+                app:layout_constraintBottom_toBottomOf="@+id/contact"
+                app:layout_constraintStart_toStartOf="@+id/text_place"
+                app:layout_constraintTop_toTopOf="@+id/contact"
+                app:layout_constraintVertical_bias="0.43"
+                app:srcCompat="@drawable/ic_call_black_24dp" />
 
             <ImageButton
                 android:id="@+id/gender"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="20dp"
                 android:background="@null"
                 android:contentDescription="@string/gender"
                 android:scaleType="fitXY"
                 android:text="@string/gender"
                 android:textColor="@color/detail"
-                app:layout_constraintStart_toEndOf="@+id/iconType"
-                app:layout_constraintTop_toBottomOf="@+id/contact"
+                app:layout_constraintBottom_toBottomOf="@+id/text_name"
+                app:layout_constraintStart_toEndOf="@+id/text_name"
+                app:layout_constraintTop_toTopOf="@+id/text_name"
                 tools:srcCompat="@drawable/female" />
 
             <ImageView
@@ -130,6 +116,30 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.487"
                 app:srcCompat="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/pedigree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/pedigree"
+                android:textColor="@color/detail"
+                app:layout_constraintStart_toEndOf="@+id/img_pedigree"
+                app:layout_constraintTop_toBottomOf="@+id/text_name" />
+
+            <ImageButton
+                android:id="@+id/img_pedigree"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@null"
+                android:contentDescription="@string/pedigree"
+                android:scaleType="fitXY"
+                android:text="@string/pedigree"
+                app:layout_constraintBottom_toBottomOf="@+id/pedigree"
+                app:layout_constraintStart_toStartOf="@+id/text_name"
+                app:layout_constraintTop_toTopOf="@+id/pedigree"
+                app:srcCompat="@drawable/ic_assignment_black_24dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

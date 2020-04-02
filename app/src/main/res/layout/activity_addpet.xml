@@ -55,6 +55,7 @@
                     android:id="@+id/pedigree"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_assignment_black_24dp"
                     android:text="@={myPet.pedigree}" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -159,63 +160,96 @@
                 app:layout_constraintStart_toStartOf="@+id/textInputLayoutContact"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayoutContact" />
 
-            <RadioGroup
-                android:id="@+id/radioGroupGender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:checkedButton="@+id/Male"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="@+id/gender"
-                app:layout_constraintTop_toBottomOf="@+id/gender">
+<!--            <RadioGroup-->
+<!--                android:id="@+id/radioGroupGender"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:checkedButton="@+id/Male"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/gender"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/gender">-->
 
-                <RadioButton
-                    android:id="@+id/Male"
-                    style="@style/MyMainRoundedActionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/activity_margin_top"
-                    android:button="@null"
-                    android:text="@string/male"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+<!--                <RadioButton-->
+<!--                    android:id="@+id/Male"-->
+<!--                    style="@style/MyMainRoundedActionButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/activity_margin_top"-->
+<!--                    android:button="@null"-->
+<!--                    android:text="@string/male"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:textSize="14sp" />-->
 
-                <RadioButton
-                    android:id="@+id/Female"
-                    style="@style/MyMainRoundedActionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/activity_margin_top"
-                    android:button="@null"
-                    android:buttonTint="#FFFFFF"
-                    android:checked="false"
-                    android:text="@string/female"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
-            </RadioGroup>
+<!--                <RadioButton-->
+<!--                    android:id="@+id/Female"-->
+<!--                    style="@style/MyMainRoundedActionButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="@dimen/activity_margin_top"-->
+<!--                    android:button="@null"-->
+<!--                    android:buttonTint="#FFFFFF"-->
+<!--                    android:checked="false"-->
+<!--                    android:text="@string/female"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@android:color/black"-->
+<!--                    android:textSize="14sp" />-->
+<!--            </RadioGroup>-->
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/category"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/input"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroupGender" />
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupGender" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupGender"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:chipSpacingHorizontal="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/gender"
+                app:layout_constraintTop_toBottomOf="@+id/gender"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/MaleChip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/male"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    app:chipBackgroundColor="@color/btnChip" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/FemaleChip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="@string/female"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    app:chipBackgroundColor="@color/btnChip" />
+            </com.google.android.material.chip.ChipGroup>
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroup"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="4dp"
                 app:chipSpacingHorizontal="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textView7"
                 app:layout_constraintTop_toBottomOf="@+id/textView7"
                 app:singleSelection="false">
 
@@ -231,7 +265,7 @@
                     app:chipStrokeColor="@color/btnChip"
                     app:rippleColor="@color/btnChip" />
 
-                 <com.google.android.material.chip.Chip
+                <com.google.android.material.chip.Chip
                     android:id="@+id/chipFriends"
                     style="@style/Widget.MaterialComponents.Chip.Filter"
                     android:layout_width="wrap_content"

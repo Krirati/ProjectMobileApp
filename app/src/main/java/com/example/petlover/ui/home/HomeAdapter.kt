@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.petlover.R
 import com.example.petlover.ui.model.Model
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_list_item.view.*
 
@@ -56,6 +55,7 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
             .placeholder(R.drawable.ic_launcher_foreground)
             .error(R.drawable.ic_launcher_foreground)
             .into(holder.imgPet)
+        holder.textPedigree.text = model.pedigree
     }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val textViewName = itemView.findViewById(R.id.text_name) as TextView
@@ -64,5 +64,6 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
         val textContact = itemView.findViewById(R.id.contact) as TextView
         val imgPet = itemView.findViewById(R.id.imagePet) as ImageView
         val cardView = itemView.cardView as CardView
+        val textPedigree = itemView.findViewById(R.id.pedigree) as TextView
     }
 }

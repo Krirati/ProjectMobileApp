@@ -1,8 +1,10 @@
 package com.example.petlover.ui.user
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -41,7 +43,9 @@ class AddFragment : Fragment() {
     val day = calendar.get(Calendar.DAY_OF_MONTH)
     private var uriImage: String? = null
     private lateinit var binding: ActivityAddpetBinding
+    private var gender = ""
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,7 +63,6 @@ class AddFragment : Fragment() {
                 showDatePickerDialog()
             }
             location.setOnClickListener {
-//                fragmentManager?.let { it -> MapsFragment().show(it,null) }
                 val args = AddFragmentArgs.fromBundle(arguments!!)
                 Navigation.findNavController(it).navigate(AddFragmentDirections.actionAddFragmentToMapsFragment(args.events, args.uidPet,args.latitude,args.longitude))
             }
@@ -91,6 +94,21 @@ class AddFragment : Fragment() {
 //                }
             }
         }
+        for (index in 0 until binding.chipGroupGender.childCount) {
+            val chip:Chip = binding.chipGroupGender.getChildAt(index) as Chip
+
+            // Set the chip checked change listener
+            chip.setOnCheckedChangeListener{view, isChecked ->
+                if (isChecked){
+                    gender = view.text.toString()
+                    chip.setChipBackgroundColorResource(R.color.colorPrimary)
+                }else{
+                    gender = ""
+                    chip.setChipBackgroundColorResource(R.color.btnChip)
+                }
+            }
+        }
+
         val args = AddFragmentArgs.fromBundle(arguments!!)
         when (args.events) {
             "UPDATE" -> {
@@ -104,11 +122,15 @@ class AddFragment : Fragment() {
                             name.setText(it.get("name").toString())
                             pedigree.setText(it.get("pedigree").toString())
                             birthday.setText(it.get("birthday").toString())
-                            binding.radioGroupGender.checkedRadioButtonId
+//                            binding.radioGroupGender.checkedRadioButtonId
                             inputContact.setText(it.get("contact").toString())
+//                            when (it.get("gender")) {
+//                                "Male" -> radioGroupGender.check(R.id.Male)
+//                                "Female"-> radioGroupGender.check(R.id.Female)
+//                            }
                             when (it.get("gender")) {
-                                "Male" -> radioGroupGender.check(R.id.Male)
-                                "Female"-> radioGroupGender.check(R.id.Female)
+                                "Male" -> chipGroupGender.check(R.id.MaleChip)
+                                "Female" -> chipGroupGender.check(R.id.FemaleChip)
                             }
                             val chipSelect = it.get("category") as ArrayList<*>
                                 for ( i in chipSelect.indices) {
@@ -138,10 +160,12 @@ class AddFragment : Fragment() {
                         view?.let { it1 -> Snackbar.make(it1,"Get data fail",Snackbar.LENGTH_SHORT).show() }
                     }
             }
-            "ADD" -> {
+            else -> {
                 binding.apply {
-                    location.setText("${args.latitude},${args.longitude}").toString()
-
+                    if (args.latitude.isNotEmpty()) {
+                        inputLocation.hint = "${args.latitude},${args.longitude}"
+                        inputLocation.defaultHintTextColor = ColorStateList.valueOf(android.graphics.Color.BLACK)
+                    }
                 }
             }
         }
@@ -164,12 +188,13 @@ class AddFragment : Fragment() {
         val name = binding.name.text.toString()
         val pedigree = binding.pedigree.text.toString()
         val birthday = binding.birthday.text.toString()
-        val genderId = binding.radioGroupGender.checkedRadioButtonId
-        val genderString = resources.getResourceEntryName(genderId)
+//        val genderId = binding.radioGroupGender.checkedRadioButtonId
+//        val genderString = resources.getResourceEntryName(genderId)
         val generateId = db.collection("animals").document().id
         val user = FirebaseAuth.getInstance().currentUser?.uid
         val contact = binding.inputContact.text.toString()
         filenameImg = UUID.randomUUID().toString()
+        val genderString = gender
         if (list.size == 0) {list.add("Find a couple")}
         when (args.events) {
             "ADD" -> {
@@ -183,7 +208,7 @@ class AddFragment : Fragment() {
                     "name" to name,
                     "pedigree" to pedigree,
                     "birthday" to birthday,
-                    "gender" to genderString,
+                    "gender" to gender,
                     "imageUID" to uriImage,
                     "category" to list,
                     "contact" to contact,
@@ -227,7 +252,7 @@ class AddFragment : Fragment() {
                         "contact" to contact
                     )
                     db.collection("animals").document(args.uidPet)
-                        .update(petUpdate as Map<String, String>)
+                        .update(petUpdate as Map<String, Any>)
                         .addOnSuccessListener {
                             uploadImageToFirebaseStorage(args.uidPet)
                             buttonAdd.isEnabled = true
