@@ -14,7 +14,14 @@ import com.example.petlover.ui.setting.SettingsActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.firestore.FirebaseFirestore
 import android.support.*
+import android.util.Log
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.snapshot.Index
+import kotlinx.android.synthetic.main.layout_list_item.view.*
 
 import java.util.ArrayList
 
@@ -39,48 +46,5 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-    }
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        menu.clear()
-//        inflater.inflate(R.menu.menu_search, menu)
-        val searchItem = menu.findItem(R.id.action_search)
-//        if (searchItem != null){
-//            val searchView = searchItem.actionView as SearchView
-//            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-//                override fun onQueryTextSubmit(query: String?): Boolean {
-//                    return true
-//                }
-//
-//                override fun onQueryTextChange(newText: String?): Boolean {
-//                    val namePet: String = ""
-//                    val db = FirebaseFirestore.getInstance()
-//                    if(newText!!.isNotEmpty()){
-//
-//                    }else{
-//
-//
-//                    }
-//                    return true
-//                }
-//
-//            })
-//        }
-
-
-//        val item = menu.findItem(R.id.action_search)
-//        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_search -> {
-                val intent = Intent(context, SettingsActivity::class.java)
-                startActivity(intent)
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 }

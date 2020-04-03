@@ -59,5 +59,7 @@ class HomeAdapter (private val modelItems: ArrayList<Model>): RecyclerView.Adapt
         val imgPet = itemView.findViewById(R.id.imagePet) as ImageView
         val cardView = itemView.cardView as CardView
         val textPedigree = itemView.findViewById(R.id.pedigree) as TextView
+
     }
+
 }

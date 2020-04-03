@@ -28,6 +28,26 @@ class LostFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     private val db = FirebaseFirestore.getInstance()
     private lateinit var binding: FragmentLostBinding
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//        val searchValue = arguments?.getString("search")
+//        Log.d("searchFm", searchValue)
+//    }
+//
+//    companion object {
+//
+//        fun newInstance(sch: String): LostFragment {
+//            val args = Bundle()
+//            args.putString("search", sch)
+//            val fragment = LostFragment()
+//            fragment.arguments = args
+//
+//            return fragment
+//        }
+//    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -72,4 +92,6 @@ class LostFragment : Fragment() {
                 Log.w("Data in animals", "Error getting documents.", exception)
             }
     }
+
+
 }
