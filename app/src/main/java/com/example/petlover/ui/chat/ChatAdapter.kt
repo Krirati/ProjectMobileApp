@@ -52,10 +52,10 @@ class ChatAdapter (private val modelChatModel: ArrayList<ChatModel>): RecyclerVi
         when (model.status == "unread") {
             true -> {
                 holder.cardItem.setBackgroundResource(R.color.chatCard)
-                holder.message.text = "มีข้อความใหม่"
+                holder.message.text = "New message"
             }
             else -> {
-                holder.message.text = "ไม่มีข้อความใหม่"
+                holder.message.text = "Not new message"
             }
         }
         Picasso.get()

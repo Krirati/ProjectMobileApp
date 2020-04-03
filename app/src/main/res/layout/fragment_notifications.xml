@@ -10,11 +10,12 @@
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/swipe_refresh_layout_chat">
+            android:id="@+id/swipe_refresh_layout_chat"
+>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white">
+            android:background="@color/greyBackground">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewChat"

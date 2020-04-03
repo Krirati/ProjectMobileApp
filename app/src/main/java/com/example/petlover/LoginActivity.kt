@@ -42,7 +42,6 @@ class LoginActivity : AppCompatActivity() {
         }
         signup_btn.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
-            finishAffinity();
             startActivity(intent)
         }
         sign_in_google.setOnClickListener {
