@@ -78,7 +78,7 @@ class CoupleFragment : Fragment() {
         Log.d("Filter", "Feilter $list")
         return object : Filter(){
             override fun performFiltering(p0: CharSequence?): FilterResults? {
-                listItem.clear()
+//                listItem.clear()
                 val searchResults = listItem.filter { it.name.contains("Rody") }
                     listItem.addAll(searchResults)
 
