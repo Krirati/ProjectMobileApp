@@ -49,7 +49,7 @@ class FriendFragment : Fragment() {
             }
             swipeRefreshLayoutFriend.setColorSchemeColors(
                 Color.parseColor("#008744")
-                , Color.parseColor("#0057e7"), Color.parseColor("#d62d20"))
+                ,Color.parseColor("#0057e7"),Color.parseColor("#d62d20"))
         }
         logRecyclerView()
         setHasOptionsMenu(true)
