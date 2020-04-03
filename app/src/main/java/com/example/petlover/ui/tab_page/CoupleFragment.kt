@@ -6,6 +6,8 @@ import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
+import android.widget.AdapterView
+import android.widget.Filter
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
@@ -18,6 +20,7 @@ import com.example.petlover.ui.home.HomeAdapter
 import com.example.petlover.ui.home.HomeViewModel
 import com.example.petlover.ui.model.Model
 import com.google.firebase.firestore.FirebaseFirestore
+import org.w3c.dom.Text
 import java.util.ArrayList
 
 
@@ -70,25 +73,44 @@ class CoupleFragment : Fragment() {
             }
     }
 
-    fun resultsFilter () {
+    fun resultsFilter (): Filter {
         val list =  listItem.filter { it.name.contains("c")}
         Log.d("Filter", "Feilter $list")
+        return object : Filter(){
+            override fun performFiltering(p0: CharSequence?): FilterResults? {
+                listItem.clear()
+                val searchResults = listItem.filter { it.name.contains("Rody") }
+                    listItem.addAll(searchResults)
+
+                        return FilterResults()
+            }
+
+            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+                TODO("Not yet implemented")
+            }
+
+
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
         inflater.inflate(R.menu.menu_search, menu)
+
         var searchItem = menu.findItem(R.id.action_search )
         var serachView  = searchItem.actionView as SearchView
 
         serachView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
+            override fun onQueryTextSubmit(query:String): Boolean {
+                Log.d("key_search", query)
                 return true
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
-                Log.d("search", "Text: $p0")
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("search", "Text: $newText")
+                resultsFilter()
                 return true
             }
 
