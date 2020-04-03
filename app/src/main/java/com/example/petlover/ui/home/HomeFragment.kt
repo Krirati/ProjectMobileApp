@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
         val fragmentAdapter = MyPagerAdapter(childFragmentManager)
         viewPager.adapter = fragmentAdapter
         tabs.setupWithViewPager(viewPager)
-        setHasOptionsMenu(true)
+        setHasOptionsMenu(false)
         return root
     }
 
@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
-        inflater.inflate(R.menu.menu_search, menu)
+//        inflater.inflate(R.menu.menu_search, menu)
         val searchItem = menu.findItem(R.id.action_search)
 //        if (searchItem != null){
 //            val searchView = searchItem.actionView as SearchView

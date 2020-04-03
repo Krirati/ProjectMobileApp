@@ -4,10 +4,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.*
+import android.view.inputmethod.EditorInfo
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -47,6 +47,7 @@ class CoupleFragment : Fragment() {
             swipeRefreshLayout.setColorSchemeColors(Color.parseColor("#008744")
                 ,Color.parseColor("#0057e7"),Color.parseColor("#d62d20"))
         }
+        setHasOptionsMenu(true)
         return binding.root
     }
     private fun logRecyclerView() {
@@ -67,5 +68,38 @@ class CoupleFragment : Fragment() {
             .addOnFailureListener { exception ->
                 Log.w("Data in animals", "Error getting documents.", exception)
             }
+    }
+
+    fun resultsFilter () {
+        val list =  listItem.filter { it.name.contains("c")}
+        Log.d("Filter", "Feilter $list")
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.menu_search, menu)
+        var searchItem = menu.findItem(R.id.action_search )
+        var serachView  = searchItem.actionView as SearchView
+
+        serachView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                Log.d("search", "Text: $p0")
+                return true
+            }
+
+        })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_search -> resultsFilter()
+        }
+        Log.d("item", "${item.itemId}")
+        return super.onOptionsItemSelected(item)
     }
 }
