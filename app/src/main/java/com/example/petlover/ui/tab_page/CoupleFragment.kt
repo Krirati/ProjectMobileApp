@@ -6,6 +6,8 @@ import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
+import android.widget.AdapterView
+import android.widget.Filter
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
@@ -19,8 +21,9 @@ import com.example.petlover.ui.home.HomeViewModel
 import com.example.petlover.ui.model.Model
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.*
-//import java.util.ArrayList
 import kotlin.collections.ArrayList
+import org.w3c.dom.Text
+
 
 
 class CoupleFragment : Fragment() {
@@ -75,19 +78,38 @@ class CoupleFragment : Fragment() {
 
     fun resultsFilter (text: String) {
         list =  listItem.filter {
-            it.name.toLowerCase(Locale.ROOT).contains(text) || it.birthday.toLowerCase(Locale.ROOT).contains(text)
-                    || it.pedigree.toLowerCase(Locale.ROOT).contains(text) || it.pedigree.toLowerCase(Locale.ROOT).contains(text)
-                    || it.gender.toLowerCase(Locale.ROOT).contains(text) || it.contact?.toLowerCase(Locale.ROOT)?.contains(text) ?: false
+            it.name.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)) || it.birthday.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))
+                    || it.pedigree.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)) || it.pedigree.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))
+                    || it.gender.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)) || it.contact?.toLowerCase(Locale.ROOT)?.contains(text.toLowerCase(Locale.ROOT)) ?: false
         }.toMutableList()
         val adapter = HomeAdapter(list as ArrayList<Model>)
         binding.recyclerView.adapter = adapter
-        Log.d("Filter", "Feilter $list")
+//    fun resultsFilter (): Filter {
+//        val list =  listItem.filter { it.name.contains("c")}
+//        Log.d("Filter", "Feilter $list")
+//        return object : Filter(){
+//            override fun performFiltering(p0: CharSequence?): FilterResults? {
+//                listItem.clear()
+//                val searchResults = listItem.filter { it.name.contains("Rody") }
+//                    listItem.addAll(searchResults)
+
+//                        return FilterResults()
+//            }
+//
+//            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
+//                TODO("Not yet implemented")
+//            }
+
+
+//        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
         inflater.inflate(R.menu.menu_search, menu)
+
         var searchItem = menu.findItem(R.id.action_search )
         var serachView  = searchItem.actionView as SearchView
 
