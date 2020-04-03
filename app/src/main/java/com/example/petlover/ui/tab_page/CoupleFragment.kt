@@ -18,11 +18,14 @@ import com.example.petlover.ui.home.HomeAdapter
 import com.example.petlover.ui.home.HomeViewModel
 import com.example.petlover.ui.model.Model
 import com.google.firebase.firestore.FirebaseFirestore
-import java.util.ArrayList
+import java.util.*
+//import java.util.ArrayList
+import kotlin.collections.ArrayList
 
 
 class CoupleFragment : Fragment() {
     var listItem = ArrayList<Model>()
+    lateinit var list: MutableList<Model>
     private lateinit var homeViewModel: HomeViewModel
     private val db = FirebaseFirestore.getInstance()
     private lateinit var binding: FragmentCoupleBinding
@@ -70,8 +73,14 @@ class CoupleFragment : Fragment() {
             }
     }
 
-    fun resultsFilter () {
-        val list =  listItem.filter { it.name.contains("c")}
+    fun resultsFilter (text: String) {
+        list =  listItem.filter {
+            it.name.toLowerCase(Locale.ROOT).contains(text) || it.birthday.toLowerCase(Locale.ROOT).contains(text)
+                    || it.pedigree.toLowerCase(Locale.ROOT).contains(text) || it.pedigree.toLowerCase(Locale.ROOT).contains(text)
+                    || it.gender.toLowerCase(Locale.ROOT).contains(text) || it.contact?.toLowerCase(Locale.ROOT)?.contains(text) ?: false
+        }.toMutableList()
+        val adapter = HomeAdapter(list as ArrayList<Model>)
+        binding.recyclerView.adapter = adapter
         Log.d("Filter", "Feilter $list")
     }
 
@@ -84,20 +93,26 @@ class CoupleFragment : Fragment() {
 
         serachView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
+                Log.d("search", "Submit: $p0")
+                if (p0 != null) {
+                    resultsFilter(p0)
+                }
                 return true
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 Log.d("search", "Text: $p0")
+                if (p0 != null) {
+                    resultsFilter(p0)
+                }
                 return true
             }
-
         })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> resultsFilter()
+            R.id.action_search -> resultsFilter("")
         }
         Log.d("item", "${item.itemId}")
         return super.onOptionsItemSelected(item)
