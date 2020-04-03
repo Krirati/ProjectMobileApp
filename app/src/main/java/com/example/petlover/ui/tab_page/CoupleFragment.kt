@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.Filter
 import android.widget.SearchView
+import androidx.core.view.OneShotPreDrawListener.add
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
@@ -20,6 +21,7 @@ import com.example.petlover.ui.home.HomeAdapter
 import com.example.petlover.ui.home.HomeViewModel
 import com.example.petlover.ui.model.Model
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_addpet.*
 import org.w3c.dom.Text
 import java.util.ArrayList
 
@@ -67,6 +69,7 @@ class CoupleFragment : Fragment() {
                 val adapter = HomeAdapter(listItem)
                 binding.recyclerView.adapter = adapter
                 binding.progressBarHome.visibility = View.INVISIBLE
+                
             }
             .addOnFailureListener { exception ->
                 Log.w("Data in animals", "Error getting documents.", exception)
@@ -74,13 +77,14 @@ class CoupleFragment : Fragment() {
     }
 
     fun resultsFilter (): Filter {
-        val list =  listItem.filter { it.name.contains("c")}
-        Log.d("Filter", "Feilter $list")
+//        val list =  listItem.filter { it.name.contains("c")}
+//        Log.d("Filter", "Filter ${list}")
         return object : Filter(){
             override fun performFiltering(p0: CharSequence?): FilterResults? {
 //                listItem.clear()
-                val searchResults = listItem.filter { it.name.contains("Rody") }
-                    listItem.addAll(searchResults)
+                val FilterResults = listItem.filter { it.name.contains("Nine")
+                }
+                    listItem.addAll(FilterResults)
 
                         return FilterResults()
             }
@@ -105,12 +109,12 @@ class CoupleFragment : Fragment() {
         serachView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query:String): Boolean {
                 Log.d("key_search", query)
+                resultsFilter()
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 Log.d("search", "Text: $newText")
-                resultsFilter()
                 return true
             }
 
