@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_chatlog.*
 import kotlinx.android.synthetic.main.layout_datetime.view.*
 import kotlinx.android.synthetic.main.layout_list_chatlogincome.view.*
 import kotlinx.android.synthetic.main.layout_list_chatlogoutcome.view.*
+import kotlinx.coroutines.Delay
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,7 +25,7 @@ class Chatlog : AppCompatActivity() {
     var database = FirebaseDatabase.getInstance()
     var beforedate = "adad"
     var firsttime = 0
-    val adapter = GroupAdapter<GroupieViewHolder>()
+    //val adapter = GroupAdapter<GroupieViewHolder>()
     val db = FirebaseFirestore.getInstance()
     var useruid = FirebaseAuth.getInstance().currentUser?.uid.toString()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,11 +40,14 @@ class Chatlog : AppCompatActivity() {
         db.collection("chat").document(roomuid).collection("chat").addSnapshotListener{
                 snapshot, e ->
             if (e != null) {
+
                 Log.w("errorsnap", "listen:error", e)
                 return@addSnapshotListener
             }
             if (snapshot != null && snapshot.metadata.hasPendingWrites()){
-                getchat(useruid,roomuid)
+                db.waitForPendingWrites().addOnSuccessListener {
+                    getchat(useruid,roomuid)
+                }
             }
         }
 
@@ -60,6 +64,7 @@ class Chatlog : AppCompatActivity() {
     }
 
     private fun getchat(uiduser: String, roomuid: String){
+        val adapter = GroupAdapter<GroupieViewHolder>()
         recyclechatlog.adapter = adapter
         val sdf = SimpleDateFormat("HH:mm")
         val daymode = SimpleDateFormat("dd  MMMM  yyyy")
@@ -69,9 +74,11 @@ class Chatlog : AppCompatActivity() {
             Log.d("hello","hello diff")
             db.collection("chat").document(roomuid).collection("chat").orderBy("timestamp")
                 .get()
-                .addOnSuccessListener { result ->
+                .addOnCompleteListener {
+            it.addOnSuccessListener{ result ->
                     for (document in result) {
                         msg = document.data["msg"].toString()
+                        Log.d("Hello",msg)
                         var timestamp = document.data["timestamp"] as Timestamp
                         Log.d("Hello",timestamp.toString())
                         val milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
@@ -92,9 +99,10 @@ class Chatlog : AppCompatActivity() {
                         }
                     }
                 }
-            firsttime++
+        }
+            //firsttime++
             }
-        else{
+        /*else{
             Log.d("hello","hello johny")
             db.collection("chat").document(roomuid).collection("chat").orderBy("timestamp")
                 .get()
@@ -129,16 +137,17 @@ class Chatlog : AppCompatActivity() {
                     }
 
                 }
-        }
+        }*/
     }
 
     private fun sendmessage(uiduser: String, msg: String, roomuid: String){
         val timestamp = FieldValue.serverTimestamp()
         val randuid = database.reference.push().key
         val word = hashMapOf(
+            "timestamp" to timestamp,
             "fromuid" to uiduser,
-            "msg" to msg,
-            "timestamp" to timestamp
+            "msg" to msg
+
         )
         val status = hashMapOf(
             "timestamp" to timestamp,
@@ -148,6 +157,7 @@ class Chatlog : AppCompatActivity() {
 
         if (randuid != null) {
             db.collection("chat").document(roomuid).collection("chat").document(randuid).set(word)
+            db.collection("chat").document(roomuid).collection("chat").document(randuid).update(word)
             db.collection("chat").document(roomuid).update(status)
 
         }
