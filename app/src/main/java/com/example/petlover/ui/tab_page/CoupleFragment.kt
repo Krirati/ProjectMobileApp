@@ -87,36 +87,6 @@ class CoupleFragment : Fragment() {
         }.toMutableList()
         val adapter = HomeAdapter(list as ArrayList<Model>)
         binding.recyclerView.adapter = adapter
-//    fun resultsFilter (): Filter {
-//        val list =  listItem.filter { it.name.contains("c")}
-//        Log.d("Filter", "Feilter $list")
-//        return object : Filter(){
-//            override fun performFiltering(p0: CharSequence?): FilterResults? {
-//                listItem.clear()
-//                val searchResults = listItem.filter { it.name.contains("Rody") }
-//                    listItem.addAll(searchResults)
-//    fun resultsFilter (): Filter {
-//        val list =  listItem.filter { it.name.contains("c")}
-//        Log.d("Filter", "Filter ${list}")
-//        return object : Filter(){
-//            override fun performFiltering(p0: CharSequence?): FilterResults? {
-//                listItem.clear()
-//                val FilterResults = listItem.filter { it.name.contains("Nine")
-//                }
-//                    listItem.addAll(FilterResults)
-//
-//                        return FilterResults()
-//            }
-
-//                        return FilterResults()
-//            }
-//
-//            override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
-//                TODO("Not yet implemented")
-//            }
-
-
-//        }
 
     }
 
@@ -144,16 +114,6 @@ class CoupleFragment : Fragment() {
                 }
                 return true
             }
-//            override fun onQueryTextSubmit(query:String): Boolean {
-//                Log.d("key_search", query)
-//                resultsFilter()
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                Log.d("search", "Text: $newText")
-//                return true
-//            }
         })
     }
 

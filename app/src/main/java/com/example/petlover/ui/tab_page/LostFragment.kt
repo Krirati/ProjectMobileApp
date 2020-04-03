@@ -4,11 +4,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,6 +20,8 @@ import com.example.petlover.ui.home.HomeViewModel
 import com.example.petlover.ui.model.Model
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_lost.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class LostFragment : Fragment() {
@@ -29,24 +30,6 @@ class LostFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()
     private lateinit var binding: FragmentLostBinding
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        val searchValue = arguments?.getString("search")
-//        Log.d("searchFm", searchValue)
-//    }
-//
-//    companion object {
-//
-//        fun newInstance(sch: String): LostFragment {
-//            val args = Bundle()
-//            args.putString("search", sch)
-//            val fragment = LostFragment()
-//            fragment.arguments = args
-//
-//            return fragment
-//        }
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,5 +76,53 @@ class LostFragment : Fragment() {
             }
     }
 
+    fun resultsFilter (text: String) {
+        val list =  listItem.filter {
+            it.name.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)) || it.birthday.toLowerCase(
+                Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))
+                    || it.pedigree.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)) || it.pedigree.toLowerCase(
+                Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))
+                    || it.gender.toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT)) || it.contact?.toLowerCase(
+                Locale.ROOT)?.contains(text.toLowerCase(Locale.ROOT)) ?: false
+        }.toMutableList()
+        val adapter = HomeAdapter(list as ArrayList<Model>)
+        binding.recyclerViewLost.adapter = adapter
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        menu.clear()
+        inflater.inflate(R.menu.menu_search, menu)
+
+        var searchItem = menu.findItem(R.id.action_search )
+        var serachView  = searchItem.actionView as SearchView
+
+        serachView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                Log.d("search", "Submit: $p0")
+                if (p0 != null) {
+                    resultsFilter(p0)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                Log.d("search", "Text: $p0")
+                if (p0 != null) {
+                    resultsFilter(p0)
+                }
+                return true
+            }
+        })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_search -> resultsFilter("")
+        }
+        Log.d("item", "${item.itemId}")
+        return super.onOptionsItemSelected(item)
+    }
 
 }
